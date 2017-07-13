@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/md_content_textsize"
+                android:textColor="@color/colorPrimaryText"
+                android:hint="视频url"
+                android:text="http://"
+                android:layout_marginLeft="-2dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="1dp" />
+
+            <ImageView
+                android:id="@+id/qcode"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="4dp"
+                android:src="@drawable/ic_scan"
+                />
+
+        </RelativeLayout>
+
+
+</LinearLayout>

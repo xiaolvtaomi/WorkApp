@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">公司点餐</string>
+    <string name="loading_failed">数据加载失败</string>
+    <string name="author">公司点餐</string>
+
+    <string name="recommend">精彩推荐</string>
+    <string name="historytoday">历史上的今天</string>
+    <string name="score">评分：</string>
+    <string name="videoType">类型：</string>
+    <string name="region">地区：</string>
+    <string name="airTime">上映时间：</string>
+    <string name="video_intro">简介</string>
+    <string name="video_comment">评论</string>
+    <string name="set_theme">设置主题</string>
+    <string name="theme">主题</string>
+    <string name="cancel">取消</string>
+    <string name="done">完成</string>
+
+
+    <!--mine-->
+    <string name="my_record">历史</string>
+    <string name="my_down">缓存</string>
+    <string name="my_collection">收藏</string>
+    <string name="my_them">主题</string>
+    <string name="clean">清除</string>
+    <string name="mine_title">我的</string>
+    <string name="theme_title">主题</string>
+
+    <string name="share">分享</string>
+    <string name="fuli">福利</string>
+    <string name="setting">设置</string>
+    <string name="feedback">建议反馈</string>
+    <string name="collection">我的收藏</string>
+    <string name="download">我的下载</string>
+    <string name="about">关于Doodle</string>
+    <string name="close">关闭</string>
+    <string name="about_me"><p id="about-intro">\nDoodle涂鸦是在Google徽标的基础上，为庆祝节日、纪念日和缅怀著名艺术家、先驱者和科学家而设计创作的作品，涂鸦作品大都幽默风趣，能给用户带来一份惊喜，有些时候纯粹是即兴之作。</p><h3>涂鸦创意是如何产生的？</h3><p>\n  早在1998年，当时公司甚至还没成立，Google 创始人拉里 (Larry) 和谢尔盖 (Sergey) 出于玩儿的心理将公司徽标稍作修改，向人们传递他们要去参加在内华达沙漠举办的<a href="/doodles/burning-man-festival">火人节</a>的信息，Google 徽标涂鸦的概念也由此诞生。当时，他们将一个火柴人放在单词“Google”的第二个“o”背后，通过这个诙谐的设计向 Google 用户们传达了一则讯息：两位创始人“外出”了。虽然第一个涂鸦非常简单，但通过在公司徽标上“做文章”来庆祝重大事件的想法就此诞生。</p><p>\n  两年以后，也就是2000年，拉里 (Larry) 和谢尔盖 (Sergey) 要求当时的网站站长黄正穆（Dennis Hwang，当时还是实习生）为法国国庆日 (Bastille Day) 设计涂鸦。该涂鸦一经刊出，立即获得了广大用户的好评，黄正穆也因此被任命为 Google 的首席涂鸦设计师。自此，涂鸦就开始越来越频繁地出现在 Google 首页上。最初，涂鸦主要是为庆祝人们熟悉的节日，现在，涂鸦为各式各样的活动和纪念日平添了一抹亮色，其中包括<a href="/doodles/226th-birthday-of-john-james-audubon">约翰•詹姆斯•奥杜邦 (John James Audubon) 诞辰</a>以及<a href="/doodles/anniversary-of-the-ice-cream-sundae">圣代冰淇凌发明纪念日</a>。</p><p>\n  在美国以及世界各地，对 Google 徽标涂鸦的需求正日益增加。目前，我们的徽标涂鸦由富有才华的插画家（我们称之为 Google 徽标涂鸦者）和工程师组成的小组负责。对于他们来说，每一幅 Google 徽标涂鸦都凝聚着整个团队的心血和智慧，它们让 Google 首页变得更加生动有趣，也为全世界的 Google 用户带来了欢乐与笑容。</p><h3>Google 这些年来创作了多少涂鸦作品？</h3><p>\n  该小组已为世界各地的Google首页创作了超过2000幅涂鸦作品。</p><h3>\n  涂鸦的主题是由谁选择的？你们如何确定要为哪些事件创作涂鸦作品？</h3><p>\n  一群 Google 员工定期聚到一起，集思广益，确定要用涂鸦来庆祝/纪念哪些事件。Google 涂鸦的创意来源众多，其中包括 Google 员工和 Google 用户。涂鸦主题的选择宗旨是：事件和纪念日要有趣或能够体现 Google 的特色及其追求和热爱创新的精神。</p><h3>涂鸦是由谁设计的？</h3><p>\n  您所看到的每幅涂鸦作品都凝聚着插画家（我们称之为 Google 徽标涂鸦者）和工程师的心血和智慧。</p></string>
+
+    <string name="expand">展开</string>
+    <string name="shrink">收起</string>
+
+    <string name="setting_recommend">推荐给好友</string>
+    <string name="setting_recommend_content">发现一个看片神器,下载安装后找我索取二维码\n\nhttps://www.pgyer.com/weixiaoying2</string>
+    <string name="setting_recommend_url">https://www.pgyer.com/weixiaoying2</string>
+    <string name="setting_recommend_copy">复制</string>
+    <string name="setting_recommend_clear">清理缓存</string>
+
+    <string name="search_history">搜索记录</string>
+    <string name="search_recommend">热门推荐</string>
+
+    <string name="input_bymyself">手动录入</string>
+    <string name="input_sure">添加</string>
+    <string name="share_sure">分享</string>
+    <string name="share_title">将专辑分享给朋友,只能用我们软件扫哟~</string>
+    <string name="input_cancel">关闭</string>
+
+
+</resources>
