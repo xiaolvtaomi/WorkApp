@@ -174,11 +174,8 @@ public class MainView extends RootView<MainContract.Presenter> implements MainCo
             case R.id.tab_rb_2:
                 vpContent.setCurrentItem(1, false);
                 break;
-            case R.id.tab_rb_3:
-                vpContent.setCurrentItem(2, false);
-                break;
             case R.id.tab_rb_4:
-                vpContent.setCurrentItem(3, false);
+                vpContent.setCurrentItem(2, false);
                 break;
         }
     }
@@ -187,11 +184,9 @@ public class MainView extends RootView<MainContract.Presenter> implements MainCo
         List<Fragment> fragments = new ArrayList<>();
         Fragment fragment1 = new RecommendFragment();
         Fragment fragment2 = new ClassificationFragment();
-        Fragment fragment3 = new DiscoverFragment();
         Fragment mineFragment = new MineFragment();
         fragments.add(fragment1);
         fragments.add(fragment2);
-        fragments.add(fragment3);
         fragments.add(mineFragment);
         return fragments;
     }
@@ -199,7 +194,7 @@ public class MainView extends RootView<MainContract.Presenter> implements MainCo
     @Subscriber(tag = MineFragment.SET_THEME)
     public void setTheme(String content) {
         new ColorChooserDialog.Builder(mActivity, R.string.theme)
-                .customColors(R.array.colors, null)
+                .customColors(R.array.colors, null) 
                 .doneButton(R.string.done)
                 .cancelButton(R.string.cancel)
                 .allowUserColorInput(false)

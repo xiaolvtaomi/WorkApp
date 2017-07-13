@@ -53,6 +53,7 @@
     <string name="share_sure">分享</string>
     <string name="share_title">将专辑分享给朋友,只能用我们软件扫哟~</string>
     <string name="input_cancel">关闭</string>
+    <string name="title_activity_main2">Main2Activity</string>
 
 
 </resources>

@@ -1,6 +1,8 @@
 package com.mvp.base.ui.view;
 
 import android.content.Context;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,8 +37,8 @@ public class DishView extends RootView<DishContract.Presenter> implements DishCo
     ColorTextView titleName;
     @BindView(R.id.recyclerView)
     EasyRecyclerView recyclerView;
-    @BindView(R.id.bookedView)
-    BookedView bookedView;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
     DishAdapter adapter ;
 
     public DishView(Context context) {
@@ -79,6 +81,14 @@ public class DishView extends RootView<DishContract.Presenter> implements DishCo
                 onRefresh();
             }
         });
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
     }
 
 
@@ -108,7 +118,7 @@ public class DishView extends RootView<DishContract.Presenter> implements DishCo
 
     @Override
     public void statusToDished(List<DishBean> dishes) {
-
+        // 更新 adapter
     }
 
     @Override

@@ -1,11 +1,14 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/main_title" />
+    <include
+        android:id="@+id/include_title"
+        layout="@layout/main_title"
+        />
 
     <com.jude.easyrecyclerview.EasyRecyclerView
         android:id="@+id/recyclerView"
@@ -14,12 +17,18 @@
         android:padding="0dp"
         app:layout_empty="@layout/view_empty"
         app:layout_progress="@layout/view_progress"
-        app:scrollbars="none" />
-
-    <com.mvp.base.ui.view.BookedView
-        android:id="@+id/bookedView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        app:scrollbars="none"
+        android:layout_below="@+id/include_title"
         />
 
-</LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        app:srcCompat="@android:drawable/ic_dialog_email"/>
+
+</RelativeLayout>

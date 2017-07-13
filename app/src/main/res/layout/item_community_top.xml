@@ -54,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="问答"
+                    android:text="配菜"
                     android:textColor="#000000"
                     android:textSize="16sp"/>
 
@@ -66,7 +66,7 @@
                     android:layout_below="@+id/tv_wenda"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="451573"
+                    android:text="菜品管理"
                     android:textColor="#40c895"
                     android:textSize="10sp"/>
 
@@ -77,7 +77,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_toRightOf="@+id/tv_question_num"
-                    android:text="个问题得到解决"
+                    android:text="管理员操作"
                     android:textColor="#000000"
                     android:textSize="11sp"/>
 

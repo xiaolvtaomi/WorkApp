@@ -12,10 +12,12 @@ import com.mvp.base.ui.adapter.viewholder.ViewHolder_01;
 import com.mvp.base.ui.adapter.viewholder.ViewHolder_02;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
-public class DishAdapter extends RecyclerArrayAdapter<Pair<Integer, Object>> {
+public class DishAdapter extends RecyclerArrayAdapter<Pair<Integer, Object>> implements ViewHolder_02.OnDishClickListener {
 
     /**
      * 类型集合，adapter对应的数据集合
@@ -23,6 +25,29 @@ public class DishAdapter extends RecyclerArrayAdapter<Pair<Integer, Object>> {
     List<Pair<Integer, Object>> superData = new ArrayList<>();
     final int TYPE_TOPCELL = 1;
     final int TYPE_DISHGROUP = 2;
+
+
+
+    Map<String, DishBean> selectedDishes = new HashMap<>();
+
+    @Override
+    public boolean clickDish(DishBean dish) {
+        if(selectedDishes.containsKey(dish.getDishname())){
+            selectedDishes.remove(dish.getDishname());
+        }else{
+            selectedDishes.put(dish.getDishname(), dish);
+        }
+        notifyDataSetChanged();
+        return true ;
+    }
+
+    /**
+     * 返回已经选择的菜
+     * @return
+     */
+    public Map<String, DishBean> getSelectedDishes(){
+        return selectedDishes ;
+    }
 
     public DishAdapter(Context context) {
         super(context);
@@ -87,7 +112,7 @@ public class DishAdapter extends RecyclerArrayAdapter<Pair<Integer, Object>> {
             case TYPE_TOPCELL:
                 return new ViewHolder_01(parent);
             case TYPE_DISHGROUP:
-                return new ViewHolder_02(parent);
+                return new ViewHolder_02(parent, this);
         }
         return new ViewHolder_01(parent);
     }
@@ -105,8 +130,15 @@ public class DishAdapter extends RecyclerArrayAdapter<Pair<Integer, Object>> {
                 ((ViewHolder_01) holder).setData((android.util.Pair<HomeTopCellBean, HomeTopCellBean>) superData.get(position).second);
                 break;
             case TYPE_DISHGROUP:
-                ((ViewHolder_02) holder).setData((Pair<DishBean, DishBean>) superData.get(position).second);
+                boolean b_second = ((Pair<DishBean, DishBean>) superData.get(position).second).second == null? false:
+                        selectedDishes.containsKey(((Pair<DishBean, DishBean>) superData.get(position).second).second.getDishname());
+                ((ViewHolder_02) holder).setData((Pair<DishBean, DishBean>) superData.get(position).second,
+                selectedDishes.containsKey(((Pair<DishBean, DishBean>) superData.get(position).second).first.getDishname()),
+                b_second
+                );
                 break;
         }
     }
+
+
 }
