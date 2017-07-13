@@ -84,7 +84,7 @@ public interface BmobApis {
     Observable<BmobHttpResponse<List<DoodleBean>>> getDoodleByCollectid(@Query("where") String doodleidmap, @Query("limit") int limit, @Query("skip") int skip);
 
     @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
-    @GET("dillitem")
+    @GET("dillitem?order=title")
     Observable<BmobHttpResponse<List<DillItemBean>>> getDillItemsByYMD(@Query("where") String map);
 
 
@@ -97,6 +97,10 @@ public interface BmobApis {
     @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
     @GET("dish")
     Observable<BmobHttpResponse<List<DishBean>>> getDishesByYMD(@Query("where") String map);
+
+    @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
+    @GET("dish?order=title")
+    Observable<BmobHttpResponse<List<DishBean>>> getAllDishes();
 
     @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
     @POST("dillitem")

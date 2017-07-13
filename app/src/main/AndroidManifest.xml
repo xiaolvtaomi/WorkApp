@@ -31,6 +31,9 @@
         <activity android:name=".ui.activitys.MainActivity"/>
         <activity android:name=".ui.activitys.SettingActivity"/>
         <activity android:name=".ui.activitys.SearchActivity"/>
+        <activity android:name=".ui.activitys.DishManageActivity"/>
+        <activity android:name=".ui.activitys.HistoryActivity"/>
+        <activity android:name=".ui.activitys.CollectionActivity"/>
     </application>
 
 </manifest>

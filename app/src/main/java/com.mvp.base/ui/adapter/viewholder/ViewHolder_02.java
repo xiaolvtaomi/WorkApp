@@ -79,6 +79,12 @@ public class ViewHolder_02 extends BaseViewHolder<Pair<DishBean,DishBean>> {
 
     }
 
+    /**
+     * 点菜界面用的填充数据的方法
+     * @param beanpair
+     * @param b_first
+     * @param b_second
+     */
     public void setData(Pair<DishBean,DishBean> beanpair, boolean b_first, boolean b_second) {
         //super.initData(bean);
 
@@ -116,6 +122,102 @@ public class ViewHolder_02 extends BaseViewHolder<Pair<DishBean,DishBean>> {
                 second = (DishBean) objectObjectPair.second;
                 if(rl_item_community_second!=null)
                 rl_item_community_second.setVisibility(View.VISIBLE);
+                //填充网络数据
+                ImageLoader.load(getContext(),second.picurl,ivSecond);
+                tv_item_community_title_second.setText(second.dishname);
+                tv_item_community_num_second.setText("辣椒");
+            }
+
+
+            if(b_first){
+                ivFirst_selected.setVisibility(View.VISIBLE);
+            }else{
+                ivFirst_selected.setVisibility(View.GONE);
+
+            }
+
+            if(b_second){
+                ivSecond_selected.setVisibility(View.VISIBLE);
+
+            }else{
+                ivSecond_selected.setVisibility(View.GONE);
+
+            }
+
+        }
+
+        //添加点击事件
+        if(beanpair.first != null) {
+            rl_item_community_first.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mOnDishClickListener != null){
+                        mOnDishClickListener.clickDish(objectObjectPair.first);
+                    }
+                }
+            });
+        }
+        if(beanpair.second != null) {
+            rl_item_community_second.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    if(mOnDishClickListener != null){
+                        mOnDishClickListener.clickDish(objectObjectPair.second);
+                    }
+                }
+            });
+        }
+
+
+    }
+
+
+
+
+    /**
+     * 配菜界面用的填充数据的方法
+     * @param beanpair
+     * @param b_first
+     * @param b_second
+     */
+    public void setDataManage(Pair<DishBean,DishBean> beanpair, boolean b_first, boolean b_second) {
+        //super.initData(bean);
+
+        final Pair<DishBean,DishBean> objectObjectPair= beanpair;
+
+        if(objectObjectPair!=null){
+
+            first = (DishBean) objectObjectPair.first;
+            //填充网络数据
+            ImageLoader.load(getContext(),first.picurl,ivFirst);
+            tv_item_community_title_first.setText(first.dishname);
+            tv_item_community_num_first.setText("辣椒");
+            if(first.hasTitle){//需要显示标头
+                divider.setVisibility(View.VISIBLE);
+                tvTitle.setVisibility(View.VISIBLE);
+                tvTitle.setText(first.title);
+                divider_02.setVisibility(View.VISIBLE);
+                divider_03.setVisibility(View.GONE);
+
+            }else{//不需要显示标头
+                divider.setVisibility(View.GONE);
+                tvTitle.setVisibility(View.GONE);
+                divider_02.setVisibility(View.INVISIBLE);
+                divider_03.setVisibility(View.GONE);
+
+            }
+
+
+            if(objectObjectPair.second==null){//第二个数据为空
+                // ivSecond.setVisibility(View.GONE);
+                if(rl_item_community_second!=null)
+                    rl_item_community_second.setVisibility(View.INVISIBLE);
+            }else {//第二个数据不为空
+
+                second = (DishBean) objectObjectPair.second;
+                if(rl_item_community_second!=null)
+                    rl_item_community_second.setVisibility(View.VISIBLE);
                 //填充网络数据
                 ImageLoader.load(getContext(),second.picurl,ivSecond);
                 tv_item_community_title_second.setText(second.dishname);
