@@ -66,6 +66,9 @@ public class DishTongjiViewHolder extends BaseViewHolder<DishTongjiBean> {
             else if (mDishTongjiBean.spicylevel==3){
                 tv_item_community_num_first.setImageResource(R.mipmap.three);
             }
+            else {
+                tv_item_community_num_first.setImageResource(R.mipmap.none);
+            }
             if(mDishTongjiBean.hasTitle){//需要显示标头
                 divider.setVisibility(View.VISIBLE);
                 tvTitle.setVisibility(View.VISIBLE);

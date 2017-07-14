@@ -37,6 +37,7 @@ public class ViewHolder_02 extends BaseViewHolder<Pair<DishBean,DishBean>> {
     RelativeLayout rl_item_community_first;
     TextView tv_item_community_title_first;
     TextView tv_item_community_title_second;
+    //辣度图片
     //  TextView tv_item_community_num_first;
     ImageView tv_item_community_num_first;
     //  TextView tv_item_community_num_second;
@@ -99,6 +100,7 @@ public class ViewHolder_02 extends BaseViewHolder<Pair<DishBean,DishBean>> {
             //填充网络数据
             ImageLoader.load(getContext(),first.picurl,ivFirst);
             tv_item_community_title_first.setText(first.dishname);
+            //辣度图片选择
             if (first.spicylevel==0){
                 tv_item_community_num_first.setImageResource(R.mipmap.none);
             }
@@ -110,6 +112,9 @@ public class ViewHolder_02 extends BaseViewHolder<Pair<DishBean,DishBean>> {
             }
             else if (first.spicylevel==3){
                 tv_item_community_num_first.setImageResource(R.mipmap.three);
+            }
+            else {
+                tv_item_community_num_first.setImageResource(R.mipmap.none);
             }
             if(first.hasTitle){//需要显示标头
                 divider.setVisibility(View.VISIBLE);
@@ -139,6 +144,7 @@ public class ViewHolder_02 extends BaseViewHolder<Pair<DishBean,DishBean>> {
                 //填充网络数据
                 ImageLoader.load(getContext(),second.picurl,ivSecond);
                 tv_item_community_title_second.setText(second.dishname);
+                //辣度图片选择
                 if (first.spicylevel==0){
                     tv_item_community_num_second.setImageResource(R.mipmap.none);
                 }
@@ -150,6 +156,9 @@ public class ViewHolder_02 extends BaseViewHolder<Pair<DishBean,DishBean>> {
                 }
                 else if (first.spicylevel==3){
                     tv_item_community_num_second.setImageResource(R.mipmap.three);
+                }
+                else {
+                    tv_item_community_num_second.setImageResource(R.mipmap.none);
                 }
             }
 
@@ -221,6 +230,7 @@ public class ViewHolder_02 extends BaseViewHolder<Pair<DishBean,DishBean>> {
             //填充网络数据
             ImageLoader.load(getContext(),first.picurl,ivFirst);
             tv_item_community_title_first.setText(first.dishname);
+            //辣度图片选择
             if (first.spicylevel==0){
                 tv_item_community_num_first.setImageResource(R.mipmap.none);
             }
@@ -232,6 +242,9 @@ public class ViewHolder_02 extends BaseViewHolder<Pair<DishBean,DishBean>> {
             }
             else if (first.spicylevel==3){
                 tv_item_community_num_first.setImageResource(R.mipmap.three);
+            }
+            else {
+                tv_item_community_num_first.setImageResource(R.mipmap.none);
             }
             if(first.hasTitle){//需要显示标头
                 divider.setVisibility(View.VISIBLE);
@@ -261,6 +274,7 @@ public class ViewHolder_02 extends BaseViewHolder<Pair<DishBean,DishBean>> {
                 //填充网络数据
                 ImageLoader.load(getContext(),second.picurl,ivSecond);
                 tv_item_community_title_second.setText(second.dishname);
+                //辣度图片选择
                 if (first.spicylevel==0){
                     tv_item_community_num_second.setImageResource(R.mipmap.none);
                 }
@@ -272,6 +286,9 @@ public class ViewHolder_02 extends BaseViewHolder<Pair<DishBean,DishBean>> {
                 }
                 else if (first.spicylevel==3){
                     tv_item_community_num_second.setImageResource(R.mipmap.three);
+                }
+                else {
+                    tv_item_community_num_second.setImageResource(R.mipmap.none);
                 }
             }
 
