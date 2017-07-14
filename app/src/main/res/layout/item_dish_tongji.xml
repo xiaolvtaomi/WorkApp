@@ -61,8 +61,8 @@
 
             <ImageView
                 android:id="@+id/tv_item_community_num_first"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_alignBottom="@+id/iv_item_community_first"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/iv_item_community_first"
