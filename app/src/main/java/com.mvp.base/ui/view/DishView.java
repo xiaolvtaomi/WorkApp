@@ -23,6 +23,7 @@ import com.mvp.base.utils.Preconditions;
 import com.mvp.base.utils.ScreenUtil;
 import com.mvp.base.widget.theme.ColorTextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -81,14 +82,8 @@ public class DishView extends RootView<DishContract.Presenter> implements DishCo
                 onRefresh();
             }
         });
+        statusToNormal();
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
 
@@ -97,7 +92,7 @@ public class DishView extends RootView<DishContract.Presenter> implements DishCo
         return mActive;
     }
 
-    List<DishBean> dishes ;
+    List<DishBean> dishes = new ArrayList<>();
     @Override
     public void showContent(List<DishBean> cells) {
         dishes = cells ;
@@ -113,27 +108,56 @@ public class DishView extends RootView<DishContract.Presenter> implements DishCo
 
     @Override
     public void statusToNormal() {
-
+        fab.setImageResource(android.R.drawable.ic_dialog_email);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(adapter.getSelectedDishes() != null && adapter.getSelectedDishes().size() > 0 ){
+                    mPresenter.postDishes(adapter.getSelectedDishes());
+                }else{
+                    Snackbar.make(view, "想吃至少选个菜吧", Snackbar.LENGTH_SHORT)
+                            .setAction("Action", null).show();
+                }
+            }
+        });
     }
 
     @Override
     public void statusToDished(List<DishBean> dishes) {
         // 更新 adapter
+        fab.setImageResource(R.drawable.ic_done_white);
+        fab.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v, "你已经定过了", Snackbar.LENGTH_SHORT)
+                        .setAction("Action", null).show();
+            }
+        });
     }
 
     @Override
     public void statusToClosed() {
-
+        fab.setImageResource(R.drawable.ic_player_close_white);
+        fab.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v, "点餐时间已经过了", Snackbar.LENGTH_SHORT)
+                        .setAction("Action", null).show();
+            }
+        });
     }
 
     @Override
     public void postFailed(String reason) {
-
+        Snackbar.make(recyclerView, "提交失败", Snackbar.LENGTH_SHORT)
+                .setAction("Action", null).show();
     }
 
     @Override
-    public void postSuc(DillItemBean postedBean) {
-
+    public void postSuc() {
+        Snackbar.make(recyclerView, "提交成功", Snackbar.LENGTH_SHORT)
+                .setAction("Action", null).show();
+        statusToDished(null);
     }
 
     @Override

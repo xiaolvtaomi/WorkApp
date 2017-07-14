@@ -2,25 +2,38 @@ package com.mvp.base.presenter;
 
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.mvp.base.base.RxPresenter;
+import com.mvp.base.model.bean.BatchBean;
+import com.mvp.base.model.bean.BatchRequestBean;
 import com.mvp.base.model.bean.DillItemBean;
 import com.mvp.base.model.bean.DishBean;
 import com.mvp.base.model.net.BmobHttpResponse;
 import com.mvp.base.model.net.RetrofitHelper;
 import com.mvp.base.presenter.contract.cook.DishContract;
+import com.mvp.base.utils.GsonUtil;
 import com.mvp.base.utils.PreUtils;
 import com.mvp.base.utils.RxUtil;
 import com.mvp.base.utils.StringUtils;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import rx.Subscription;
 import rx.functions.Action1;
+
+import static com.mvp.base.model.bean.BatchRequestBean.*;
 
 /**
  * Created by lml on 17/7/11.
@@ -112,27 +125,70 @@ public class DishPresenter extends RxPresenter implements DishContract.Presenter
     }
 
     @Override
-    public void postDishes(final DillItemBean mDillitembean) {
-        Subscription rxSubscription = RetrofitHelper.getBmobApis().postDill(mDillitembean)
-                .compose(RxUtil.<BmobHttpResponse>rxSchedulerHelper())
-                .subscribe(new Action1<BmobHttpResponse>() {
-                    @Override
-                    public void call(BmobHttpResponse response) {
-                        if (response != null && !TextUtils.isEmpty(response.getObjectId())) {
-                            if (mView.isActive()) {
-                                mView.postSuc(mDillitembean);
-                            }else{
-                                mView.postFailed("提交失败");
-                            }
-                        }
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        mView.postFailed("提交异常");
-                    }
-                });
-        addSubscribe(rxSubscription);
+    public void postDishes(Collection<DishBean> dishes) {
+
+        BatchRequestBean batchrequest = new BatchRequestBean();
+        for (DishBean dish : dishes){
+            DillItemBean temp = new DillItemBean();
+            temp.setTitle(dish.getTitle());
+            temp.setDishname(dish.getDishname());
+            temp.setAvatar("https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=3001304778,4021565056&fm=96");
+            temp.setDay(Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+            temp.setDishpic(dish.getPicurl());
+            temp.setMonth(Calendar.getInstance().get(Calendar.MONTH)+1);
+            temp.setWorkmate_creator("李梦龙");
+            temp.setWorkmate_name("李梦龙");
+            temp.setYear(Calendar.getInstance().get(Calendar.YEAR));
+
+            BatchBean batchbean = new BatchBean();
+            batchbean.setMethod("POST");
+            batchbean.setPath("/1/classes/dillitem");
+            batchbean.setBody(temp);
+            batchrequest.getRequests().add(batchbean);
+        }
+
+//        Subscription rxSubscription = RetrofitHelper.getBmobApis().postDillBatch(batchrequest)
+//                .compose(RxUtil.<List<Map<String,BmobHttpResponse>>>rxSchedulerHelper())
+//                .compose(RxUtil.<List<DillItemBean>>handleBmobResult())
+//                .subscribe(new Action1<List<Map<String,BmobHttpResponse>>>() {
+//                    @Override
+//                    public void call(List<Map<String,BmobHttpResponse>> response) {
+//                        if (response != null && !TextUtils.isEmpty(response.getObjectId())) {
+//                            if (mView.isActive()) {
+//                                mView.postSuc(mDillitembean);
+//                            }else{
+//                                mView.postFailed("提交失败");
+//                            }
+//                        }
+//                    }
+//                }, new Action1<Throwable>() {
+//                    @Override
+//                    public void call(Throwable throwable) {
+//                        mView.postFailed("提交异常");
+//                    }
+//                });
+//        addSubscribe(rxSubscription);
+
+        Log.e("DishPresenter", GsonUtil.getJson(batchrequest));
+
+        Call<ResponseBody> call = RetrofitHelper.getBmobApis().postDillBatch(batchrequest);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    System.out.println(response.body().string());
+                    mView.postSuc();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    mView.postFailed("提交失败");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
     @Override

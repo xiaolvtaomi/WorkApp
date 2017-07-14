@@ -1,6 +1,7 @@
 package com.mvp.base.model.net;
 
 
+import com.mvp.base.model.bean.BatchRequestBean;
 import com.mvp.base.model.bean.CollectionBean;
 import com.mvp.base.model.bean.CommentBean;
 import com.mvp.base.model.bean.DillItemBean;
@@ -15,6 +16,8 @@ import com.mvp.base.model.bean.WorkmateBean;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.HEAD;
@@ -27,7 +30,7 @@ import rx.Observable;
 
 public interface BmobApis {
 
-    String HOST = "https://api.bmob.cn/1/classes/";
+    String HOST = "https://api.bmob.cn/1/";
 
     String APPID = "03274654d9ef74a7989712c500f155aa";
     String RESTKEY = "502d2271cf2efa791972b85135ef8222";
@@ -42,7 +45,7 @@ public interface BmobApis {
      * @return
      */
     @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:03274654d9ef74a7989712c500f155aa","X-Bmob-REST-API-Key:502d2271cf2efa791972b85135ef8222"})
-    @GET("doodle?where%3d%7b%22level%22%3a%7b%22%24gte%22%3a1%7d%7d&order=-createdAt")
+    @GET("classes/doodle?where%3d%7b%22level%22%3a%7b%22%24gte%22%3a1%7d%7d&order=-createdAt")
     Observable<BmobHttpResponse<List<DoodleBean>>> getHomePage(@Query("limit") int limit , @Query("skip") int skip);
 
     /**
@@ -53,7 +56,7 @@ public interface BmobApis {
      * @return
      */
     @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:03274654d9ef74a7989712c500f155aa","X-Bmob-REST-API-Key:502d2271cf2efa791972b85135ef8222"})
-    @GET("doodle/{objectid}")
+    @GET("classes/doodle/{objectid}")
     Observable<DoodleBean> getDoodleDetail(@Path("objectid") String objectid);
 
 
@@ -64,7 +67,7 @@ public interface BmobApis {
      * @return
      */
     @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:03274654d9ef74a7989712c500f155aa","X-Bmob-REST-API-Key:502d2271cf2efa791972b85135ef8222"})
-    @GET("doodle")
+    @GET("classes/doodle")
     Observable<BmobHttpResponse<List<DoodleBean>>> getDoodleReact(
             @Query("where") String encoded_monthday);
 
@@ -76,38 +79,42 @@ public interface BmobApis {
      * @return
      */
     @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:03274654d9ef74a7989712c500f155aa","X-Bmob-REST-API-Key:502d2271cf2efa791972b85135ef8222"})
-    @GET("comment")
+    @GET("classes/comment")
     Observable<BmobHttpResponse<List<CommentBean>>> getCommentsByDoodleid(@Query("where") String doodleidmap, @Query("limit") int limit, @Query("skip") int skip);
 
     @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:03274654d9ef74a7989712c500f155aa","X-Bmob-REST-API-Key:502d2271cf2efa791972b85135ef8222"})
-    @GET("doodle")
+    @GET("classes/doodle")
     Observable<BmobHttpResponse<List<DoodleBean>>> getDoodleByCollectid(@Query("where") String doodleidmap, @Query("limit") int limit, @Query("skip") int skip);
 
     @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
-    @GET("dillitem?order=title")
+    @GET("classes/dillitem?order=title")
     Observable<BmobHttpResponse<List<DillItemBean>>> getDillItemsByYMD(@Query("where") String map);
 
 
     @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
-    @GET("dillitem")
+    @GET("classes/dillitem")
     Observable<BmobHttpResponse<List<DillItemBean>>> getDillItemsByYMD_UID(@Query("where") String map);
 
 
 
     @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
-    @GET("dish")
+    @GET("classes/dish")
     Observable<BmobHttpResponse<List<DishBean>>> getDishesByYMD(@Query("where") String map);
 
     @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
-    @GET("dish?order=title")
+    @GET("classes/dish?order=title")
     Observable<BmobHttpResponse<List<DishBean>>> getAllDishes();
 
     @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
-    @POST("dillitem")
-    Observable<BmobHttpResponse> postDill(@Body DillItemBean mDillItemBean);
+    @POST("classes/dish")
+    Call<ResponseBody> addDishbean(@Body DishBean mDishBean);
+
+    @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
+    @POST("batch")
+    Call<ResponseBody> postDillBatch(@Body BatchRequestBean batchRequestBean);
 
     @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:03274654d9ef74a7989712c500f155aa","X-Bmob-REST-API-Key:502d2271cf2efa791972b85135ef8222"})
-    @POST("comment")
+    @POST("classes/comment")
     Observable<BmobHttpResponse> postComment(@Body CommentBean mCommentBean);
 
 
@@ -118,7 +125,7 @@ public interface BmobApis {
      * @return
      */
     @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:03274654d9ef74a7989712c500f155aa","X-Bmob-REST-API-Key:502d2271cf2efa791972b85135ef8222"})
-    @GET("doodle?order=doodleid&limit=25")
+    @GET("classes/doodle?order=doodleid&limit=25")
     Observable<BmobHttpResponse<List<DoodleBean>>> getDoodleRandom(@Query("skip") int skip);
 
 
@@ -128,7 +135,7 @@ public interface BmobApis {
      * @return
      */
     @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:03274654d9ef74a7989712c500f155aa","X-Bmob-REST-API-Key:502d2271cf2efa791972b85135ef8222"})
-    @GET("nickname?limit=1")
+    @GET("classes/nickname?limit=1")
     Observable<BmobHttpResponse<List<NickBean>>> getNickRandom(@Query("skip") int skip);
 
     /**
@@ -138,7 +145,7 @@ public interface BmobApis {
      * @return
      */
     @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:03274654d9ef74a7989712c500f155aa","X-Bmob-REST-API-Key:502d2271cf2efa791972b85135ef8222"})
-    @GET("collection")
+    @GET("classes/collection")
     Observable<BmobHttpResponse<List<CollectionBean>>> getCollection();
 
 }

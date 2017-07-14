@@ -6,8 +6,17 @@ public class BmobHttpResponse<T> {
     private int code;
     private String error;
     private String createdAt;
+    private String updatedAt ;
     private String objectId;
     T results;
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 
     public String getCreatedAt() {
         return createdAt;

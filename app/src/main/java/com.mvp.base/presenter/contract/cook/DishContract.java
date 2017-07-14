@@ -7,6 +7,8 @@ import com.mvp.base.base.BaseView;
 import com.mvp.base.model.bean.DillItemBean;
 import com.mvp.base.model.bean.DishBean;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -54,7 +56,7 @@ public interface DishContract {
 
         void postFailed(String reason);
 
-        void postSuc(DillItemBean postedBean);
+        void postSuc();
 
         void refreshFailed(String reason);
 
@@ -77,7 +79,7 @@ public interface DishContract {
         /**
          * 提交我的菜
          */
-        void postDishes(DillItemBean mDillitembean);
+        void postDishes( Collection<DishBean> dishes);
 
         /**
          * 点选菜

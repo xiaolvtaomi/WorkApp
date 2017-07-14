@@ -12,6 +12,7 @@ import com.mvp.base.ui.adapter.viewholder.ViewHolder_01;
 import com.mvp.base.ui.adapter.viewholder.ViewHolder_02;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,8 +46,8 @@ public class DishAdapter extends RecyclerArrayAdapter<Pair<Integer, Object>> imp
      * 返回已经选择的菜
      * @return
      */
-    public Map<String, DishBean> getSelectedDishes(){
-        return selectedDishes ;
+    public Collection<DishBean> getSelectedDishes(){
+        return selectedDishes.values();
     }
 
     public DishAdapter(Context context) {

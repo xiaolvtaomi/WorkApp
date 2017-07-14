@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.jph.takephoto.compress.CompressConfig;
 import com.jph.takephoto.model.TResult;
 import com.mvp.base.R;
@@ -15,6 +16,13 @@ import com.mvp.base.base.SwipeBackActivity;
 
 import com.mvp.base.base.SwipeBackWithPicActivity;
 import com.mvp.base.component.ImageLoader;
+import com.mvp.base.model.bean.DillItemBean;
+import com.mvp.base.model.bean.DishBean;
+import com.mvp.base.model.net.BmobHttpResponse;
+import com.mvp.base.model.net.RetrofitHelper;
+import com.mvp.base.utils.GsonUtil;
+import com.mvp.base.utils.RxUtil;
+import com.mvp.base.utils.StringUtils;
 import com.mvp.base.widget.theme.ColorTextView;
 import com.sina.cloudstorage.auth.AWSCredentials;
 import com.sina.cloudstorage.auth.BasicAWSCredentials;
@@ -25,11 +33,21 @@ import com.sina.cloudstorage.services.scs.model.PutObjectResult;
 import org.w3c.dom.Text;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import rx.Subscription;
+import rx.functions.Action1;
 
 /**
  * Created by lml on 17/7/14.
@@ -48,13 +66,18 @@ public class DishAddActivity extends SwipeBackWithPicActivity implements View.On
     @BindView(R.id.iv_logo)
     ImageView iv_logo ;
 
-//    @BindView(R.id.title_name)
+    @BindView(R.id.title_name)
     ColorTextView titleName;
+
+    DishBean bean = null ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dishadd);
+        unbinder = ButterKnife.bind(this);
+
+        bean = (DishBean)getIntent().getSerializableExtra("dishbean");
 
         titleName = (ColorTextView) findViewById(R.id.title_name);
         titleName.setText("新增");
@@ -74,12 +97,36 @@ public class DishAddActivity extends SwipeBackWithPicActivity implements View.On
             case R.id.btn_post:
                 if(TextUtils.isEmpty(compressPath)){
                     Toast.makeText(this,"选图", Toast.LENGTH_SHORT).show();
+                    // 测试
+                    if(bean == null) {
+                        bean = new DishBean();
+                    }
+                    if(!TextUtils.isEmpty(compressPath)) {
+                        bean.setPicurl("http://cdn.sinacloud.net/diancai/dish/" + compressPath.substring(compressPath.lastIndexOf("/") + 1));
+                    }
+                    bean.setSpicylevel(0);
+                    bean.setTitle("主食");
+                    bean.setDishname("caiming");
+                    bean.setIsopen(false);
+                    postDish(bean);
                 }else {
-                    putObjectWithCustomRequestHeader(compressPath);
+                    if(bean == null) {
+                        bean = new DishBean();
+                    }
+                    if(!TextUtils.isEmpty(compressPath)) {
+                        bean.setPicurl("http://cdn.sinacloud.net/diancai/dish/" + compressPath.substring(compressPath.lastIndexOf("/") + 1));
+                    }
+                    bean.setSpicylevel(0);
+                    bean.setTitle("主食");
+                    bean.setDishname("caiming");
+                    bean.setIsopen(false);
+
+                    putObjectWithCustomRequestHeader(compressPath, bean);
+
                 }
                 break;
             case R.id.iv_logo:
-                CompressConfig compressConfig = new CompressConfig.Builder().setMaxPixel(200).create();
+                CompressConfig compressConfig = new CompressConfig.Builder().setMaxPixel(320).create();
                 getTakePhoto().onEnableCompress(compressConfig,true);
                 getTakePhoto().onPickFromGallery();
                 break;
@@ -91,15 +138,25 @@ public class DishAddActivity extends SwipeBackWithPicActivity implements View.On
     /**
      * 上传文件 自定义请求头
      */
-    public void putObjectWithCustomRequestHeader(final String filepath){
+    public void putObjectWithCustomRequestHeader(final String filepath, final DishBean bean){
         new Thread(){
             public void run(){
                 //自定义请求头k-v
-                Map<String, String> requestHeader = new HashMap<String, String>();
-                requestHeader.put("x-sina-additional-indexed-key", filepath.substring(filepath.lastIndexOf("/"))+1);
-                PutObjectResult putObjectResult = conn.putObject("diancai", "dish/",
-                        new File(filepath), requestHeader);
+//                Map<String, String> requestHeader = new HashMap<String, String>();
+//                requestHeader.put("x-sina-additional-indexed-key", filepath.substring(filepath.lastIndexOf("/"))+1);
+//                PutObjectResult putObjectResult = conn.putObject("diancai", "dish/",
+//                        new File(filepath), requestHeader);
+
+                PutObjectResult putObjectResult = conn.putObject("diancai",
+                        "dish/"+filepath.substring(filepath.lastIndexOf("/")+1),
+                        new File(filepath));
                 System.out.println(putObjectResult);//服务器响应结果
+
+                if(putObjectResult != null && !TextUtils.isEmpty(putObjectResult.getContentMd5())){
+                    postDish(bean);
+                }
+
+
             }
         }.start();
 
@@ -112,6 +169,35 @@ public class DishAddActivity extends SwipeBackWithPicActivity implements View.On
         compressPath = result.getImage().getCompressPath() ;
         originalPath = result.getImage().getOriginalPath() ;
         ImageLoader.load(this, compressPath, iv_logo);
+    }
+
+
+    public void postDish(DishBean bean){
+//        Map<String, Object> params = new HashMap<>();
+//        int year , month ,day ;
+//        year = Calendar.getInstance().get(Calendar.YEAR);
+//        month = Calendar.getInstance().get(Calendar.MONTH);
+//        day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+//        params.put("year", year);
+//        params.put("month", month);
+//        params.put("day", day);
+//        String json = new Gson().toJson(params) ;
+        Call<ResponseBody> call = RetrofitHelper.getBmobApis().addDishbean(bean);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    System.out.println(response.body().string());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
 }

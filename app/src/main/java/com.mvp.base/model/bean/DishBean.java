@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 public class DishBean implements Serializable {
 
+    public String objectId ;
     public String picurl ;
     public String dishname ;
     public String title ;
@@ -17,6 +18,14 @@ public class DishBean implements Serializable {
     public int type ; // 0,1,2 早中晚
 
     public boolean hasTitle=false;
+
+    public String getObjectId() {
+        return objectId;
+    }
+
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
+    }
 
     public String getDishname() {
         return dishname;
