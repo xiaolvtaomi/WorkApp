@@ -16,7 +16,7 @@ import com.mvp.base.base.RootView;
 import com.mvp.base.model.bean.DoodleBean;
 import com.mvp.base.model.bean.VideoInfo;
 import com.mvp.base.presenter.contract.VideoListContract;
-import com.mvp.base.ui.activitys.VideoListActivity;
+import com.mvp.base.ui.activitys.WorkmateListActivity;
 import com.mvp.base.ui.adapter.VideoListAdapter;
 import com.mvp.base.utils.EventUtil;
 import com.mvp.base.utils.JumpUtil;
@@ -35,7 +35,7 @@ import butterknife.OnClick;
  * Creator: yxc
  * date: 2016/9/21 14:57
  */
-public class VideoListView extends RootView<VideoListContract.Presenter> implements VideoListContract.View, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnLoadMoreListener {
+public class WorkmateListView extends RootView<VideoListContract.Presenter> implements VideoListContract.View, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnLoadMoreListener {
 
     @BindView(R.id.rl_back)
     RelativeLayout mRlBack;
@@ -49,17 +49,17 @@ public class VideoListView extends RootView<VideoListContract.Presenter> impleme
     VideoInfo videoInfo;
     int pageSize = 30;
 
-    public VideoListView(Context context) {
+    public WorkmateListView(Context context) {
         super(context);
     }
 
-    public VideoListView(Context context, AttributeSet attrs) {
+    public WorkmateListView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     @Override
     protected void getLayout() {
-        inflate(mContext, R.layout.activity_video_list_view, this);
+        inflate(mContext, R.layout.activity_workmate_list_view, this);
     }
 
     @Override
@@ -112,8 +112,8 @@ public class VideoListView extends RootView<VideoListContract.Presenter> impleme
 
     @OnClick(R.id.rl_back)
     public void back() {
-        if (mContext instanceof VideoListActivity) {
-            ((VideoListActivity) mContext).finish();
+        if (mContext instanceof WorkmateListActivity) {
+            ((WorkmateListActivity) mContext).finish();
         }
     }
 

@@ -8,11 +8,9 @@ import com.mvp.base.model.bean.VideoInfo;
 import com.mvp.base.ui.activitys.DishAddActivity;
 import com.mvp.base.ui.activitys.DishManageActivity;
 import com.mvp.base.ui.activitys.MainActivity;
-import com.mvp.base.ui.activitys.VideoActivity;
 import com.mvp.base.ui.activitys.VideoInfoActivity;
-import com.mvp.base.ui.activitys.VideoListActivity;
+import com.mvp.base.ui.activitys.WorkmateListActivity;
 import com.mvp.base.ui.activitys.WelcomeActivity;
-import com.mvp.base.ui.view.DishManageView;
 
 /**
  * Description: JumpUtil
@@ -34,13 +32,13 @@ public class JumpUtil {
     }
 
     public static void go2VideoListActivity(Context context, int catalogId, String title) {
-        Intent intent = new Intent(context, VideoListActivity.class);
+        Intent intent = new Intent(context, WorkmateListActivity.class);
         intent.putExtra("catalogId", catalogId);
         intent.putExtra("title", title);
         context.startActivity(intent);
     }
     public static void go2VideoListSearchActivity(Context context, String searchStr,String title) {
-        Intent intent = new Intent(context, VideoListActivity.class);
+        Intent intent = new Intent(context, WorkmateListActivity.class);
         intent.putExtra("searchStr", searchStr);
         intent.putExtra("title", title);
         context.startActivity(intent);
