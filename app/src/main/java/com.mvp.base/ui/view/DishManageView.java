@@ -20,6 +20,7 @@ import com.mvp.base.ui.activitys.DishManageActivity;
 import com.mvp.base.ui.activitys.HistoryActivity;
 import com.mvp.base.ui.adapter.DishAdapter;
 import com.mvp.base.ui.adapter.DishManageAdapter;
+import com.mvp.base.utils.JumpUtil;
 import com.mvp.base.utils.Preconditions;
 import com.mvp.base.widget.theme.ColorTextView;
 
@@ -36,6 +37,8 @@ public class DishManageView extends RootView<DishManageContract.Presenter> imple
 
     @BindView(R.id.title_name)
     ColorTextView titleName;
+    @BindView(R.id.rl_collect_clear)
+    RelativeLayout rl_add;
     @BindView(R.id.rl_back)
     RelativeLayout rlBack;
     @BindView(R.id.recyclerView)
@@ -65,6 +68,7 @@ public class DishManageView extends RootView<DishManageContract.Presenter> imple
         recyclerView.setAdapterWithProgress(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setErrorView(R.layout.view_error);
+        rl_add.setVisibility(View.VISIBLE);
 //        SpaceDecoration itemDecoration = new SpaceDecoration(ScreenUtil.dip2px(getContext(), 8));
 //        itemDecoration.setPaddingEdgeSide(false);
 //        itemDecoration.setPaddingStart(false);
@@ -142,13 +146,16 @@ public class DishManageView extends RootView<DishManageContract.Presenter> imple
     }
 
 
-    @OnClick({R.id.rl_back})
+    @OnClick({R.id.rl_back, R.id.rl_collect_clear})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_back:
                 if (mContext instanceof DishManageActivity) {
                     ((DishManageActivity) mContext).finish();
                 }
+                break;
+            case R.id.rl_collect_clear:
+                JumpUtil.go2DishAddActivity(mContext);
                 break;
 
         }

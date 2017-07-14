@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.mvp.base.model.bean.DoodleBean;
 import com.mvp.base.model.bean.VideoInfo;
+import com.mvp.base.ui.activitys.DishAddActivity;
 import com.mvp.base.ui.activitys.DishManageActivity;
 import com.mvp.base.ui.activitys.MainActivity;
 import com.mvp.base.ui.activitys.VideoActivity;
@@ -58,6 +59,11 @@ public class JumpUtil {
 
     public static void go2DishManageActivity(Context context) {
         Intent intent = new Intent(context, DishManageActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void go2DishAddActivity(Context context) {
+        Intent intent = new Intent(context, DishAddActivity.class);
         context.startActivity(intent);
     }
 }

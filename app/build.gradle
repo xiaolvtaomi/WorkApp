@@ -34,8 +34,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.0'
     compile 'com.android.support:support-v4:24.2.0'
     compile 'com.android.support:recyclerview-v7:24.+'
-
-
     compile 'org.simple:androideventbus:1.0.5.1'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
@@ -51,7 +49,7 @@ dependencies {
     compile 'jp.wasabeef:glide-transformations:2.0.1'
     compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
     compile 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
-//    compile 'fm.jiecao:jiecaovideoplayer:4.7.1_preview'
+    //    compile 'fm.jiecao:jiecaovideoplayer:4.7.1_preview'
     compile 'org.jetbrains:annotations-java5:15.0'
     compile 'com.daprlabs.aaron:cardstack:0.3.1-beta0'
     compile 'com.makeramen:roundedimageview:2.2.1'
@@ -65,8 +63,9 @@ dependencies {
     }
     //canary
     compile 'com.github.markzhai:blockcanary-android:1.3.1'
-//    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4'
-//    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4'
+    //    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4'
+
+    //    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4'
     compile 'com.orhanobut:logger:1.15'
     compile 'org.slf4j:slf4j-api:1.7.12'
     //material-design-iconic
@@ -76,4 +75,7 @@ dependencies {
     compile 'com.mikepenz:foundation-icons-typeface:3.0.0.1@aar'
     compile 'mi-appstore:xiaomi-update-sdk:2.6+'
     compile files('libs/MiPush_SDK_Client_3_4_3.jar')
+    compile files('libs/scs-android-sdk-0.0.1-SNAPSHOT.jar')
+
+    compile 'com.jph.takephoto:takephoto_library:4.0.3'
 }

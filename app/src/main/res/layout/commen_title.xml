@@ -18,13 +18,14 @@
 
     </RelativeLayout>
 
+    <!--android:textColor="?attr/md_title_color" -->
     <com.mvp.base.widget.theme.ColorTextView
         android:id="@+id/title_name"
         style="@style/title_tv_style"
         android:layout_centerHorizontal="true"
         android:maxLength="15"
         android:singleLine="true"
-        android:textColor="?attr/md_title_color" />
+        />
 
     <RelativeLayout
         android:id="@+id/rl_collect"
@@ -54,7 +55,7 @@
         <TextView
             style="@style/common_tv_style"
             android:layout_centerInParent="true"
-            android:text="@string/clean" />
+            android:text="新增" />
 
     </RelativeLayout>
 </com.mvp.base.widget.theme.ColorRelativeLayout>
