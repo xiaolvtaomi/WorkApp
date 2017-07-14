@@ -25,7 +25,8 @@ public class DishTongjiViewHolder extends BaseViewHolder<DishTongjiBean> {
     View divider_02;//长线
     RelativeLayout rl_item_community_first;
     TextView tv_item_community_title_first;
-    TextView tv_item_community_num_first;
+  //  TextView tv_item_community_num_first;
+    ImageView tv_item_community_num_first;
 
 
     public DishTongjiViewHolder(ViewGroup parent) {
@@ -38,7 +39,7 @@ public class DishTongjiViewHolder extends BaseViewHolder<DishTongjiBean> {
         ivFirst= (ImageView) itemView.findViewById(R.id.iv_item_community_first);
         rl_item_community_first= (RelativeLayout) itemView.findViewById(R.id.rl_item_community_first);
         tv_item_community_title_first= (TextView) itemView.findViewById(R.id.tv_item_community_title_first);
-        tv_item_community_num_first= (TextView) itemView.findViewById(R.id.tv_item_community_num_first);
+        tv_item_community_num_first= (ImageView) itemView.findViewById(R.id.tv_item_community_num_first);
 
     }
 
@@ -53,7 +54,18 @@ public class DishTongjiViewHolder extends BaseViewHolder<DishTongjiBean> {
             //填充网络数据
             ImageLoader.load(getContext(),mDishTongjiBean.picurl,ivFirst);
             tv_item_community_title_first.setText(mDishTongjiBean.dishname);
-            tv_item_community_num_first.setText("辣椒");
+            if (mDishTongjiBean.spicylevel==0){
+                tv_item_community_num_first.setImageResource(R.mipmap.none);
+            }
+            else if (mDishTongjiBean.spicylevel==1){
+                tv_item_community_num_first.setImageResource(R.mipmap.one);
+            }
+            else if (mDishTongjiBean.spicylevel==2){
+                tv_item_community_num_first.setImageResource(R.mipmap.two);
+            }
+            else if (mDishTongjiBean.spicylevel==3){
+                tv_item_community_num_first.setImageResource(R.mipmap.three);
+            }
             if(mDishTongjiBean.hasTitle){//需要显示标头
                 divider.setVisibility(View.VISIBLE);
                 tvTitle.setVisibility(View.VISIBLE);

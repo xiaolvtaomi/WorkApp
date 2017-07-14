@@ -37,8 +37,11 @@ public class ViewHolder_02 extends BaseViewHolder<Pair<DishBean,DishBean>> {
     RelativeLayout rl_item_community_first;
     TextView tv_item_community_title_first;
     TextView tv_item_community_title_second;
-    TextView tv_item_community_num_first;
-    TextView tv_item_community_num_second;
+    //  TextView tv_item_community_num_first;
+    ImageView tv_item_community_num_first;
+    //  TextView tv_item_community_num_second;
+    ImageView tv_item_community_num_second;
+
 
     DishBean first;
     DishBean second;
@@ -63,14 +66,14 @@ public class ViewHolder_02 extends BaseViewHolder<Pair<DishBean,DishBean>> {
         divider_03=itemView.findViewById(R.id.item_community_divider03);
         ivSecond= (ImageView) itemView.findViewById(R.id.iv_item_community_second);
         ivFirst= (ImageView) itemView.findViewById(R.id.iv_item_community_first);
-        ivFirst_selected= (ImageView) itemView.findViewById(R.id.iv_first_selected);
-        ivSecond_selected= (ImageView) itemView.findViewById(R.id.iv_second_selected);
+ //       ivFirst_selected= (ImageView) itemView.findViewById(R.id.iv_first_seleted);
+        ivSecond_selected= (ImageView) itemView.findViewById(R.id.iv_second_seleted);
         rl_item_community_second= (RelativeLayout) itemView.findViewById(R.id.rl_item_community_second);
         rl_item_community_first= (RelativeLayout) itemView.findViewById(R.id.rl_item_community_first);
         tv_item_community_title_first= (TextView) itemView.findViewById(R.id.tv_item_community_title_first);
         tv_item_community_title_second= (TextView) itemView.findViewById(R.id.tv_item_community_title_second);
-        tv_item_community_num_first= (TextView) itemView.findViewById(R.id.tv_item_community_num_first);
-        tv_item_community_num_second= (TextView) itemView.findViewById(R.id.tv_item_community_num_second);
+        tv_item_community_num_first= (ImageView) itemView.findViewById(R.id.tv_item_community_num_first);
+        tv_item_community_num_second= (ImageView) itemView.findViewById(R.id.tv_item_community_num_second);
 
     }
 
@@ -96,7 +99,18 @@ public class ViewHolder_02 extends BaseViewHolder<Pair<DishBean,DishBean>> {
             //填充网络数据
             ImageLoader.load(getContext(),first.picurl,ivFirst);
             tv_item_community_title_first.setText(first.dishname);
-            tv_item_community_num_first.setText("辣椒");
+            if (first.spicylevel==0){
+                tv_item_community_num_first.setImageResource(R.mipmap.none);
+            }
+            else if (first.spicylevel==1){
+                tv_item_community_num_first.setImageResource(R.mipmap.one);
+            }
+            else if (first.spicylevel==2){
+                tv_item_community_num_first.setImageResource(R.mipmap.two);
+            }
+            else if (first.spicylevel==3){
+                tv_item_community_num_first.setImageResource(R.mipmap.three);
+            }
             if(first.hasTitle){//需要显示标头
                 divider.setVisibility(View.VISIBLE);
                 tvTitle.setVisibility(View.VISIBLE);
@@ -125,22 +139,37 @@ public class ViewHolder_02 extends BaseViewHolder<Pair<DishBean,DishBean>> {
                 //填充网络数据
                 ImageLoader.load(getContext(),second.picurl,ivSecond);
                 tv_item_community_title_second.setText(second.dishname);
-                tv_item_community_num_second.setText("辣椒");
+                if (first.spicylevel==0){
+                    tv_item_community_num_second.setImageResource(R.mipmap.none);
+                }
+                else if (first.spicylevel==1){
+                    tv_item_community_num_second.setImageResource(R.mipmap.one);
+                }
+                else if (first.spicylevel==2){
+                    tv_item_community_num_second.setImageResource(R.mipmap.two);
+                }
+                else if (first.spicylevel==3){
+                    tv_item_community_num_second.setImageResource(R.mipmap.three);
+                }
             }
 
 
             if(b_first){
-                ivFirst_selected.setVisibility(View.VISIBLE);
+                // ivFirst_selected.setVisibility(View.VISIBLE);
+                rl_item_community_first.setBackgroundResource(R.mipmap.pitch_on);
             }else{
-                ivFirst_selected.setVisibility(View.GONE);
+              //   ivFirst_selected.setVisibility(View.GONE);
+                rl_item_community_first.setBackgroundResource(R.mipmap.none);
 
             }
 
             if(b_second){
-                ivSecond_selected.setVisibility(View.VISIBLE);
+            //    ivSecond_selected.setVisibility(View.VISIBLE);
+                rl_item_community_second.setBackgroundResource(R.mipmap.pitch_on);
 
             }else{
-                ivSecond_selected.setVisibility(View.GONE);
+            //    ivSecond_selected.setVisibility(View.GONE);
+                rl_item_community_second.setBackgroundResource(R.mipmap.none);
 
             }
 
@@ -192,7 +221,18 @@ public class ViewHolder_02 extends BaseViewHolder<Pair<DishBean,DishBean>> {
             //填充网络数据
             ImageLoader.load(getContext(),first.picurl,ivFirst);
             tv_item_community_title_first.setText(first.dishname);
-            tv_item_community_num_first.setText("辣椒");
+            if (first.spicylevel==0){
+                tv_item_community_num_first.setImageResource(R.mipmap.none);
+            }
+            else if (first.spicylevel==1){
+                tv_item_community_num_first.setImageResource(R.mipmap.one);
+            }
+            else if (first.spicylevel==2){
+                tv_item_community_num_first.setImageResource(R.mipmap.two);
+            }
+            else if (first.spicylevel==3){
+                tv_item_community_num_first.setImageResource(R.mipmap.three);
+            }
             if(first.hasTitle){//需要显示标头
                 divider.setVisibility(View.VISIBLE);
                 tvTitle.setVisibility(View.VISIBLE);
@@ -221,22 +261,37 @@ public class ViewHolder_02 extends BaseViewHolder<Pair<DishBean,DishBean>> {
                 //填充网络数据
                 ImageLoader.load(getContext(),second.picurl,ivSecond);
                 tv_item_community_title_second.setText(second.dishname);
-                tv_item_community_num_second.setText("辣椒");
+                if (first.spicylevel==0){
+                    tv_item_community_num_second.setImageResource(R.mipmap.none);
+                }
+                else if (first.spicylevel==1){
+                    tv_item_community_num_second.setImageResource(R.mipmap.one);
+                }
+                else if (first.spicylevel==2){
+                    tv_item_community_num_second.setImageResource(R.mipmap.two);
+                }
+                else if (first.spicylevel==3){
+                    tv_item_community_num_second.setImageResource(R.mipmap.three);
+                }
             }
 
 
             if(b_first){
-                ivFirst_selected.setVisibility(View.VISIBLE);
+        //        ivFirst_selected.setVisibility(View.VISIBLE);
+                rl_item_community_first.setBackgroundResource(R.mipmap.pitch_on);
             }else{
-                ivFirst_selected.setVisibility(View.GONE);
+         //       ivFirst_selected.setVisibility(View.GONE);
+                rl_item_community_first.setBackgroundResource(R.mipmap.none);
 
             }
 
             if(b_second){
-                ivSecond_selected.setVisibility(View.VISIBLE);
+         //       ivSecond_selected.setVisibility(View.VISIBLE);
+                rl_item_community_second.setBackgroundResource(R.mipmap.pitch_on);
 
             }else{
-                ivSecond_selected.setVisibility(View.GONE);
+          //      ivSecond_selected.setVisibility(View.GONE);
+                rl_item_community_second.setBackgroundResource(R.mipmap.none);
 
             }
 
