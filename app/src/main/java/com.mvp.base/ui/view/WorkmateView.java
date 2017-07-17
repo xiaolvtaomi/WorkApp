@@ -4,72 +4,73 @@ import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.RelativeLayout;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.mvp.base.R;
 import com.mvp.base.base.RootView;
 import com.mvp.base.model.bean.DillItemBean;
 import com.mvp.base.model.bean.DishBean;
-import com.mvp.base.presenter.contract.cook.DishManageContract;
-import com.mvp.base.ui.activitys.CollectionActivity;
-import com.mvp.base.ui.activitys.DishManageActivity;
-import com.mvp.base.ui.activitys.HistoryActivity;
+import com.mvp.base.model.bean.WorkmateBean;
+import com.mvp.base.presenter.contract.cook.DishContract;
+import com.mvp.base.presenter.contract.cook.WorkmateContract;
 import com.mvp.base.ui.adapter.DishAdapter;
-import com.mvp.base.ui.adapter.DishManageAdapter;
-import com.mvp.base.utils.JumpUtil;
+import com.mvp.base.ui.adapter.VideoListAdapter;
+import com.mvp.base.ui.adapter.WorkmateAdapter;
 import com.mvp.base.utils.Preconditions;
 import com.mvp.base.widget.theme.ColorTextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * Created by lml on 17/7/11.
  */
 
-public class DishManageView extends RootView<DishManageContract.Presenter> implements DishManageContract.View , SwipeRefreshLayout.OnRefreshListener{
+public class WorkmateView extends RootView<WorkmateContract.Presenter> implements WorkmateContract.View , SwipeRefreshLayout.OnRefreshListener{
 
     @BindView(R.id.title_name)
     ColorTextView titleName;
-    @BindView(R.id.rl_collect_clear)
-    RelativeLayout rl_add;
-    @BindView(R.id.rl_back)
-    RelativeLayout rlBack;
     @BindView(R.id.recyclerView)
     EasyRecyclerView recyclerView;
     @BindView(R.id.fab)
     FloatingActionButton fab;
-    DishManageAdapter adapter ;
+    WorkmateAdapter adapter ;
 
-    public DishManageView(Context context) {
+    public WorkmateView(Context context) {
         super(context);
     }
 
-    public DishManageView(Context context, AttributeSet attrs) {
+    public WorkmateView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
 
     @Override
     protected void getLayout() {
-        inflate(mContext, R.layout.fragment_dishmanage_view, this);
+        inflate(mContext, R.layout.activity_workmate_list_view, this);
     }
 
     @Override
     protected void initView() {
-        titleName.setText("配菜");
-        adapter = new DishManageAdapter(getContext());
+        titleName.setText("选同事");
+        adapter = new WorkmateAdapter(getContext());
         recyclerView.setAdapterWithProgress(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 3);
+        gridLayoutManager.setSpanSizeLookup(adapter.obtainGridSpanSizeLookUp(3));
+        recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setErrorView(R.layout.view_error);
-        rl_add.setVisibility(View.VISIBLE);
+
+//        adapter.setMore(R.layout.view_more, this);
+//        adapter.setNoMore(R.layout.view_nomore);
+
 //        SpaceDecoration itemDecoration = new SpaceDecoration(ScreenUtil.dip2px(getContext(), 8));
 //        itemDecoration.setPaddingEdgeSide(false);
 //        itemDecoration.setPaddingStart(false);
@@ -88,15 +89,9 @@ public class DishManageView extends RootView<DishManageContract.Presenter> imple
                 onRefresh();
             }
         });
-
-        fab.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
+
+
 
 
     @Override
@@ -104,15 +99,14 @@ public class DishManageView extends RootView<DishManageContract.Presenter> imple
         return mActive;
     }
 
-    List<DishBean> dishes ;
+    List<WorkmateBean> workmates = new ArrayList<>();
     @Override
-    public void showContent(List<DishBean> cells) {
-        dishes = cells ;
+    public void showContent(List<WorkmateBean> cells) {
+        workmates = cells ;
         adapter.clear();
-        adapter.setData(dishes);
+        adapter.setData(workmates);
 //        adapter.notifyDataSetChanged();
     }
-
 
 
     @Override
@@ -122,7 +116,7 @@ public class DishManageView extends RootView<DishManageContract.Presenter> imple
     }
 
     @Override
-    public void postSuc(DillItemBean postedBean) {
+    public void postSuc() {
         Snackbar.make(recyclerView, "提交成功", Snackbar.LENGTH_SHORT)
                 .setAction("Action", null).show();
 
@@ -137,7 +131,7 @@ public class DishManageView extends RootView<DishManageContract.Presenter> imple
     }
 
     @Override
-    public void setPresenter(DishManageContract.Presenter presenter) {
+    public void setPresenter(WorkmateContract.Presenter presenter) {
         mPresenter = Preconditions.checkNotNull(presenter);
     }
 
@@ -153,18 +147,4 @@ public class DishManageView extends RootView<DishManageContract.Presenter> imple
     }
 
 
-    @OnClick({R.id.rl_back, R.id.rl_collect_clear})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.rl_back:
-                if (mContext instanceof DishManageActivity) {
-                    ((DishManageActivity) mContext).finish();
-                }
-                break;
-            case R.id.rl_collect_clear:
-                JumpUtil.go2DishAddActivity(mContext);
-                break;
-
-        }
-    }
 }

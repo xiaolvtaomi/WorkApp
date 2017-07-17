@@ -25,7 +25,7 @@ public class ViewHolder_01 extends BaseViewHolder<Pair<HomeTopCellBean, HomeTopC
         itemView.findViewById(R.id.rl_right).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                JumpUtil.go2WorkmateListActivity(getContext(), "代点");
             }
         });
 

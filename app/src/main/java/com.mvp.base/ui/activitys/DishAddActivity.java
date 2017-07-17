@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -68,6 +69,10 @@ public class DishAddActivity extends SwipeBackWithPicActivity implements View.On
 
     @BindView(R.id.title_name)
     ColorTextView titleName;
+    @BindView(R.id.et_title)
+    EditText et_title;
+    @BindView(R.id.et_dishname)
+    EditText et_dishname;
 
     DishBean bean = null ;
 
@@ -97,6 +102,19 @@ public class DishAddActivity extends SwipeBackWithPicActivity implements View.On
             case R.id.btn_post:
                 if(TextUtils.isEmpty(compressPath)){
                     Toast.makeText(this,"选图", Toast.LENGTH_SHORT).show();
+
+
+                }else {
+                    if(TextUtils.isEmpty(et_title.getText().toString())){
+                        Toast.makeText(this,"填分类", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+
+                    if(TextUtils.isEmpty(et_dishname.getText().toString())){
+                        Toast.makeText(this,"填菜名", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+
                     // 测试
                     if(bean == null) {
                         bean = new DishBean();
@@ -105,20 +123,8 @@ public class DishAddActivity extends SwipeBackWithPicActivity implements View.On
                         bean.setPicurl("http://cdn.sinacloud.net/diancai/dish/" + compressPath.substring(compressPath.lastIndexOf("/") + 1));
                     }
                     bean.setSpicylevel(0);
-                    bean.setTitle("主食");
-                    bean.setDishname("caiming");
-                    bean.setIsopen(false);
-                    postDish(bean);
-                }else {
-                    if(bean == null) {
-                        bean = new DishBean();
-                    }
-                    if(!TextUtils.isEmpty(compressPath)) {
-                        bean.setPicurl("http://cdn.sinacloud.net/diancai/dish/" + compressPath.substring(compressPath.lastIndexOf("/") + 1));
-                    }
-                    bean.setSpicylevel(0);
-                    bean.setTitle("主食");
-                    bean.setDishname("caiming");
+                    bean.setTitle(et_title.getText().toString());
+                    bean.setDishname(et_dishname.getText().toString());
                     bean.setIsopen(false);
 
                     putObjectWithCustomRequestHeader(compressPath, bean);

@@ -2,7 +2,7 @@
 <com.mvp.base.widget.theme.ColorLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/both_match_style"
-    android:background="?attr/background"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <include layout="@layout/commen_title" />
@@ -14,4 +14,14 @@
         app:layout_empty="@layout/view_empty"
         app:layout_progress="@layout/view_progress"
         app:scrollbars="none" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_dialog_email"/>
 </com.mvp.base.widget.theme.ColorLinearLayout>

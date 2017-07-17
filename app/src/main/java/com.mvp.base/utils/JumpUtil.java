@@ -31,9 +31,8 @@ public class JumpUtil {
         context.startActivity(intent);
     }
 
-    public static void go2VideoListActivity(Context context, int catalogId, String title) {
+    public static void go2WorkmateListActivity(Context context, String title) {
         Intent intent = new Intent(context, WorkmateListActivity.class);
-        intent.putExtra("catalogId", catalogId);
         intent.putExtra("title", title);
         context.startActivity(intent);
     }

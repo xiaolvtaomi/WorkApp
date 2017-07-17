@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -162,7 +163,10 @@ public class DishView extends RootView<DishContract.Presenter> implements DishCo
 
     @Override
     public void refreshFailed(String reason) {
-
+        if (!TextUtils.isEmpty(reason))
+            showError(reason);
+        recyclerView.showError();
+        adapter.pauseMore();
     }
 
     @Override

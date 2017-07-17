@@ -31,6 +31,7 @@ public class RetrofitHelper {
     private static VideoApis videoApi;
     private static GankApis gankApis;
     private static BmobApis bmobApis;
+    private static BmobClouds mBmobClouds;
 
     public static VideoApis getVideoApi() {
         initOkHttp();
@@ -71,6 +72,20 @@ public class RetrofitHelper {
             bmobApis = retrofit.create(BmobApis.class);
         }
         return bmobApis;
+    }
+
+    public static BmobClouds getBmobClouds() {
+        initOkHttp();
+        if (mBmobClouds == null) {
+            Retrofit retrofit = new Retrofit.Builder()
+                    .client(okHttpClient)
+                    .baseUrl(BmobClouds.HOST_CLOUD)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .build();
+            mBmobClouds = retrofit.create(BmobClouds.class);
+        }
+        return mBmobClouds;
     }
 
     private static void initOkHttp() {
