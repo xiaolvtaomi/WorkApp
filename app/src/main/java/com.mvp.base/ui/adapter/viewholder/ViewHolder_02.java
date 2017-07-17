@@ -1,25 +1,16 @@
 package com.mvp.base.ui.adapter.viewholder;
 
-import android.content.Context;
 import android.support.v4.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.mvp.base.R;
 import com.mvp.base.component.ImageLoader;
 import com.mvp.base.model.bean.DishBean;
-import com.mvp.base.model.bean.DishGroupBean;
-import com.mvp.base.ui.adapter.DishAdapter;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class ViewHolder_02 extends BaseViewHolder<Pair<DishBean,DishBean>> {
@@ -166,19 +157,22 @@ public class ViewHolder_02 extends BaseViewHolder<Pair<DishBean,DishBean>> {
             if(b_first){
                 // ivFirst_selected.setVisibility(View.VISIBLE);
                 rl_item_community_first.setBackgroundResource(R.mipmap.pitch_on);
+                rl_item_community_first.setAlpha(1.0f);
             }else{
               //   ivFirst_selected.setVisibility(View.GONE);
-                rl_item_community_first.setBackgroundResource(R.mipmap.none);
-
+                rl_item_community_first.setBackgroundResource(R.mipmap.back_pic);
+                rl_item_community_first.setAlpha(0.5f);
             }
 
             if(b_second){
             //    ivSecond_selected.setVisibility(View.VISIBLE);
                 rl_item_community_second.setBackgroundResource(R.mipmap.pitch_on);
+                rl_item_community_second.setAlpha(1.0f);
 
             }else{
             //    ivSecond_selected.setVisibility(View.GONE);
-                rl_item_community_second.setBackgroundResource(R.mipmap.none);
+                rl_item_community_second.setBackgroundResource(R.mipmap.back_pic);
+                rl_item_community_second.setAlpha(0.5f);
 
             }
 
@@ -294,21 +288,24 @@ public class ViewHolder_02 extends BaseViewHolder<Pair<DishBean,DishBean>> {
 
 
             if(b_first){
-        //        ivFirst_selected.setVisibility(View.VISIBLE);
+                // ivFirst_selected.setVisibility(View.VISIBLE);
                 rl_item_community_first.setBackgroundResource(R.mipmap.pitch_on);
+                rl_item_community_first.setAlpha(1.0f);
             }else{
-         //       ivFirst_selected.setVisibility(View.GONE);
-                rl_item_community_first.setBackgroundResource(R.mipmap.none);
-
+                //   ivFirst_selected.setVisibility(View.GONE);
+                rl_item_community_first.setBackgroundResource(R.mipmap.back_pic);
+                rl_item_community_first.setAlpha(0.5f);
             }
 
             if(b_second){
-         //       ivSecond_selected.setVisibility(View.VISIBLE);
+                //    ivSecond_selected.setVisibility(View.VISIBLE);
                 rl_item_community_second.setBackgroundResource(R.mipmap.pitch_on);
+                rl_item_community_second.setAlpha(1.0f);
 
             }else{
-          //      ivSecond_selected.setVisibility(View.GONE);
-                rl_item_community_second.setBackgroundResource(R.mipmap.none);
+                //    ivSecond_selected.setVisibility(View.GONE);
+                rl_item_community_second.setBackgroundResource(R.mipmap.back_pic);
+                rl_item_community_second.setAlpha(0.5f);
 
             }
 
