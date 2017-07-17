@@ -53,9 +53,15 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         unbinder = ButterKnife.bind(this);
-
+        SharedPreferences sp = getSharedPreferences("loginUser", Context.MODE_PRIVATE);
+        //取得欢迎界面背景
+        String name = sp.getString("name", "");
+        String moible = sp.getString("mobile", "");
+       if (!"".equals(name)&&!"".equals(moible)&&name!=null&&moible!=null){
+           Intent i2 = new Intent(LoginActivity.this, MainActivity.class);
+           startActivity(i2);
+       }
     }
 
     @OnClick({R.id.bt_go, R.id.fab})
