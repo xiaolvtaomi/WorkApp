@@ -11,7 +11,9 @@ import com.mvp.base.model.bean.TongjiDishBean;
 import com.mvp.base.ui.adapter.viewholder.TongjiDishViewHolder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Description: 统计
@@ -33,10 +35,12 @@ public class TongjiDishAdapter extends RecyclerArrayAdapter<TongjiDishBean> {
      * 类型集合，adapter对应的数据集合
      */
     List<TongjiDishBean> superData = new ArrayList<>();
-
+    Map<String, DishBean> mapdata = new HashMap<>();
 
     public void setData(List<DillItemBean> dillitems) {
         superData.clear();
+
+
 
         ArrayList<DishBean> dishes = new ArrayList<>();
         for(DillItemBean dillitem : dillitems){
@@ -53,7 +57,7 @@ public class TongjiDishAdapter extends RecyclerArrayAdapter<TongjiDishBean> {
             boolean hasinclude = false;
             for (int j = 0; j < superData.size(); j++) {
                 if (dishes.get(i).getDishname().equals(superData.get(j)
-                        .getTitle())) {
+                        .getDishname())) {
                     superData.get(j).setCountnum(superData.get(j).getCountnum
                             () + 1);
                     hasinclude = true;
