@@ -55,26 +55,11 @@ import static com.mvp.base.ui.activitys.MainActivity.Banner_Stop;
 public class MainView extends RootView<MainContract.Presenter> implements MainContract.View, RadioGroup.OnCheckedChangeListener {
 
     final int WAIT_TIME = 200;
-    @BindView(R.id.tv_collect)
-    TextView tvCollect;
-    @BindView(R.id.tv_share)
-    TextView tvShare;
-//    @BindView(R.id.tv_feedback)
-//    TextView tvFeedback;
-    @BindView(R.id.tv_setting)
-    TextView tvSetting;
-    @BindView(R.id.about)
-    TextView about;
-    @BindView(R.id.theme)
-    TextView theme;
+
     @BindView(R.id.tab_rg_menu)
     RadioGroup tabRgMenu;
     @BindView(R.id.vp_content)
     UnScrollViewPager vpContent;
-    @BindView(R.id.resideLayout)
-    ResideLayout mResideLayout;
-    @BindView(R.id.desc)
-    TextView mName;
     ContentPagerAdapter mPagerAdapter;
     MainActivity mActivity;
 
@@ -89,7 +74,7 @@ public class MainView extends RootView<MainContract.Presenter> implements MainCo
 
     @Override
     protected void getLayout() {
-        inflate(mContext, R.layout.activity_main_view, this);
+        inflate(mContext, R.layout.activity_main_view2, this);
     }
 
     @Override
@@ -100,13 +85,12 @@ public class MainView extends RootView<MainContract.Presenter> implements MainCo
         mPagerAdapter = new ContentPagerAdapter(mActivity.getSupportFragmentManager(), fragments);
         vpContent.setAdapter(mPagerAdapter);
         vpContent.setOffscreenPageLimit(fragments.size());
-        StringUtils.setIconDrawable(mContext, tvCollect, MaterialDesignIconic.Icon.gmi_collection_bookmark, 16, 10);
-        StringUtils.setIconDrawable(mContext, tvShare, MaterialDesignIconic.Icon.gmi_share, 16, 10);
+//        StringUtils.setIconDrawable(mContext, tvCollect, MaterialDesignIconic.Icon.gmi_collection_bookmark, 16, 10);
+//        StringUtils.setIconDrawable(mContext, tvShare, MaterialDesignIconic.Icon.gmi_share, 16, 10);
 //        StringUtils.setIconDrawable(mContext, tvFeedback, MaterialDesignIconic.Icon.gmi_android, 16, 10);
-        StringUtils.setIconDrawable(mContext, tvSetting, MaterialDesignIconic.Icon.gmi_settings, 16, 10);
-        StringUtils.setIconDrawable(mContext, about, MaterialDesignIconic.Icon.gmi_account, 16, 10);
-        StringUtils.setIconDrawable(mContext, theme, MaterialDesignIconic.Icon.gmi_palette, 16, 10);
-        mName.setText(PreUtils.getString(getContext(), "nickname", "有意思就分享下"));
+//        StringUtils.setIconDrawable(mContext, tvSetting, MaterialDesignIconic.Icon.gmi_settings, 16, 10);
+//        StringUtils.setIconDrawable(mContext, about, MaterialDesignIconic.Icon.gmi_account, 16, 10);
+//        StringUtils.setIconDrawable(mContext, theme, MaterialDesignIconic.Icon.gmi_palette, 16, 10);
     }
 
     @Override
@@ -126,22 +110,22 @@ public class MainView extends RootView<MainContract.Presenter> implements MainCo
             public void onPageScrollStateChanged(int state) {
             }
         });
-        mResideLayout.setPanelSlideListener(new ResideLayout.PanelSlideListener() {
-            @Override
-            public void onPanelSlide(View panel, float slideOffset) {
-                postBannerState(true);
-            }
-
-            @Override
-            public void onPanelOpened(View panel) {
-                postBannerState(true);
-            }
-
-            @Override
-            public void onPanelClosed(View panel) {
-                postBannerState(false);
-            }
-        });
+//        mResideLayout.setPanelSlideListener(new ResideLayout.PanelSlideListener() {
+//            @Override
+//            public void onPanelSlide(View panel, float slideOffset) {
+//                postBannerState(true);
+//            }
+//
+//            @Override
+//            public void onPanelOpened(View panel) {
+//                postBannerState(true);
+//            }
+//
+//            @Override
+//            public void onPanelClosed(View panel) {
+//                postBannerState(false);
+//            }
+//        });
     }
 
     @Override
@@ -202,52 +186,11 @@ public class MainView extends RootView<MainContract.Presenter> implements MainCo
                 .show();
     }
 
-    @OnClick({R.id.tv_collect,  R.id.tv_share,  R.id.tv_setting, R.id.about, R.id.theme})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.tv_collect:
-                mContext.startActivity(new Intent(mContext, CollectionActivity.class));
-                break;
-            case R.id.tv_share:
-                Intent shareIntent = new Intent();
-                shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.setting_recommend_content));
-                shareIntent.setType("text/plain");
 
-                //设置分享列表的标题，并且每次都显示分享列表
-                mContext.startActivity(Intent.createChooser(shareIntent, "分享到"));
-                break;
-//            case R.id.tv_feedback:
-//                // 以对话框的形式弹出
-//                PgyerDialog.setDialogTitleBackgroundColor(PreUtils.getString(mContext, Constants.PRIMARYCOLOR, "#000000"));
-//                PgyerDialog.setDialogTitleTextColor(PreUtils.getString(mContext, Constants.TITLECOLOR, "#0aa485"));
-//                PgyFeedback.getInstance().showDialog(mContext).d().setChecked(false);
-//                break;
-            case R.id.tv_setting:
-                mContext.startActivity(new Intent(mContext, SettingActivity.class));
-                break;
-            case R.id.about:
-                new MaterialDialog.Builder(mContext)
-                        .title(R.string.about)
-                        .titleColor(ThemeUtils.getThemeColor(mContext, R.attr.colorPrimary))
-                        .icon(new IconicsDrawable(mContext)
-                                .color(ThemeUtils.getThemeColor(mContext, R.attr.colorPrimary))
-                                .icon(MaterialDesignIconic.Icon.gmi_account)
-                                .sizeDp(20))
-                        .content(R.string.about_me)
-                        .contentColor(ThemeUtils.getThemeColor(mContext, R.attr.colorPrimary))
-                        .positiveText(R.string.close)
-                        .show();
-                break;
-            case R.id.theme:
-                setTheme("");
-                break;
-        }
-    }
 
-    public ResideLayout getResideLayout() {
-        return mResideLayout;
-    }
+//    public ResideLayout getResideLayout() {
+//        return mResideLayout;
+//    }
 
     @Override
     protected void onAttachedToWindow() {

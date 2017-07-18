@@ -189,9 +189,9 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
 
     @Override
     public void onBackPressed() {
-        if (mainView.getResideLayout().isOpen()) {
-            mainView.getResideLayout().closePane();
-        } else {
+//        if (mainView.getResideLayout().isOpen()) {
+//            mainView.getResideLayout().closePane();
+//        } else {
             long secondTime = System.currentTimeMillis();
             if (secondTime - firstTime > 1500) {
                 EventUtil.showToast(this, "再按一次退出");
@@ -199,7 +199,7 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
             } else {
                 App.getInstance().exitApp();
             }
-        }
+//        }
     }
 
     @Override

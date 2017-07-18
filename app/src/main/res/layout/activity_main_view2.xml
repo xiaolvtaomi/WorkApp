@@ -1,0 +1,45 @@
+<!-- android:background="?attr/background" -->
+<com.mvp.base.widget.theme.ColorRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/both_match_style"
+    android:background="@color/white"
+    >
+
+    <com.mvp.base.widget.UnScrollViewPager
+        android:id="@+id/vp_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:paddingBottom="40dp"/>
+
+    <RadioGroup
+        android:id="@+id/tab_rg_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@mipmap/bottom_bg"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/tab_rb_1"
+            style="@style/tab_rb_style"
+            android:checked="true"
+            android:drawableTop="@drawable/tab_02"
+            android:text="点餐"/>
+
+        <RadioButton
+            android:id="@+id/tab_rb_2"
+            style="@style/tab_rb_style"
+            android:drawableTop="@drawable/tab_03"
+            android:text="统计"/>
+
+
+        <RadioButton
+            android:id="@+id/tab_rb_4"
+            style="@style/tab_rb_style"
+            android:drawableTop="@drawable/tab_04"
+            android:text="我的"/>
+
+    </RadioGroup>
+</com.mvp.base.widget.theme.ColorRelativeLayout>
+
