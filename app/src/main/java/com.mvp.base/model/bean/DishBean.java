@@ -11,6 +11,17 @@ public class DishBean implements Serializable {
     public String objectId ;
     public String picurl ;
     public String dishname ;
+    public String dishpic;
+
+
+    public String getDishpic() {
+        return dishpic;
+    }
+
+    public void setDishpic(String dishpic) {
+        this.dishpic = dishpic;
+    }
+
     public String title ;
     public int spicylevel ; // 0,1,2
     public int dishid ;
