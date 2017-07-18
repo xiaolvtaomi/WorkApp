@@ -10,6 +10,7 @@ import com.mvp.base.model.bean.WorkmateBean;
 import com.mvp.base.model.bean.HomeTopCellBean;
 import com.mvp.base.ui.adapter.viewholder.ViewHolder_01;
 import com.mvp.base.ui.adapter.viewholder.ViewHolder_02;
+import com.mvp.base.ui.adapter.viewholder.WorkmateUnknowViewHolder;
 import com.mvp.base.ui.adapter.viewholder.WorkmateViewHolder;
 
 import java.util.ArrayList;
@@ -64,7 +65,7 @@ public class WorkmateAdapter extends RecyclerArrayAdapter<Pair<Integer, Object>>
     public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType){
             case TYPE_TOPCELL:
-                return new ViewHolder_01(parent);
+                return new WorkmateUnknowViewHolder(parent);
             case TYPE_WorkmateGROUP:
                 return new WorkmateViewHolder(parent, this);
         }
@@ -81,7 +82,7 @@ public class WorkmateAdapter extends RecyclerArrayAdapter<Pair<Integer, Object>>
     public void OnBindViewHolder(BaseViewHolder holder, int position) {
         switch (superData.get(position).first) {
             case TYPE_TOPCELL:
-                ((ViewHolder_01) holder).setData((android.util.Pair<HomeTopCellBean, HomeTopCellBean>) superData.get(position).second);
+                ((WorkmateUnknowViewHolder) holder).setData((android.util.Pair<HomeTopCellBean, HomeTopCellBean>) superData.get(position).second);
                 break;
             case TYPE_WorkmateGROUP:
                 ((WorkmateViewHolder) holder).setData((WorkmateBean) superData.get(position).second);

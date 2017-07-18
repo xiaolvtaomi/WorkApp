@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.mvp.base.widget.theme.ColorLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/both_match_style"
-    android:background="@color/white"
-    android:orientation="vertical">
+<com.mvp.base.widget.theme.ColorRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                               xmlns:app="http://schemas.android.com/apk/res-auto"
+                                               style="@style/both_match_style"
+                                               android:background="@color/white"
+                                               android:orientation="vertical">
 
-    <include layout="@layout/commen_title" />
+    <include
+        android:id="@+id/include_title"
+        layout="@layout/commen_title"/>
 
     <com.jude.easyrecyclerview.EasyRecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/include_title"
+        android:padding="0dp"
         app:layout_empty="@layout/view_empty"
         app:layout_progress="@layout/view_progress"
-        app:scrollbars="none" />
+        app:scrollbars="none"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -24,4 +28,22 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_dialog_email"/>
-</com.mvp.base.widget.theme.ColorLinearLayout>
+
+
+    <com.mvp.base.widget.circleprogress.CircleProgress xmlns:android="http://schemas.android.com/apk/res/android"
+                                                       xmlns:circleprogress="http://schemas.android.com/apk/res-auto"
+                                                       android:id="@+id/loading"
+                                                       android:layout_width="80dp"
+                                                       android:layout_height="80dp"
+                                                       android:layout_centerHorizontal="true"
+                                                       android:layout_centerVertical="true"
+                                                       android:layout_gravity="center"
+
+                                                       android:visibility="invisible"
+
+                                                       circleprogress:autoStart="true"
+                                                       circleprogress:color1="@android:color/holo_red_light"
+                                                       circleprogress:color2="@android:color/holo_green_light"
+                                                       circleprogress:color3="@android:color/holo_blue_light"/>
+
+</com.mvp.base.widget.theme.ColorRelativeLayout>

@@ -127,7 +127,7 @@ public class DishManageView extends RootView<DishManageContract.Presenter> imple
 
     @Override
     public void postFailed(String reason) {
-        Snackbar.make(recyclerView, "提交失败", Snackbar.LENGTH_SHORT)
+        Snackbar.make(recyclerView, reason, Snackbar.LENGTH_SHORT)
                 .setAction("Action", null).show();
     }
 

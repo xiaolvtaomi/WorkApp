@@ -7,5 +7,6 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:lineSpacingMultiplier="1.2"
+        android:textColor="@color/colorSecondText"
         android:text="ヽ(≧Д≦)ノ\n加载失败,请点击重试"/>
 </LinearLayout>

@@ -29,6 +29,7 @@ public interface WorkmateContract {
         void showContent(List<WorkmateBean> cells);
 
         void onRefresh();
+        void hidLoading();
 
         void postFailed(String reason);
 

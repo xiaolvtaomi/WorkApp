@@ -57,11 +57,12 @@ public class TongjiInfoView extends RootView<VideoInfoContract.Presenter> implem
 
     @Override
     protected void initView() {
+        mTitleName.setText("统计");
         animation = AnimationUtils.loadAnimation(mContext, R.anim.view_hand);
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
                 ((MainActivity) mContext).getSupportFragmentManager(), FragmentPagerItems.with(mContext)
-                .add("菜品", TongjiDishFragment.class)
-                .add("人员", TongjiWorkmateFragment.class)
+                .add("按菜统计", TongjiDishFragment.class)
+                .add("按人统计", TongjiWorkmateFragment.class)
                 .create());
         mViewpager.setAdapter(adapter);
         mViewpagertab.setViewPager(mViewpager);
@@ -73,10 +74,7 @@ public class TongjiInfoView extends RootView<VideoInfoContract.Presenter> implem
 
     }
 
-    @OnClick(R.id.rl_back)
-    public void back() {
 
-    }
 
     @Override
     public boolean isActive() {

@@ -23,6 +23,7 @@ import com.mvp.base.ui.adapter.DishAdapter;
 import com.mvp.base.ui.adapter.VideoListAdapter;
 import com.mvp.base.ui.adapter.WorkmateAdapter;
 import com.mvp.base.utils.Preconditions;
+import com.mvp.base.widget.circleprogress.CircleProgress;
 import com.mvp.base.widget.theme.ColorTextView;
 
 import java.util.ArrayList;
@@ -43,6 +44,8 @@ public class WorkmateView extends RootView<WorkmateContract.Presenter> implement
     @BindView(R.id.fab)
     FloatingActionButton fab;
     WorkmateAdapter adapter ;
+    @BindView(R.id.loading)
+    CircleProgress loading;
 
     public WorkmateView(Context context) {
         super(context);
@@ -89,6 +92,20 @@ public class WorkmateView extends RootView<WorkmateContract.Presenter> implement
                 onRefresh();
             }
         });
+
+        fab.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+//                ArrayList<String> data = new ArrayList<String>();
+//                for (WorkmateBean bean : adapter.getselectedWorkmates()){
+//                    data.add(bean.getObjectId());
+//                }
+//                loading.setVisibility(View.VISIBLE);
+//                mPresenter.postWorkmates(data);
+
+            }
+        });
     }
 
 
@@ -124,6 +141,7 @@ public class WorkmateView extends RootView<WorkmateContract.Presenter> implement
 
     @Override
     public void refreshFailed(String reason) {
+        hidLoading();
         if (!TextUtils.isEmpty(reason))
             showError(reason);
         recyclerView.showError();
@@ -138,6 +156,11 @@ public class WorkmateView extends RootView<WorkmateContract.Presenter> implement
     @Override
     public void showError(String msg) {
 
+    }
+
+    @Override
+    public void hidLoading() {
+        loading.setVisibility(View.INVISIBLE);
     }
 
 

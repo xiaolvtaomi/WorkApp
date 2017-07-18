@@ -9,6 +9,7 @@ import com.mvp.base.model.bean.DishBean;
 import com.mvp.base.model.net.BmobHttpResponse;
 import com.mvp.base.model.net.RetrofitHelper;
 import com.mvp.base.presenter.contract.cook.DishManageContract;
+import com.mvp.base.utils.GsonUtil;
 import com.mvp.base.utils.RxUtil;
 import com.mvp.base.utils.StringUtils;
 
@@ -68,18 +69,16 @@ public class DishManagePresenter extends RxPresenter implements DishManageContra
 
     @Override
     public void postDishes(ArrayList<String> selectedDishes) {
-        Map<String, Object> formdata = new HashMap<>();
-        formdata.put("objectId", selectedDishes);
-        Subscription rxSubscription = RetrofitHelper.getBmobClouds().updateDishStatus(formdata)
+//        Map<String, String> formdata = new HashMap<>();
+//        formdata.put("objectId", GsonUtil.getJson(selectedDishes));
+        Subscription rxSubscription = RetrofitHelper.getBmobClouds().updateDishStatus(GsonUtil.getJson(selectedDishes))
                 .compose(RxUtil.<BmobHttpResponse>rxSchedulerHelper())
                 .subscribe(new Action1<BmobHttpResponse>() {
                     @Override
                     public void call(BmobHttpResponse response) {
-                        if (response != null && response.getResults() != null) {
+                        if (response != null && response.getCode() == 200) {
                             if (mView.isActive()) {
                                 mView.postSuc();
-                            }else{
-                                mView.postFailed("提交失败");
                             }
                         }
                     }
