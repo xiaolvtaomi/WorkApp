@@ -60,9 +60,6 @@ public class TongjiWorkmateViewHolder extends BaseViewHolder<TongjiWorkmateBean>
     @Override
     public void setData(TongjiWorkmateBean mWorkmateBean) {
         //super.initData(bean);
-
-
-
         if(mWorkmateBean!=null){
             //填充网络数据
             ImageLoader.load(getContext(),mWorkmateBean.workmate.getPicurl(),riv_avatar);
