@@ -15,7 +15,6 @@ import com.mvp.base.widget.theme.RoundedImageView;
 
 public class TongjiWorkmateViewHolder extends BaseViewHolder<TongjiWorkmateBean> {
 
-
     RoundedImageView riv_avatar ;
     View divider;//分割线
     View divider_03;//分割线
@@ -106,10 +105,10 @@ public class TongjiWorkmateViewHolder extends BaseViewHolder<TongjiWorkmateBean>
                 }
 
             }
-            }
-            divider.setVisibility(View.VISIBLE);
-            divider_02.setVisibility(View.VISIBLE);
-            divider_03.setVisibility(View.GONE);
+        }
+        divider.setVisibility(View.VISIBLE);
+        divider_02.setVisibility(View.VISIBLE);
+        divider_03.setVisibility(View.GONE);
 
 
 
