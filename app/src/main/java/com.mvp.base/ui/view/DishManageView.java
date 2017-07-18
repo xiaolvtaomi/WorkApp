@@ -25,6 +25,7 @@ import com.mvp.base.utils.JumpUtil;
 import com.mvp.base.utils.Preconditions;
 import com.mvp.base.widget.theme.ColorTextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -94,6 +95,13 @@ public class DishManageView extends RootView<DishManageContract.Presenter> imple
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                ArrayList<String> data = new ArrayList<String>();
+                for (DishBean bean : adapter.getSelectedDishes().values()){
+                    data.add(bean.getObjectId());
+                }
+                mPresenter.postDishes(data);
+
             }
         });
     }
@@ -122,10 +130,12 @@ public class DishManageView extends RootView<DishManageContract.Presenter> imple
     }
 
     @Override
-    public void postSuc(DillItemBean postedBean) {
+    public void postSuc() {
         Snackbar.make(recyclerView, "提交成功", Snackbar.LENGTH_SHORT)
                 .setAction("Action", null).show();
-
+        if (mContext instanceof DishManageActivity) {
+            ((DishManageActivity) mContext).finish();
+        }
     }
 
     @Override

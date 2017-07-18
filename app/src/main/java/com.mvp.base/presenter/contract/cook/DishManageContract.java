@@ -32,7 +32,7 @@ public interface DishManageContract {
 
         void postFailed(String reason);
 
-        void postSuc(DillItemBean postedBean);
+        void postSuc();
 
         void refreshFailed(String reason);
 
@@ -50,7 +50,7 @@ public interface DishManageContract {
         /**
          * 提交我的菜
          */
-        void postDishes(ArrayList<DishBean> selectedDishes);
+        void postDishes(ArrayList<String> selectedDishObjectid);
 
     }
 

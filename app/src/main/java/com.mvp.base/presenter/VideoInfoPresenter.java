@@ -168,7 +168,7 @@ public class VideoInfoPresenter extends RxPresenter implements VideoInfoContract
     public void collect() {
         if (RealmHelper.getInstance().queryCollectionId(dataId)) {
             RealmHelper.getInstance().deleteCollection(dataId);
-            mView.disCollect();
+//            mView.disCollect();
         } else {
             if (intentbean != null) {
                 Collection bean = new Collection();
@@ -178,7 +178,7 @@ public class VideoInfoPresenter extends RxPresenter implements VideoInfoContract
                 bean.setTime(System.currentTimeMillis());
                 bean.setType(intentbean.getType());
                 RealmHelper.getInstance().insertCollection(bean);
-                mView.collected();
+//                mView.collected();
             }
         }
         //刷新收藏列表
@@ -219,9 +219,9 @@ public class VideoInfoPresenter extends RxPresenter implements VideoInfoContract
 
     private void setCollectState() {
         if (RealmHelper.getInstance().queryCollectionId(dataId)) {
-            mView.collected();
+//            mView.collected();
         } else {
-            mView.disCollect();
+//            mView.disCollect();
         }
     }
 }

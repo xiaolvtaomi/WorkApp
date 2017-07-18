@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by lml on 17/7/7.
  */
 
-public class DishTongjiBean implements Serializable {
+public class TongjiDishBean implements Serializable {
 
     public String picurl ;
     public String dishname ;
@@ -17,7 +17,7 @@ public class DishTongjiBean implements Serializable {
 
     public boolean hasTitle=false;
 
-    public DishTongjiBean(DishBean dish){
+    public TongjiDishBean(DishBean dish){
         setPicurl(dish.getPicurl());
         setCountnum(1);
         setTitle(dish.getTitle());

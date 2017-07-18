@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="#eeeeee"
+              android:orientation="vertical"
+              android:paddingLeft="15dp"
+              android:paddingRight="15dp">
+
+    <View
+        android:id="@+id/item_community_divider"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="#eeeeee"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="#ffffff"
+        >
+
+        <com.mvp.base.widget.theme.RoundedImageView
+            android:id="@+id/riv_avatar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            />
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:padding="12dp"
+            android:text=""
+            android:textColor="#000000"/>
+
+    </LinearLayout>
+
+
+
+    <View
+        android:id="@+id/item_community_divider02"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#88000000"></View>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <RelativeLayout
+            android:id="@+id/rl_item0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/iv_dish0"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/ic_launcher"/>
+
+            <TextView
+                android:id="@+id/tv_dishname0"
+                android:layout_width="match_parent"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/iv_dish0"
+                android:maxEms="10"
+                android:text="德国"
+                android:textColor="#000000"
+                android:textSize="12sp"/>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_item1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/iv_dish1"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/ic_launcher"/>
+
+            <TextView
+                android:id="@+id/tv_dishname1"
+                android:layout_width="match_parent"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/iv_dish1"
+                android:maxEms="10"
+                android:text="德国"
+                android:textColor="#000000"
+                android:textSize="12sp"/>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_item2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/iv_dish2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/ic_launcher"/>
+
+            <TextView
+                android:id="@+id/tv_dishname2"
+                android:layout_width="match_parent"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/iv_dish2"
+                android:maxEms="10"
+                android:text="德国"
+                android:textColor="#000000"
+                android:textSize="12sp"/>
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <RelativeLayout
+            android:id="@+id/rl_item3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/iv_dish3"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/ic_launcher"/>
+
+            <TextView
+                android:id="@+id/tv_dishname3"
+                android:layout_width="match_parent"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/iv_dish3"
+                android:maxEms="10"
+                android:text="德国"
+                android:textColor="#000000"
+                android:textSize="12sp"/>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_item4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/iv_dish4"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/ic_launcher"/>
+
+            <TextView
+                android:id="@+id/tv_dishname4"
+                android:layout_width="match_parent"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/iv_dish4"
+                android:maxEms="10"
+                android:text="德国"
+                android:textColor="#000000"
+                android:textSize="12sp"/>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_item5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/iv_dish5"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/ic_launcher"/>
+
+            <TextView
+                android:id="@+id/tv_dishname5"
+                android:layout_width="match_parent"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/iv_dish5"
+                android:maxEms="10"
+                android:text="德国"
+                android:textColor="#000000"
+                android:textSize="12sp"/>
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/item_community_divider03"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="#eeeeee"></View>
+
+</LinearLayout>

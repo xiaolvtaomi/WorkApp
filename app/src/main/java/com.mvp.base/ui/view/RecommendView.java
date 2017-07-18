@@ -135,7 +135,6 @@ public class RecommendView extends RootView<RecommendContract.Presenter> impleme
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                JumpUtil.go2DoodleInfoActivity(mContext, adapter.getItem(position));
             }
         });
         recyclerView.getErrorView().setOnClickListener(new View.OnClickListener() {

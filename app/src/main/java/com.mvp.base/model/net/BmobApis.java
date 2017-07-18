@@ -93,6 +93,11 @@ public interface BmobApis {
 
 
     @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
+    @GET("classes/dillitem?order=workmate_name")
+    Observable<BmobHttpResponse<List<DillItemBean>>> getDillItemsByYMDOrderName(@Query("where") String map);
+
+
+    @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
     @GET("classes/dillitem")
     Observable<BmobHttpResponse<List<DillItemBean>>> getDillItemsByYMD_UID(@Query("where") String map);
 

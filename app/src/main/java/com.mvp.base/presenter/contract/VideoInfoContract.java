@@ -16,9 +16,6 @@ public interface VideoInfoContract {
 
         void hidLoading();
 
-        void collected();
-
-        void disCollect();
     }
 
     interface Presenter extends BasePresenter {

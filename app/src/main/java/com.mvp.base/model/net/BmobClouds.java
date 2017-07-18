@@ -8,6 +8,7 @@ import com.mvp.base.model.bean.DillItemBean;
 import com.mvp.base.model.bean.DishBean;
 import com.mvp.base.model.bean.DoodleBean;
 import com.mvp.base.model.bean.NickBean;
+import com.mvp.base.model.bean.TongjiWorkmateBean;
 import com.mvp.base.model.bean.WorkmateBean;
 
 import java.util.List;
@@ -32,5 +33,14 @@ public interface BmobClouds {
     @GET("getUnDishedWorkmates")
     Observable<BmobHttpResponse<List<WorkmateBean>>> getUnDishedWorkmates();
 
+
+    @Headers({"CONTENTTYPE:application/json; charset=utf-8","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
+    @POST("getUnDishedWorkmates")
+    Observable<BmobHttpResponse<String>> updateDishStatus(@Body Object json_al_objectid);
+
+
+    @Headers({"CONTENTTYPE:application/json; charset=utf-8","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
+    @POST("getTongjiWorkmatesByYMD")
+    Observable<BmobHttpResponse<List<TongjiWorkmateBean>>> getTongjiWorkmatesByYMD(@Body Object json_ymd);
 
 }

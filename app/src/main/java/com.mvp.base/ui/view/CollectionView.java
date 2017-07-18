@@ -84,7 +84,6 @@ public class CollectionView extends RootView<CollectionContract.Presenter> imple
         mAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                JumpUtil.go2DoodleInfoActivity(getContext(), mAdapter.getItem(position));
             }
         });
     }

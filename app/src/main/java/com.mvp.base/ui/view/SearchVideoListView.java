@@ -113,7 +113,6 @@ public class SearchVideoListView extends RootView<SearchVideoListContract.Presen
         mAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                JumpUtil.go2DoodleInfoActivity(getContext(), mAdapter.getItem(position));
             }
         });
         mAdapter.setError(R.layout.view_error_footer).setOnClickListener(new View.OnClickListener() {
@@ -194,10 +193,8 @@ public class SearchVideoListView extends RootView<SearchVideoListContract.Presen
                 wvSearchHistory.removeAllViews();
                 break;
             case R.id.ll_reco:
-                JumpUtil.go2VideoInfoActivity(getContext(), recommend.get(0));
                 break;
             case R.id.ll_reco1:
-                JumpUtil.go2VideoInfoActivity(getContext(), recommend.get(1));
                 break;
         }
 

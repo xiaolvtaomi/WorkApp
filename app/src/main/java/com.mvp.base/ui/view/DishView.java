@@ -4,24 +4,19 @@ import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.mvp.base.R;
 import com.mvp.base.base.RootView;
 import com.mvp.base.model.bean.DillItemBean;
 import com.mvp.base.model.bean.DishBean;
 import com.mvp.base.presenter.contract.cook.DishContract;
-import com.mvp.base.ui.adapter.ClassificationAdapter;
 import com.mvp.base.ui.adapter.DishAdapter;
 import com.mvp.base.utils.Preconditions;
-import com.mvp.base.utils.ScreenUtil;
 import com.mvp.base.widget.theme.ColorTextView;
 
 import java.util.ArrayList;

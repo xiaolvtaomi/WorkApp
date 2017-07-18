@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import com.google.gson.Gson;
 import com.mvp.base.base.RxPresenter;
 import com.mvp.base.model.bean.DillItemBean;
+import com.mvp.base.model.bean.DishBean;
+import com.mvp.base.model.bean.TongjiWorkmateBean;
 import com.mvp.base.model.net.BmobHttpResponse;
 import com.mvp.base.model.net.RetrofitHelper;
 import com.mvp.base.presenter.contract.cook.DillWorkmateContract;
@@ -36,18 +38,18 @@ public class DillWorkmatePresenter extends RxPresenter implements DillWorkmateCo
         Map<String, Object> params = new HashMap<>();
         int year , month ,day ;
         year = Calendar.getInstance().get(Calendar.YEAR);
-        month = Calendar.getInstance().get(Calendar.MONTH);
+        month = Calendar.getInstance().get(Calendar.MONTH)+1;
         day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
         params.put("year", year);
         params.put("month", month);
         params.put("day", day);
         String json = new Gson().toJson(params) ;
-        Subscription rxSubscription = RetrofitHelper.getBmobApis().getDillItemsByYMD(json)
-                .compose(RxUtil.<BmobHttpResponse<List<DillItemBean>>>rxSchedulerHelper())
-                .compose(RxUtil.<List<DillItemBean>>handleBmobResult())
-                .subscribe(new Action1<List<DillItemBean>>() {
+        Subscription rxSubscription = RetrofitHelper.getBmobClouds().getTongjiWorkmatesByYMD(json)
+                .compose(RxUtil.<BmobHttpResponse<List<TongjiWorkmateBean>>>rxSchedulerHelper())
+                .compose(RxUtil.<List<TongjiWorkmateBean>>handleBmobResult())
+                .subscribe(new Action1<List<TongjiWorkmateBean>>() {
                     @Override
-                    public void call(List<DillItemBean> beans) {
+                    public void call(List<TongjiWorkmateBean> beans) {
                         if (beans != null) {
                             if (mView.isActive()) {
                                 mView.showContent(beans);

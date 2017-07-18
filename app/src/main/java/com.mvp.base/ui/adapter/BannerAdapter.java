@@ -50,7 +50,6 @@ public class BannerAdapter extends StaticPagerAdapter {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                JumpUtil.go2DoodleInfoActivity(ctx, list.get(position));
             }
         });
         return imageView;

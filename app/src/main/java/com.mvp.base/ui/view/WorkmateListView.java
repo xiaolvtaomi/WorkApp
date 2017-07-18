@@ -92,7 +92,6 @@ public class WorkmateListView extends RootView<VideoListContract.Presenter> impl
         mAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                JumpUtil.go2DoodleInfoActivity(getContext(), mAdapter.getItem(position));
             }
         });
         mAdapter.setError(R.layout.view_error_footer).setOnClickListener(new View.OnClickListener() {

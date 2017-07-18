@@ -1,6 +1,7 @@
 package com.mvp.base.presenter;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.mvp.base.base.RxPresenter;
@@ -66,27 +67,31 @@ public class DishManagePresenter extends RxPresenter implements DishManageContra
     }
 
     @Override
-    public void postDishes(ArrayList<DishBean> selectedDishes) {
-//        Subscription rxSubscription = RetrofitHelper.getBmobApis().postDill(mDillitembean)
-//                .compose(RxUtil.<BmobHttpResponse>rxSchedulerHelper())
-//                .subscribe(new Action1<BmobHttpResponse>() {
-//                    @Override
-//                    public void call(BmobHttpResponse response) {
-//                        if (response != null && !TextUtils.isEmpty(response.getObjectId())) {
-//                            if (mView.isActive()) {
-//                                mView.postSuc(mDillitembean);
-//                            }else{
-//                                mView.postFailed("提交失败");
-//                            }
-//                        }
-//                    }
-//                }, new Action1<Throwable>() {
-//                    @Override
-//                    public void call(Throwable throwable) {
-//                        mView.postFailed("提交异常");
-//                    }
-//                });
-//        addSubscribe(rxSubscription);
+    public void postDishes(ArrayList<String> selectedDishes) {
+        Subscription rxSubscription = RetrofitHelper.getBmobClouds().updateDishStatus(selectedDishes)
+                .compose(RxUtil.<BmobHttpResponse>rxSchedulerHelper())
+                .subscribe(new Action1<BmobHttpResponse>() {
+                    @Override
+                    public void call(BmobHttpResponse response) {
+                        if (response != null && response.getResults() != null) {
+                            if (mView.isActive()) {
+                                mView.postSuc();
+                            }else{
+                                mView.postFailed("提交失败");
+                            }
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        mView.postFailed("提交异常");
+                    }
+                });
+        addSubscribe(rxSubscription);
+
+
+
+
     }
 
 

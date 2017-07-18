@@ -3,12 +3,7 @@ package com.mvp.base.presenter.contract;
 
 import com.mvp.base.base.BasePresenter;
 import com.mvp.base.base.BaseView;
-import com.mvp.base.model.bean.Cell;
-import com.mvp.base.model.bean.CollectionBean;
 import com.mvp.base.model.bean.DillItemBean;
-import com.mvp.base.model.bean.DishTongjiBean;
-import com.mvp.base.model.bean.VideoRes;
-import com.mvp.base.model.bean.VideoType;
 
 import java.util.List;
 

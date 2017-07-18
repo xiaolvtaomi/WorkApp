@@ -79,7 +79,6 @@ public class ThemeSetView extends RootView<CollectionContract.Presenter> impleme
         mAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                JumpUtil.go2DoodleInfoActivity(getContext(), mAdapter.getItem(position));
             }
         });
     }

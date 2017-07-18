@@ -8,7 +8,6 @@ import com.mvp.base.model.bean.VideoInfo;
 import com.mvp.base.ui.activitys.DishAddActivity;
 import com.mvp.base.ui.activitys.DishManageActivity;
 import com.mvp.base.ui.activitys.MainActivity;
-import com.mvp.base.ui.activitys.VideoInfoActivity;
 import com.mvp.base.ui.activitys.WorkmateListActivity;
 import com.mvp.base.ui.activitys.WelcomeActivity;
 
@@ -19,17 +18,7 @@ import com.mvp.base.ui.activitys.WelcomeActivity;
  */
 public class JumpUtil {
 
-    public static void go2VideoInfoActivity(Context context, VideoInfo videoInfo) {
-        Intent intent = new Intent(context, VideoInfoActivity.class);
-        intent.putExtra("videoInfo", videoInfo);
-        context.startActivity(intent);
-    }
 
-    public static void go2DoodleInfoActivity(Context context, DoodleBean doodle) {
-        Intent intent = new Intent(context, VideoInfoActivity.class);
-        intent.putExtra("doodleinfo", doodle);
-        context.startActivity(intent);
-    }
 
     public static void go2WorkmateListActivity(Context context, String title) {
         Intent intent = new Intent(context, WorkmateListActivity.class);

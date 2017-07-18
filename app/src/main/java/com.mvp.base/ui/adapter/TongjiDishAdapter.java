@@ -1,44 +1,38 @@
 package com.mvp.base.ui.adapter;
 
 import android.content.Context;
-import android.support.v4.util.Pair;
 import android.view.ViewGroup;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.mvp.base.model.bean.CollectionBean;
 import com.mvp.base.model.bean.DillItemBean;
 import com.mvp.base.model.bean.DishBean;
-import com.mvp.base.model.bean.DishTongjiBean;
-import com.mvp.base.model.bean.HomeTopCellBean;
-import com.mvp.base.ui.adapter.viewholder.DishTongjiViewHolder;
-import com.mvp.base.ui.adapter.viewholder.ViewHolder_01;
-import com.mvp.base.ui.adapter.viewholder.ViewHolder_02;
+import com.mvp.base.model.bean.TongjiDishBean;
+import com.mvp.base.ui.adapter.viewholder.TongjiDishViewHolder;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Description: 统计
  */
-public class ClassificationAdapter extends RecyclerArrayAdapter<DishTongjiBean> {
+public class TongjiDishAdapter extends RecyclerArrayAdapter<TongjiDishBean> {
 
 
-    public ClassificationAdapter(Context context) {
+    public TongjiDishAdapter(Context context) {
         super(context);
     }
 
     @Override
     public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-        return new DishTongjiViewHolder(parent);
+        return new TongjiDishViewHolder(parent);
     }
 
 
     /**
      * 类型集合，adapter对应的数据集合
      */
-    List<DishTongjiBean> superData = new ArrayList<>();
+    List<TongjiDishBean> superData = new ArrayList<>();
 
 
     public void setData(List<DillItemBean> dillitems) {
@@ -67,7 +61,7 @@ public class ClassificationAdapter extends RecyclerArrayAdapter<DishTongjiBean> 
                 }
             }
             if (!hasinclude) {
-                DishTongjiBean temp = new DishTongjiBean(dishes.get(i));
+                TongjiDishBean temp = new TongjiDishBean(dishes.get(i));
                 superData.add(temp);
             }
         }
@@ -80,7 +74,7 @@ public class ClassificationAdapter extends RecyclerArrayAdapter<DishTongjiBean> 
 
     @Override
     public void OnBindViewHolder(BaseViewHolder holder, int position) {
-        ((DishTongjiViewHolder) holder).setData(superData.get(position));
+        ((TongjiDishViewHolder) holder).setData(superData.get(position));
 
 
     }

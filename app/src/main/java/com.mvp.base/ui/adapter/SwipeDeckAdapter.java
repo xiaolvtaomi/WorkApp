@@ -80,7 +80,6 @@ public class SwipeDeckAdapter extends BaseAdapter {
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                JumpUtil.go2DoodleInfoActivity(context, data.get(position));
             }
         });
         return convertView;

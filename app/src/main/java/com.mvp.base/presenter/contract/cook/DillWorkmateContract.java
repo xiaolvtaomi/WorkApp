@@ -4,6 +4,7 @@ import com.mvp.base.base.BasePresenter;
 import com.mvp.base.base.BaseView;
 import com.mvp.base.model.bean.DillItemBean;
 import com.mvp.base.model.bean.DishBean;
+import com.mvp.base.model.bean.TongjiWorkmateBean;
 import com.mvp.base.model.bean.WorkmateBean;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface DillWorkmateContract {
 
         boolean isActive();
 
-        void showContent(List<DillItemBean> mDillItemBeans);
+        void showContent(List<TongjiWorkmateBean> tongjiworkmates);
 
         void refreshFailed(String reason);
 

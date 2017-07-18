@@ -113,7 +113,6 @@ public class MineView extends RootView<MineContract.Presenter> implements MineCo
             @Override
             public void onItemClick(int position) {
                 videoInfo = BeanUtil.VideoType2VideoInfo(mAdapter.getItem(position), videoInfo);
-                JumpUtil.go2VideoInfoActivity(getContext(), videoInfo);
             }
         });
     }

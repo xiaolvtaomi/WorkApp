@@ -1,28 +1,22 @@
 package com.mvp.base.ui.view;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Base64;
 import android.view.View;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.mvp.base.R;
 import com.mvp.base.base.RootView;
 import com.mvp.base.model.bean.DillItemBean;
-import com.mvp.base.model.bean.DishTongjiBean;
-import com.mvp.base.presenter.contract.ClassificationContract;
-import com.mvp.base.ui.adapter.ClassificationAdapter;
+import com.mvp.base.presenter.contract.cook.DillTotalContract;
+import com.mvp.base.ui.adapter.TongjiDishAdapter;
 import com.mvp.base.ui.fragments.ClassificationFragment;
 import com.mvp.base.utils.EventUtil;
 import com.mvp.base.utils.Preconditions;
-import com.mvp.base.widget.theme.ColorTextView;
 
 import org.simple.eventbus.EventBus;
 import org.simple.eventbus.Subscriber;
@@ -36,19 +30,17 @@ import butterknife.BindView;
 /**
  * 统计,按菜统计
  */
-public class ClassificationView extends RootView<ClassificationContract.Presenter> implements ClassificationContract.View, SwipeRefreshLayout.OnRefreshListener {
+public class TongjiInfoDishView extends RootView<DillTotalContract.Presenter> implements DillTotalContract.View, SwipeRefreshLayout.OnRefreshListener {
 
-    @BindView(R.id.title_name)
-    ColorTextView titleName;
     @BindView(R.id.recyclerView)
     EasyRecyclerView recyclerView;
-    ClassificationAdapter adapter;
+    TongjiDishAdapter adapter;
 
-    public ClassificationView(Context context) {
+    public TongjiInfoDishView(Context context) {
         super(context);
     }
 
-    public ClassificationView(Context context, AttributeSet attrs) {
+    public TongjiInfoDishView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -59,8 +51,7 @@ public class ClassificationView extends RootView<ClassificationContract.Presente
 
     @Override
     protected void initView() {
-        titleName.setText("统计");
-        recyclerView.setAdapterWithProgress(adapter = new ClassificationAdapter(getContext()));
+        recyclerView.setAdapterWithProgress(adapter = new TongjiDishAdapter(getContext()));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setErrorView(R.layout.view_error);
 //        SpaceDecoration itemDecoration = new SpaceDecoration(ScreenUtil.dip2px(getContext(), 8));
@@ -100,7 +91,7 @@ public class ClassificationView extends RootView<ClassificationContract.Presente
 
 
     @Override
-    public void setPresenter(ClassificationContract.Presenter presenter) {
+    public void setPresenter(DillTotalContract.Presenter presenter) {
         mPresenter = Preconditions.checkNotNull(presenter);
     }
 
@@ -111,7 +102,7 @@ public class ClassificationView extends RootView<ClassificationContract.Presente
 
     List<DillItemBean> videoInfos = new ArrayList<>();
     @Override
-    public void showContent(final List<DillItemBean> beans) {
+    public void showDishesContent(final List<DillItemBean> beans) {
         if (beans != null) {
             adapter.clear();
             videoInfos.clear();
@@ -125,7 +116,7 @@ public class ClassificationView extends RootView<ClassificationContract.Presente
 
 
     @Override
-    public void refreshFaild(String msg) {
+    public void refreshFailed(String msg) {
         if (!TextUtils.isEmpty(msg))
             showError(msg);
         recyclerView.showError();
