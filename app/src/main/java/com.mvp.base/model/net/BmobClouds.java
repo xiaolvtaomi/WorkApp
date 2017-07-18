@@ -43,8 +43,8 @@ public interface BmobClouds {
     Observable<BmobHttpResponse<String>> updateDishStatus(@FieldMap Map<String,Object> formdata);
 
 
-    @Headers({"CONTENTTYPE:application/json; charset=utf-8","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
+    @Headers({"CONTENTTYPE:application/x-www-form-urlencoded; charset=utf-8","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
     @POST("getTongjiWorkmatesByYMD")
-    Observable<BmobHttpResponse<List<TongjiWorkmateBean>>> getTongjiWorkmatesByYMD(@Body Object json_ymd);
+    Observable<BmobHttpResponse<List<TongjiWorkmateBean>>> getTongjiWorkmatesByYMD();
 
 }

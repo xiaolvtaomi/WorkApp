@@ -159,7 +159,7 @@ public class ViewHolder_02 extends BaseViewHolder<Pair<DishBean,DishBean>> {
                 rl_item_community_first.setBackgroundResource(R.mipmap.pitch_on);
             }else{
               //   ivFirst_selected.setVisibility(View.GONE);
-                rl_item_community_first.setBackgroundResource(R.mipmap.back_pic);
+                rl_item_community_first.setBackgroundResource(R.color.white);
             }
 
             if(b_second){
@@ -168,7 +168,7 @@ public class ViewHolder_02 extends BaseViewHolder<Pair<DishBean,DishBean>> {
 
             }else{
             //    ivSecond_selected.setVisibility(View.GONE);
-                rl_item_community_second.setBackgroundResource(R.mipmap.back_pic);
+                rl_item_community_second.setBackgroundResource(R.color.white);
 
             }
 

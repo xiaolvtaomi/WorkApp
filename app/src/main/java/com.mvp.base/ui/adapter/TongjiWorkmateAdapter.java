@@ -5,11 +5,7 @@ import android.view.ViewGroup;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.mvp.base.model.bean.DillItemBean;
-import com.mvp.base.model.bean.DishBean;
-import com.mvp.base.model.bean.TongjiDishBean;
 import com.mvp.base.model.bean.TongjiWorkmateBean;
-import com.mvp.base.ui.adapter.viewholder.TongjiDishViewHolder;
 import com.mvp.base.ui.adapter.viewholder.TongjiWorkmateViewHolder;
 
 import java.util.ArrayList;
@@ -27,7 +23,7 @@ public class TongjiWorkmateAdapter extends RecyclerArrayAdapter<TongjiWorkmateBe
 
     @Override
     public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-        return new TongjiDishViewHolder(parent);
+        return new TongjiWorkmateViewHolder(parent);
     }
 
 
