@@ -11,6 +11,15 @@ public class WorkmateBean implements Serializable {
     String name ;
     String mobile ;
     String userid ;
+    String avatar;
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     public String getUserid() {
         return userid;
