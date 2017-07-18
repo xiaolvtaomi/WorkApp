@@ -153,9 +153,11 @@ public class DishAddActivity extends SwipeBackWithPicActivity implements View.On
 //                PutObjectResult putObjectResult = conn.putObject("diancai", "dish/",
 //                        new File(filepath), requestHeader);
 
+                Map<String, String> headers = new HashMap<String, String>();
+                headers.put("x-amz-acl", "public-read");
                 PutObjectResult putObjectResult = conn.putObject("diancai",
                         "dish/"+filepath.substring(filepath.lastIndexOf("/")+1),
-                        new File(filepath));
+                        new File(filepath), headers);
                 System.out.println(putObjectResult);//服务器响应结果
 
                 if(putObjectResult != null && !TextUtils.isEmpty(putObjectResult.getContentMd5())){

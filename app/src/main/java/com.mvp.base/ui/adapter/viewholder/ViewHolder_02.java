@@ -157,22 +157,18 @@ public class ViewHolder_02 extends BaseViewHolder<Pair<DishBean,DishBean>> {
             if(b_first){
                 // ivFirst_selected.setVisibility(View.VISIBLE);
                 rl_item_community_first.setBackgroundResource(R.mipmap.pitch_on);
-                rl_item_community_first.setAlpha(1.0f);
             }else{
               //   ivFirst_selected.setVisibility(View.GONE);
                 rl_item_community_first.setBackgroundResource(R.mipmap.back_pic);
-                rl_item_community_first.setAlpha(0.5f);
             }
 
             if(b_second){
             //    ivSecond_selected.setVisibility(View.VISIBLE);
                 rl_item_community_second.setBackgroundResource(R.mipmap.pitch_on);
-                rl_item_community_second.setAlpha(1.0f);
 
             }else{
             //    ivSecond_selected.setVisibility(View.GONE);
                 rl_item_community_second.setBackgroundResource(R.mipmap.back_pic);
-                rl_item_community_second.setAlpha(0.5f);
 
             }
 
