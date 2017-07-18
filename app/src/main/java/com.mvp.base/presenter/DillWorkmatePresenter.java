@@ -9,6 +9,7 @@ import com.mvp.base.model.bean.DishBean;
 import com.mvp.base.model.bean.TongjiWorkmateBean;
 import com.mvp.base.model.net.BmobHttpResponse;
 import com.mvp.base.model.net.RetrofitHelper;
+import com.mvp.base.presenter.contract.cook.DillTotalContract;
 import com.mvp.base.presenter.contract.cook.DillWorkmateContract;
 import com.mvp.base.utils.RxUtil;
 import com.mvp.base.utils.StringUtils;
@@ -31,6 +32,12 @@ public class DillWorkmatePresenter extends RxPresenter implements DillWorkmateCo
     @Override
     public void onRefresh() {
         getDillItems();
+    }
+
+    public DillWorkmatePresenter(@NonNull DillWorkmateContract.View addTaskView){
+        this.mView = addTaskView;
+        this.mView.setPresenter(this);
+        onRefresh();
     }
 
     @Override
