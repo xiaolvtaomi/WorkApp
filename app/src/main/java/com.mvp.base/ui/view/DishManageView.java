@@ -23,6 +23,7 @@ import com.mvp.base.ui.adapter.DishAdapter;
 import com.mvp.base.ui.adapter.DishManageAdapter;
 import com.mvp.base.utils.JumpUtil;
 import com.mvp.base.utils.Preconditions;
+import com.mvp.base.widget.circleprogress.CircleProgress;
 import com.mvp.base.widget.theme.ColorTextView;
 
 import java.util.ArrayList;
@@ -47,6 +48,8 @@ public class DishManageView extends RootView<DishManageContract.Presenter> imple
     EasyRecyclerView recyclerView;
     @BindView(R.id.fab)
     FloatingActionButton fab;
+    @BindView(R.id.loading)
+    CircleProgress loading;
     DishManageAdapter adapter ;
 
     public DishManageView(Context context) {
@@ -93,13 +96,12 @@ public class DishManageView extends RootView<DishManageContract.Presenter> imple
         fab.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
 
                 ArrayList<String> data = new ArrayList<String>();
                 for (DishBean bean : adapter.getSelectedDishes().values()){
                     data.add(bean.getObjectId());
                 }
+                loading.setVisibility(View.VISIBLE);
                 mPresenter.postDishes(data);
 
             }
@@ -140,10 +142,17 @@ public class DishManageView extends RootView<DishManageContract.Presenter> imple
 
     @Override
     public void refreshFailed(String reason) {
+        hidLoading();
+
         if (!TextUtils.isEmpty(reason))
             showError(reason);
         recyclerView.showError();
 //        adapter.pauseMore();
+    }
+
+    @Override
+    public void hidLoading() {
+        loading.setVisibility(View.INVISIBLE);
     }
 
     @Override

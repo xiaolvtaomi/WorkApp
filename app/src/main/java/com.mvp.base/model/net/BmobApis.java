@@ -104,7 +104,7 @@ public interface BmobApis {
 
 
     @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
-    @GET("classes/dish")
+    @GET("classes/dish?order=title")
     Observable<BmobHttpResponse<List<DishBean>>> getDishesByYMD(@Query("where") String map);
 
     @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})

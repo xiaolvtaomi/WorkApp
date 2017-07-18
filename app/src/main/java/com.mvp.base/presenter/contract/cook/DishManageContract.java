@@ -36,6 +36,8 @@ public interface DishManageContract {
 
         void refreshFailed(String reason);
 
+        void hidLoading();
+
     }
 
     interface Presenter extends BasePresenter {

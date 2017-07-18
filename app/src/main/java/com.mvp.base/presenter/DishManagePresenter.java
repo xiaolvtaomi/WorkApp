@@ -68,7 +68,9 @@ public class DishManagePresenter extends RxPresenter implements DishManageContra
 
     @Override
     public void postDishes(ArrayList<String> selectedDishes) {
-        Subscription rxSubscription = RetrofitHelper.getBmobClouds().updateDishStatus(selectedDishes)
+        Map<String, Object> formdata = new HashMap<>();
+        formdata.put("objectId", selectedDishes);
+        Subscription rxSubscription = RetrofitHelper.getBmobClouds().updateDishStatus(formdata)
                 .compose(RxUtil.<BmobHttpResponse>rxSchedulerHelper())
                 .subscribe(new Action1<BmobHttpResponse>() {
                     @Override

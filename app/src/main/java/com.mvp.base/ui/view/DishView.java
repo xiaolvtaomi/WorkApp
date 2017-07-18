@@ -161,7 +161,6 @@ public class DishView extends RootView<DishContract.Presenter> implements DishCo
         if (!TextUtils.isEmpty(reason))
             showError(reason);
         recyclerView.showError();
-        adapter.pauseMore();
     }
 
     @Override

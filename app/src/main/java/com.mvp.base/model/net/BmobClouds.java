@@ -12,10 +12,13 @@ import com.mvp.base.model.bean.TongjiWorkmateBean;
 import com.mvp.base.model.bean.WorkmateBean;
 
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -34,9 +37,10 @@ public interface BmobClouds {
     Observable<BmobHttpResponse<List<WorkmateBean>>> getUnDishedWorkmates();
 
 
-    @Headers({"CONTENTTYPE:application/json; charset=utf-8","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
-    @POST("getUnDishedWorkmates")
-    Observable<BmobHttpResponse<String>> updateDishStatus(@Body Object json_al_objectid);
+    @Headers({"CONTENTTYPE:application/x-www-form-urlencoded; charset=utf-8","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
+    @FormUrlEncoded
+    @POST("updateDishStatus")
+    Observable<BmobHttpResponse<String>> updateDishStatus(@FieldMap Map<String,Object> formdata);
 
 
     @Headers({"CONTENTTYPE:application/json; charset=utf-8","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
