@@ -26,12 +26,12 @@ public class TongjiWorkmateViewHolder extends BaseViewHolder<TongjiWorkmateBean>
     ImageView iv_dish3;
     ImageView iv_dish4;
     ImageView iv_dish5;
-    TextView  staple_foodname;
-    TextView  dish_onename;
-    TextView  dish_twoname;
-    TextView  dish_threename;
-    TextView  dish_fourname;
-    TextView  dish_fivename;
+    TextView  tv_dishname0;
+    TextView  tv_dishname1;
+    TextView  tv_dishname2;
+    TextView  tv_dishname3;
+    TextView  tv_dishname4;
+    TextView  tv_dishname5;
     TextView tv_name;
 
     public TongjiWorkmateViewHolder(ViewGroup parent) {
@@ -46,12 +46,12 @@ public class TongjiWorkmateViewHolder extends BaseViewHolder<TongjiWorkmateBean>
         iv_dish3=(ImageView) itemView.findViewById(R.id.iv_dish3);
         iv_dish4=(ImageView) itemView.findViewById(R.id.iv_dish4);
         iv_dish5=(ImageView) itemView.findViewById(R.id.iv_dish5);
-        staple_foodname= (TextView) itemView.findViewById(R.id.tv_dishname0);
-        dish_onename= (TextView) itemView.findViewById(R.id.tv_dishname1);
-        dish_twoname= (TextView) itemView.findViewById(R.id.tv_dishname2);
-        dish_threename= (TextView) itemView.findViewById(R.id.tv_dishname3);
-        dish_fourname= (TextView) itemView.findViewById(R.id.tv_dishname4);
-        dish_fivename= (TextView) itemView.findViewById(R.id.tv_dishname5);
+        tv_dishname0= (TextView) itemView.findViewById(R.id.tv_dishname0);
+        tv_dishname1= (TextView) itemView.findViewById(R.id.tv_dishname1);
+        tv_dishname2= (TextView) itemView.findViewById(R.id.tv_dishname2);
+        tv_dishname3= (TextView) itemView.findViewById(R.id.tv_dishname3);
+        tv_dishname4= (TextView) itemView.findViewById(R.id.tv_dishname4);
+        tv_dishname5= (TextView) itemView.findViewById(R.id.tv_dishname5);
         tv_name= (TextView) itemView.findViewById(R.id.tv_name);
 
 
@@ -64,12 +64,48 @@ public class TongjiWorkmateViewHolder extends BaseViewHolder<TongjiWorkmateBean>
             //填充网络数据
             ImageLoader.load(getContext(),mWorkmateBean.workmate.getPicurl(),riv_avatar);
             tv_name.setText(mWorkmateBean.workmate.getName());
-//            ImageLoader.load(getContext(),mWorkmateBean.workmate.getPicurl(),iv_dish0);
-//            ImageLoader.load(getContext(),mWorkmateBean.workmate.getPicurl(),riv_avatar);
-//            ImageLoader.load(getContext(),mWorkmateBean.workmate.getPicurl(),riv_avatar);
-//            ImageLoader.load(getContext(),mWorkmateBean.workmate.getPicurl(),riv_avatar);
-//            ImageLoader.load(getContext(),mWorkmateBean.workmate.getPicurl(),riv_avatar);
-//            ImageLoader.load(getContext(),mWorkmateBean.workmate.getPicurl(),riv_avatar);
+            for (int i = 0; i < mWorkmateBean.dishes.size(); i++) {
+                if (i==0){
+                    ImageLoader.load(getContext(),mWorkmateBean.dishes.get(i).getPicurl(),iv_dish0);
+                }
+                if (i==1){
+                    ImageLoader.load(getContext(),mWorkmateBean.dishes.get(i).getPicurl(),iv_dish1);
+                }
+                if (i==2){
+                    ImageLoader.load(getContext(),mWorkmateBean.dishes.get(i).getPicurl(),iv_dish2);
+                }
+                if (i==3){
+                    ImageLoader.load(getContext(),mWorkmateBean.dishes.get(i).getPicurl(),iv_dish3);
+                }
+                if (i==4){
+                    ImageLoader.load(getContext(),mWorkmateBean.dishes.get(i).getPicurl(),iv_dish4);
+                }
+                if (i==5){
+                    ImageLoader.load(getContext(),mWorkmateBean.dishes.get(i).getPicurl(),iv_dish5);
+                }
+
+            }
+            for (int i = 0; i < mWorkmateBean.dishes.size(); i++) {
+                if (i==0){
+                    tv_dishname0 .setText(mWorkmateBean.dishes.get(i).getDishname());
+                }
+                if (i==1){
+                    tv_dishname0 .setText(mWorkmateBean.dishes.get(i).getDishname());
+                }
+                if (i==2){
+                    tv_dishname0 .setText(mWorkmateBean.dishes.get(i).getDishname());
+                }
+                if (i==3){
+                    tv_dishname0 .setText(mWorkmateBean.dishes.get(i).getDishname());
+                }
+                if (i==4){
+                    tv_dishname0 .setText(mWorkmateBean.dishes.get(i).getDishname());
+                }
+                if (i==5){
+                    tv_dishname0 .setText(mWorkmateBean.dishes.get(i).getDishname());
+                }
+
+            }
             }
             divider.setVisibility(View.VISIBLE);
             divider_02.setVisibility(View.VISIBLE);
