@@ -51,7 +51,7 @@ public class DillWorkmatePresenter extends RxPresenter implements DillWorkmateCo
         params.put("month", month);
         params.put("day", day);
         String json = new Gson().toJson(params) ;
-        Subscription rxSubscription = RetrofitHelper.getBmobClouds().getTongjiWorkmatesByYMD(json)
+        Subscription rxSubscription = RetrofitHelper.getBmobClouds().getTongjiWorkmatesByYMD()
                 .compose(RxUtil.<BmobHttpResponse<List<TongjiWorkmateBean>>>rxSchedulerHelper())
                 .compose(RxUtil.<List<TongjiWorkmateBean>>handleBmobResult())
                 .subscribe(new Action1<List<TongjiWorkmateBean>>() {
