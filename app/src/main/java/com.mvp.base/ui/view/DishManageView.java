@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.mvp.base.R;
@@ -96,14 +97,16 @@ public class DishManageView extends RootView<DishManageContract.Presenter> imple
         fab.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-
+if (DishManageActivity.rolle==0){
                 ArrayList<String> data = new ArrayList<String>();
                 for (DishBean bean : adapter.getSelectedDishes().values()){
                     data.add(bean.getObjectId());
                 }
                 loading.setVisibility(View.VISIBLE);
                 mPresenter.postDishes(data);
-
+}else{
+    Toast.makeText(getContext(), "你没有该权限", Toast.LENGTH_SHORT).show();
+}
             }
         });
     }
@@ -181,7 +184,11 @@ public class DishManageView extends RootView<DishManageContract.Presenter> imple
                 }
                 break;
             case R.id.rl_collect_clear:
-                JumpUtil.go2DishAddActivity(mContext);
+                if (DishManageActivity.rolle==0){
+                JumpUtil.go2DishAddActivity(mContext);}
+                else {
+                    Toast.makeText(getContext(), "你没有该权限", Toast.LENGTH_SHORT).show();
+                }
                 break;
 
         }
