@@ -25,6 +25,7 @@
             android:id="@+id/riv_avatar"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:padding="8dp"
             />
         <TextView
             android:id="@+id/tv_name"
@@ -56,7 +57,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="15dp">
+            android:padding="15dp"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/iv_dish0"
@@ -85,7 +87,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="15dp">
+            android:padding="15dp"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/iv_dish1"
@@ -114,7 +117,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="15dp">
+            android:padding="15dp"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/iv_dish2"
@@ -152,7 +156,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="15dp">
+            android:padding="15dp"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/iv_dish3"
@@ -181,7 +186,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="15dp">
+            android:padding="15dp"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/iv_dish4"
@@ -210,7 +216,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="15dp">
+            android:padding="15dp"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/iv_dish5"
