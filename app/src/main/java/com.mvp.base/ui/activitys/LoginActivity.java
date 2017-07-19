@@ -1,7 +1,5 @@
 package com.mvp.base.ui.activitys;
 
-import android.annotation.TargetApi;
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,21 +7,28 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.transition.Explode;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mvp.base.R;
 import com.mvp.base.base.BaseActivity;
+import com.mvp.base.model.bean.LoginResponse;
+import com.mvp.base.model.bean.WorkmateBean;
+import com.mvp.base.model.net.BmobHttpResponse;
 import com.mvp.base.model.net.RetrofitHelper;
+import com.mvp.base.utils.GsonUtil;
+import com.mvp.base.utils.JumpUtil;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -49,21 +54,23 @@ public class LoginActivity extends BaseActivity {
     ActivityOptionsCompat oc2;
     String str1;
     String str2;
+    WorkmateBean bean;
+    String name;
+    String mobile;
+    int  role;
+    String avatar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         unbinder = ButterKnife.bind(this);
         SharedPreferences sp = getSharedPreferences("loginUser", Context.MODE_PRIVATE);
-        //取得欢迎界面背景
         String name = sp.getString("name", "");
         String moible = sp.getString("mobile", "");
        if (!"".equals(name)&&!"".equals(moible)&&name!=null&&moible!=null){
-           Intent i2 = new Intent(LoginActivity.this, MainActivity.class);
-           startActivity(i2);
+           JumpUtil.goMainActivity(LoginActivity.this);
        }
     }
-
     @OnClick({R.id.bt_go, R.id.fab})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -89,7 +96,8 @@ public class LoginActivity extends BaseActivity {
                     getWindow().setExitTransition(explode);
                     getWindow().setEnterTransition(explode);
                     oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
-                    if (!"".equals(str1)&&!"".equals(str2)&&str1!=null&&str2!=null) {
+
+                    if (!"".equals(str1)&&str1!=null&&!"".equals(str2)&&str2!=null) {
                         Map<String, Object> params = new HashMap<>();
                         params.put("name", str1);
                         params.put("mobile", str2);
@@ -99,12 +107,21 @@ public class LoginActivity extends BaseActivity {
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                 try {
-                                    System.out.println(response.body().string());
-                                    if (response.body().contentLength() !=14) {
+                                    String respon_str = response.body().string();
+                                    System.out.println(respon_str);
+                                    LoginResponse responsebean = (LoginResponse) GsonUtil.getObject(respon_str, LoginResponse.class);
+                                    List<WorkmateBean> results = responsebean==null?null:responsebean.getResults();
+                                    if (results!=null && results.size() > 0) {
+                                        name=results.get(0).getName();
+                                        mobile=results.get(0).getMobile();
+                                        role=results.get(0).getRole();
+                                        avatar=results.get(0).getAvatar();
                                         SharedPreferences mSharedPreferences = getSharedPreferences("loginUser", Context.MODE_PRIVATE);
                                         SharedPreferences.Editor editor = mSharedPreferences.edit();
-                                        editor.putString("name",str1);
-                                        editor.putString("mobile",str2);
+                                        editor.putString("name",name);
+                                        editor.putString("mobile",mobile);
+                                        editor.putInt("role",role);
+                                        editor.putString("avatar",avatar);
                                         editor.commit();
                                         Intent i2 = new Intent(LoginActivity.this, MainActivity.class);
                                         startActivity(i2, oc2.toBundle());
@@ -140,16 +157,23 @@ public class LoginActivity extends BaseActivity {
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                 try {
-                                    System.out.println(response.body().string());
-                                    System.out.println(response.body().contentLength());
-                                    if (response.body().contentLength() !=14) {
+                                    String respon_str = response.body().string();
+                                    System.out.println(respon_str);
+                                    LoginResponse responsebean = (LoginResponse) GsonUtil.getObject(respon_str, LoginResponse.class);
+                                    List<WorkmateBean> results = responsebean==null?null:responsebean.getResults();
+                                    if (results!=null && results.size() > 0) {
+                                        name=results.get(0).getName();
+                                        mobile=results.get(0).getMobile();
+                                        role=results.get(0).getRole();
+                                        avatar=results.get(0).getAvatar();
                                         SharedPreferences mSharedPreferences = getSharedPreferences("loginUser", Context.MODE_PRIVATE);
                                         SharedPreferences.Editor editor = mSharedPreferences.edit();
-                                        editor.putString("name",str1);
-                                        editor.putString("mobile",str2);
+                                        editor.putString("name",name);
+                                        editor.putString("mobile",mobile);
+                                        editor.putInt("role",role);
+                                        editor.putString("avatar",avatar);
                                         editor.commit();
-                                        Intent i2 = new Intent(LoginActivity.this, MainActivity.class);
-                                        startActivity(i2);
+                                        JumpUtil.goMainActivity(LoginActivity.this);
                                     } else {
                                         Toast.makeText(getApplicationContext(), "请输入正确的姓名与手机号", Toast.LENGTH_SHORT).show();
                                     }
@@ -169,5 +193,8 @@ public class LoginActivity extends BaseActivity {
                 }
                 break;
         }
+    }
+    public  void in(){
+
     }
 }
