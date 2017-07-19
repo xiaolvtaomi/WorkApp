@@ -12,6 +12,15 @@ public class WorkmateBean implements Serializable {
     String mobile ;
     String userid ;
     String avatar;
+    int role ;
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
 
     public String getAvatar() {
         return avatar;
