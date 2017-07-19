@@ -79,46 +79,31 @@ public class TongjiWorkmateViewHolder extends BaseViewHolder<TongjiWorkmateBean>
                 if (i==0){
                     rl_item0.setVisibility(View.VISIBLE);
                     ImageLoader.load(getContext(),mWorkmateBean.dishes.get(i).getDishpic(),iv_dish0);
-                }
-                if (i==1){
-                    rl_item1.setVisibility(View.VISIBLE);
-                    ImageLoader.load(getContext(),mWorkmateBean.dishes.get(i).getDishpic(),iv_dish1);
-                }
-                if (i==2){
-                    rl_item2.setVisibility(View.VISIBLE);
-                    ImageLoader.load(getContext(),mWorkmateBean.dishes.get(i).getDishpic(),iv_dish2);
-                }
-                if (i==3){
-                    rl_item3.setVisibility(View.VISIBLE);
-                    ImageLoader.load(getContext(),mWorkmateBean.dishes.get(i).getDishpic(),iv_dish3);
-                }
-                if (i==4){
-                    rl_item4.setVisibility(View.VISIBLE);
-                    ImageLoader.load(getContext(),mWorkmateBean.dishes.get(i).getDishpic(),iv_dish4);
-                }
-                if (i==5){
-                    rl_item5.setVisibility(View.VISIBLE);
-                    ImageLoader.load(getContext(),mWorkmateBean.dishes.get(i).getDishpic(),iv_dish5);
-                }
-
-            }
-            for (int i = 0; i < mWorkmateBean.dishes.size(); i++) {
-                if (i==0){
                     tv_dishname0 .setText(mWorkmateBean.dishes.get(i).getDishname());
                 }
-                if (i==1){
+               else if (i==1){
+                    rl_item1.setVisibility(View.VISIBLE);
+                    ImageLoader.load(getContext(),mWorkmateBean.dishes.get(i).getDishpic(),iv_dish1);
                     tv_dishname1 .setText(mWorkmateBean.dishes.get(i).getDishname());
                 }
-                if (i==2){
+                else if (i==2){
+                    rl_item2.setVisibility(View.VISIBLE);
+                    ImageLoader.load(getContext(),mWorkmateBean.dishes.get(i).getDishpic(),iv_dish2);
                     tv_dishname2 .setText(mWorkmateBean.dishes.get(i).getDishname());
                 }
-                if (i==3){
+                else if (i==3){
+                    rl_item3.setVisibility(View.VISIBLE);
+                    ImageLoader.load(getContext(),mWorkmateBean.dishes.get(i).getDishpic(),iv_dish3);
                     tv_dishname3 .setText(mWorkmateBean.dishes.get(i).getDishname());
                 }
-                if (i==4){
+                else if (i==4){
+                    rl_item4.setVisibility(View.VISIBLE);
+                    ImageLoader.load(getContext(),mWorkmateBean.dishes.get(i).getDishpic(),iv_dish4);
                     tv_dishname4 .setText(mWorkmateBean.dishes.get(i).getDishname());
                 }
-                if (i==5){
+                else if (i==5){
+                    rl_item5.setVisibility(View.VISIBLE);
+                    ImageLoader.load(getContext(),mWorkmateBean.dishes.get(i).getDishpic(),iv_dish5);
                     tv_dishname5 .setText(mWorkmateBean.dishes.get(i).getDishname());
                 }
 
