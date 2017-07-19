@@ -1,5 +1,7 @@
 package com.mvp.base.ui.activitys;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.mvp.base.R;
@@ -24,6 +26,11 @@ public class DishManageActivity extends SwipeBackActivity {
         setContentView(R.layout.activity_dishmanage);
         unbinder = ButterKnife.bind(this);
         mPresenter = new DishManagePresenter(dishmanage_view);
-    }
+        SharedPreferences sp = getSharedPreferences("loginUser", Context.MODE_PRIVATE);
+        //取得欢迎界面背景
+        DishManageActivity.rolle = sp.getInt("role",0);
 
+
+    }
+    public  static int  rolle = 0;
 }
