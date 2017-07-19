@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="com.mvp.base">
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -11,6 +12,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+
 
     <application
         android:name=".app.App"
@@ -37,6 +40,25 @@
         <activity android:name=".ui.activitys.DishAddActivity"/>
         <activity android:name=".ui.activitys.WelcomeActivity"/>
         <activity android:name=".ui.activitys.WorkmateListActivity"/>
+
+
+        <uses-permission android:name="com.company.app.fileprovider.READ" />
+        <meta-data
+            android:name="PGYER_APPID"
+            android:value="071bdb1d9b450cbef7c21924c79085c0" >
+        </meta-data>
+
+        <!--<provider-->
+            <!--android:name="android.support.v4.content.FileProvider"-->
+            <!--tools:replace="android:authorities"-->
+            <!--android:authorities="com.pgyersdk.test.fileProvider"-->
+            <!--android:exported="false"-->
+            <!--android:grantUriPermissions="true">-->
+            <!--<meta-data-->
+                <!--tools:replace="android:resource"-->
+                <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
+                <!--android:resource="@xml/provider_paths" />-->
+        <!--</provider>-->
     </application>
 
 </manifest>

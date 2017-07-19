@@ -6,6 +6,7 @@ import com.mvp.base.R;
 import com.mvp.base.base.BaseActivity;
 import com.mvp.base.presenter.WelcomePresenter;
 import com.mvp.base.ui.view.WelcomeView;
+import com.pgyersdk.update.PgyUpdateManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,6 +22,8 @@ public class WelcomeActivity extends BaseActivity {
         setContentView(R.layout.activity_welcome);
         unbinder = ButterKnife.bind(this);
         mPresenter = new WelcomePresenter(welcomeView);
+
+
 
     }
 }

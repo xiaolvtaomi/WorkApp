@@ -25,6 +25,8 @@ android {
 
 repositories {
     maven { url "https://jitpack.io" }
+    jcenter()
+    maven { url "https://raw.githubusercontent.com/Pgyer/mvn_repo_pgyer/master" }
 }
 
 dependencies {
@@ -73,9 +75,9 @@ dependencies {
     compile 'com.mikepenz:material-design-iconic-typeface:2.2.0.1@aar'
     compile 'com.mikepenz:fontawesome-typeface:4.5.0.1@aar'
     compile 'com.mikepenz:foundation-icons-typeface:3.0.0.1@aar'
-    compile 'mi-appstore:xiaomi-update-sdk:2.6+'
+//    compile 'mi-appstore:xiaomi-update-sdk:2.6+'
     compile files('libs/MiPush_SDK_Client_3_4_3.jar')
     compile files('libs/scs-android-sdk-0.0.1-SNAPSHOT.jar')
-
     compile 'com.jph.takephoto:takephoto_library:4.0.3'
+    compile files('libs/pgyer_sdk_2.6.5.jar')
 }

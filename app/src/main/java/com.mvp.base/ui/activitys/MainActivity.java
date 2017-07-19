@@ -1,11 +1,12 @@
 package com.mvp.base.ui.activitys;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
-import android.util.Base64;
-import android.widget.Toast;
+import android.util.Log;
 
 import com.afollestad.materialdialogs.color.ColorChooserDialog;
 import com.mvp.base.R;
@@ -19,6 +20,8 @@ import com.mvp.base.base.BaseActivity;
 import com.mvp.base.ui.fragments.ClassificationFragment;
 import com.mvp.base.ui.view.MainView;
 import com.mvp.base.widget.theme.Theme;
+import com.pgyersdk.update.PgyUpdateManager;
+import com.pgyersdk.update.UpdateManagerListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,52 +51,9 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         unbinder = ButterKnife.bind(this);
-/*
-        PgyUpdateManager.register(MainActivity.this, new UpdateManagerListener() {
 
-            @Override
-            public void onNoUpdateAvailable() {
+        PgyUpdateManager.register(MainActivity.this, "");
 
-            }
-
-            @Override
-            public void onUpdateAvailable(final String result) {
-//                new MaterialDialog.Builder(MainActivity.this)
-//                        .title("版本更新")
-//                        .titleColor(ThemeUtils.getThemeColor(MainActivity.this, R.attr.colorPrimary))
-//                        .negativeText("确定")
-//                        .onNegative(new MaterialDialog.SingleButtonCallback() {
-//                            @Override
-//                            public void onClick(@NonNull MaterialDialog
-//                                                        dialog, @NonNull
-//                                                        DialogAction which) {
-//
-//                            }
-//                        }).show();
-
-                String url;
-                JSONObject jsonData;
-                try {
-                    jsonData = new JSONObject(result);
-                    if ("0".equals(jsonData
-                            .getString("code"))) {
-                        JSONObject jsonObject = jsonData
-                                .getJSONObject("data");
-                        url = jsonObject
-                                .getString("downloadURL");
-
-                        startDownloadTask(
-                                MainActivity.this,
-                                url);
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
-        */
 
     }
 
