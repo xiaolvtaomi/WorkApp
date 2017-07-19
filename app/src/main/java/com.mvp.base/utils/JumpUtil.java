@@ -52,4 +52,9 @@ public class JumpUtil {
         Intent intent = new Intent(context, DishAddActivity.class);
         context.startActivity(intent);
     }
+    public static void goMainActivity(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
+    }
+
 }
