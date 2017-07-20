@@ -24,6 +24,7 @@ import retrofit2.http.GET;
 import retrofit2.http.HEAD;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -100,6 +101,13 @@ public interface BmobApis {
     @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
     @GET("classes/dillitem")
     Observable<BmobHttpResponse<List<DillItemBean>>> getDillItemsByYMD_UID(@Query("where") String map);
+
+
+    @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
+    @PUT("classes/workmate/{objectid}")
+    Observable<BmobHttpResponse<Object>> updateMyInfo(@Path("objectid") String objectid, @Body String body);
+
+
 
 
 

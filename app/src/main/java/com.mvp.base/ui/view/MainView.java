@@ -203,4 +203,6 @@ public class MainView extends RootView<MainContract.Presenter> implements MainCo
         super.onDetachedFromWindow();
         EventBus.getDefault().unregister(this);
     }
+
+
 }

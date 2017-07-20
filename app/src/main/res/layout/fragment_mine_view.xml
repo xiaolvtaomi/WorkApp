@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/both_match_style"
-    android:orientation="vertical">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              style="@style/both_match_style"
+              android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -23,7 +23,7 @@
 
             <!--app:layout_scrollFlags="scroll|enterAlways"-->
 
-            <include layout="@layout/main_title" />
+            <include layout="@layout/main_title"/>
 
         </android.support.v7.widget.Toolbar>
 
@@ -32,39 +32,43 @@
             android:layout_height="110dp"
             android:background="?attr/mine_background"
             >
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
-                    android:src="@mipmap/ic_launcher"
-                    android:id="@+id/avatar2"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="姓名"
-                android:textSize="20sp"
-                android:layout_toRightOf="@+id/avatar2"
+
+            <ImageView
+                android:id="@+id/avatar2"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
-                android:id="@+id/name"/>
+                android:src="@mipmap/ic_launcher"/>
+
             <TextView
+                android:id="@+id/name"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:text="13888888888"
-                android:textSize="20sp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/avatar2"
+                android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@+id/avatar2"
-                android:layout_marginTop="65dp"
-               android:layout_marginLeft="10dp"
+                android:text="姓名"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/avatar_set"
                 style="?android:attr/borderlessButtonStyle"
-                android:id="@+id/avatar_set"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/name"
+                android:layout_marginTop="12dp"
+                android:layout_toRightOf="@+id/avatar2"
+                android:text="13888888888"
+                android:textSize="18sp"/>
+
             <ImageView
                 android:id="@+id/img_setting"
                 style="@style/lmatch_hwrap_style"
-                android:layout_marginTop="43dp"
-                android:layout_marginRight="10dp"
                 android:layout_alignParentRight="true"
-                android:background="@mipmap/my_set" />
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@mipmap/my_set"/>
         </com.mvp.base.widget.theme.ColorRelativeLayout>
 
     </android.support.design.widget.AppBarLayout>
@@ -99,13 +103,13 @@
                     android:id="@+id/tv_history"
                     style="@style/common_tv_style"
                     android:layout_centerVertical="true"
-                    android:text="@string/my_record" />
+                    android:text="@string/my_record"/>
 
                 <ImageView
                     style="@style/both_wrap_style"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"
-                    android:background="@mipmap/right" />
+                    android:background="@mipmap/right"/>
             </RelativeLayout>
 
             <LinearLayout
@@ -119,8 +123,8 @@
                     android:layout_height="100dp"
                     android:layout_marginLeft="@dimen/mine_list_view_margin_left"
                     android:layout_marginRight="@dimen/mine_list_view_margin_left"
-                    app:scrollbars="none"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    app:scrollbars="none"/>
             </LinearLayout>
 
             <RelativeLayout
@@ -133,13 +137,13 @@
                     android:id="@+id/tv_down"
                     style="@style/common_tv_style"
                     android:layout_centerVertical="true"
-                    android:text="@string/my_down" />
+                    android:text="@string/my_down"/>
 
                 <ImageView
                     style="@style/both_wrap_style"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"
-                    android:background="@mipmap/right" />
+                    android:background="@mipmap/right"/>
             </RelativeLayout>
 
 
@@ -152,13 +156,13 @@
                     android:id="@+id/tv_collection"
                     style="@style/common_tv_style"
                     android:layout_centerVertical="true"
-                    android:text="@string/my_collection" />
+                    android:text="@string/my_collection"/>
 
                 <ImageView
                     style="@style/both_wrap_style"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"
-                    android:background="@mipmap/right" />
+                    android:background="@mipmap/right"/>
             </RelativeLayout>
 
 
@@ -171,13 +175,13 @@
                     android:id="@+id/tv_them"
                     style="@style/common_tv_style"
                     android:layout_centerVertical="true"
-                    android:text="@string/my_them" />
+                    android:text="@string/my_them"/>
 
                 <ImageView
                     style="@style/both_wrap_style"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"
-                    android:background="@mipmap/right" />
+                    android:background="@mipmap/right"/>
             </RelativeLayout>
         </android.support.v7.widget.LinearLayoutCompat>
     </android.support.v4.widget.NestedScrollView>

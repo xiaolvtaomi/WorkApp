@@ -9,6 +9,14 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.afollestad.materialdialogs.color.ColorChooserDialog;
+import com.jph.takephoto.app.TakePhoto;
+import com.jph.takephoto.app.TakePhotoImpl;
+import com.jph.takephoto.model.InvokeParam;
+import com.jph.takephoto.model.TContextWrap;
+import com.jph.takephoto.model.TResult;
+import com.jph.takephoto.permission.InvokeListener;
+import com.jph.takephoto.permission.PermissionManager;
+import com.jph.takephoto.permission.TakePhotoInvocationHandler;
 import com.mvp.base.R;
 import com.mvp.base.app.App;
 import com.mvp.base.app.Constants;
@@ -38,9 +46,10 @@ import rx.Subscription;
 import rx.functions.Action1;
 import rx.subscriptions.CompositeSubscription;
 
-public class MainActivity extends BaseActivity implements ColorChooserDialog.ColorCallback {
+public class MainActivity extends BaseActivity implements ColorChooserDialog.ColorCallback, TakePhoto.TakeResultListener,InvokeListener {
 
     public static final String Set_Theme_Color = "Set_Theme_Color";
+    public static final String UPDATE_AVATAR = "update_avatar";
     public final static String Banner_Stop = "Banner_Stop";
     private Long firstTime = 0L;
     @BindView(R.id.main_view)
@@ -48,6 +57,8 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getTakePhoto().onCreate(savedInstanceState);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         unbinder = ButterKnife.bind(this);
@@ -55,6 +66,12 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
         PgyUpdateManager.register(MainActivity.this, "");
 
 
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        getTakePhoto().onSaveInstanceState(outState);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -165,6 +182,8 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent
             data) {
+        getTakePhoto().onActivityResult(requestCode, resultCode, data);
+
         /**
          * 处理二维码扫描结果
 
@@ -225,8 +244,53 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
     }
 
 
+    @Override
+    public void takeSuccess(TResult result) {
+        Log.e(TAG, "000000===="+result.getImage().getCompressPath());
+        EventBus.getDefault().post(result, UPDATE_AVATAR);
+    }
+
+    @Override
+    public void takeFail(TResult result, String msg) {
+        Log.e(TAG, "11111===="+msg);
+
+    }
+
+    @Override
+    public void takeCancel() {
+        Log.e(TAG, "22222====");
+
+    }
+
+    @Override
+    public PermissionManager.TPermissionType invoke(InvokeParam invokeParam) {
+        PermissionManager.TPermissionType type=PermissionManager.checkPermission(TContextWrap.of(this),invokeParam.getMethod());
+        if(PermissionManager.TPermissionType.WAIT.equals(type)){
+            this.invokeParam=invokeParam;
+        }
+        return type;
+    }
 
 
+    private TakePhoto takePhoto;
+    private InvokeParam invokeParam;
+    private String TAG= "MainActivity";
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionManager.TPermissionType type=PermissionManager.onRequestPermissionsResult(requestCode,permissions,grantResults);
+        PermissionManager.handlePermissionsResult(this,type,invokeParam,this);
+    }
 
+    /**
+     *  获取TakePhoto实例
+     * @return
+     */
+    public TakePhoto getTakePhoto(){
+        if (takePhoto==null){
+            takePhoto= (TakePhoto) TakePhotoInvocationHandler.of(this).bind(new TakePhotoImpl(this,this));
+        }
+        return takePhoto;
+    }
 }

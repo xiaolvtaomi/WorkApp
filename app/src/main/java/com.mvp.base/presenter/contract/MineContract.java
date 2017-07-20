@@ -1,6 +1,8 @@
 package com.mvp.base.presenter.contract;
 
 
+import android.content.Context;
+
 import com.mvp.base.base.BasePresenter;
 import com.mvp.base.base.BaseView;
 import com.mvp.base.model.bean.VideoType;
@@ -20,11 +22,15 @@ public interface MineContract {
 
         void showContent(List<VideoType> list);
 
+        void postSuccess();
+        void postFailed();
     }
 
     interface Presenter extends BasePresenter {
         void getHistoryData();
 
         void delAllHistory();
+
+        void updateMyInfo(Context context, String myjsoninfo);
     }
 }
