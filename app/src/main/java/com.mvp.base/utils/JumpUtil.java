@@ -2,6 +2,7 @@ package com.mvp.base.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
 
 import com.mvp.base.model.bean.DoodleBean;
 import com.mvp.base.model.bean.VideoInfo;
@@ -52,9 +53,16 @@ public class JumpUtil {
         Intent intent = new Intent(context, DishAddActivity.class);
         context.startActivity(intent);
     }
-    public static void goMainActivity(Context context) {
+
+    public static void goMainActivity(Context context, ActivityOptionsCompat oc2) {
         Intent intent = new Intent(context, MainActivity.class);
-        context.startActivity(intent);
+        if(oc2 == null) {
+            context.startActivity(intent);
+
+        }else{
+            context.startActivity(intent, oc2.toBundle());
+
+        }
     }
 
 }

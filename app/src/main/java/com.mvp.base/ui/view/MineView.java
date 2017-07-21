@@ -293,6 +293,7 @@ public class MineView extends RootView<MineContract.Presenter> implements
                     ((MainActivity) mContext).getTakePhoto()
                             .onPickFromGallery();
                 }
+                dialog.dismiss();
             }
         });
 

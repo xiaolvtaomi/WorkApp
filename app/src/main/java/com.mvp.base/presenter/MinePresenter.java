@@ -12,7 +12,6 @@ import com.mvp.base.model.db.RealmHelper;
 import com.mvp.base.model.net.BmobHttpResponse;
 import com.mvp.base.model.net.RetrofitHelper;
 import com.mvp.base.presenter.contract.MineContract;
-import com.mvp.base.utils.Httpurl;
 import com.mvp.base.utils.PreUtils;
 import com.mvp.base.utils.Preconditions;
 import com.mvp.base.utils.RxUtil;
@@ -63,14 +62,17 @@ public class MinePresenter extends RxPresenter implements MineContract.Presenter
 
     @Override
     public void updateMyInfo(Context context, String myjsoninfo) {
+        String objectId = PreUtils.getString(context, "objectId", "") ;
+
         Subscription rxSubscription =
-                RetrofitHelper.getBmobApis().updateMyInfo(PreUtils.getString(context, "objectid", Httpurl.objectID), myjsoninfo)
+                RetrofitHelper.getBmobApis().updateMyInfo(
+                        objectId, myjsoninfo)
                         .compose(RxUtil.<BmobHttpResponse>rxSchedulerHelper())
                         .subscribe(new Action1<BmobHttpResponse>() {
                             @Override
                             public void call(final BmobHttpResponse res) {
                                 mView.postSuccess();
-                              System.out.println("提交成功");
+                                System.out.println("提交成功");
 
                             }
                         }, new Action1<Throwable>() {
