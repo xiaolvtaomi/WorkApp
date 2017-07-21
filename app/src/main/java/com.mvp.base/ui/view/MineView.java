@@ -104,9 +104,7 @@ public class MineView extends RootView<MineContract.Presenter> implements
     TextView tvCollection;
     @BindView(R.id.tv_them)
     TextView tvThem;
-    TextView moible;
-    TextView name;
-    ImageView avatar2;
+    ImageView iv_avatar;
     Button picture;
     Button photo;
     Button back;
@@ -127,9 +125,7 @@ public class MineView extends RootView<MineContract.Presenter> implements
 
     @Override
     protected void initView() {
-        moible = (TextView) findViewById(R.id.avatar_set);
-        name = (TextView) findViewById(R.id.name);
-        avatar2 = (ImageView) findViewById(R.id.avatar2);
+       iv_avatar= (ImageView) findViewById(R.id.uc_avater);
         ((AppCompatActivity) getContext()).setSupportActionBar(toolbar);
         toolbar.setTitle("");
         titleName.setText(getResources().getString(R.string.mine_title));
@@ -154,16 +150,14 @@ public class MineView extends RootView<MineContract.Presenter> implements
         itemDecoration.setPaddingStart(true);
         itemDecoration.setPaddingHeaderFooter(false);
         mRecyclerView.addItemDecoration(itemDecoration);
-        name.setText(PreUtils.getString(getContext(),"name", ""));
-        moible.setText(PreUtils.getString(getContext(),"mobile", ""));
-        ImageLoader.load(mContext, PreUtils.getString(getContext(),"avatar", ""), avatar2);
-        avatar2.setOnClickListener(new OnClickListener() {
+        ImageLoader.load(mContext, PreUtils.getString(getContext(),"avatar", ""), iv_avatar);
+        iv_avatar.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 showDialog();
             }
         });
-    }
+  }
 
     @Override
     protected void initEvent() {
@@ -314,7 +308,7 @@ public class MineView extends RootView<MineContract.Presenter> implements
 
         compressPath = result.getImage().getCompressPath() ;
         originalPath = result.getImage().getOriginalPath() ;
-        ImageLoader.load(mContext, result.getImage().getCompressPath(), avatar2);
+        ImageLoader.load(mContext, result.getImage().getCompressPath(), iv_avatar);
 
         WorkmateBean bean = new WorkmateBean();
         if(!TextUtils.isEmpty(compressPath)) {
