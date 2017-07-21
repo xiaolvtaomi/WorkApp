@@ -2,6 +2,7 @@ package com.mvp.base.presenter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.widget.Toast;
 
 import com.mvp.base.base.RxPresenter;
 import com.mvp.base.model.bean.DoodleBean;
@@ -11,6 +12,7 @@ import com.mvp.base.model.db.RealmHelper;
 import com.mvp.base.model.net.BmobHttpResponse;
 import com.mvp.base.model.net.RetrofitHelper;
 import com.mvp.base.presenter.contract.MineContract;
+import com.mvp.base.utils.Httpurl;
 import com.mvp.base.utils.PreUtils;
 import com.mvp.base.utils.Preconditions;
 import com.mvp.base.utils.RxUtil;
@@ -62,19 +64,20 @@ public class MinePresenter extends RxPresenter implements MineContract.Presenter
     @Override
     public void updateMyInfo(Context context, String myjsoninfo) {
         Subscription rxSubscription =
-                RetrofitHelper.getBmobApis().updateMyInfo(PreUtils.getString(context, "objectid",""), myjsoninfo)
-                        .compose(RxUtil.<BmobHttpResponse<Object>>rxSchedulerHelper())
-                        .compose(RxUtil.<Object>handleBmobResult())
-                        .subscribe(new Action1<Object>() {
+                RetrofitHelper.getBmobApis().updateMyInfo(PreUtils.getString(context, "objectid", Httpurl.objectID), myjsoninfo)
+                        .compose(RxUtil.<BmobHttpResponse>rxSchedulerHelper())
+                        .subscribe(new Action1<BmobHttpResponse>() {
                             @Override
-                            public void call(final Object res) {
+                            public void call(final BmobHttpResponse res) {
                                 mView.postSuccess();
+                              System.out.println("提交成功");
 
                             }
                         }, new Action1<Throwable>() {
                             @Override
                             public void call(Throwable throwable) {
                                 mView.postFailed();
+                                System.out.println("提交失败");
                             }
                         });
         addSubscribe(rxSubscription);

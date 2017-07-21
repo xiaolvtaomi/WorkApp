@@ -180,7 +180,7 @@ public class DishAddActivity extends SwipeBackWithPicActivity implements View.On
     }
 
 
-    public void postDish(DishBean bean){
+    public void  postDish(DishBean bean){
 //        Map<String, Object> params = new HashMap<>();
 //        int year , month ,day ;
 //        year = Calendar.getInstance().get(Calendar.YEAR);
@@ -196,6 +196,7 @@ public class DishAddActivity extends SwipeBackWithPicActivity implements View.On
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
                     System.out.println(response.body().string());
+                    finish();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

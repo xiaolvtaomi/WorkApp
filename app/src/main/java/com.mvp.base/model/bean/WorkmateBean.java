@@ -10,8 +10,22 @@ public class WorkmateBean implements Serializable {
     String picurl ;
     String name ;
     String mobile ;
-    String userid ;
     String avatar;
+    String objectId;
+    int userid;
+
+    public String getObjectId() {
+        return objectId;
+    }
+
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
     int role ;
 
     public int getRole() {
@@ -30,12 +44,8 @@ public class WorkmateBean implements Serializable {
         this.avatar = avatar;
     }
 
-    public String getUserid() {
+    public int getUserid() {
         return userid;
-    }
-
-    public void setUserid(String userid) {
-        this.userid = userid;
     }
 
     public String getPicurl() {

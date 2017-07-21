@@ -24,6 +24,7 @@ import com.mvp.base.model.bean.WorkmateBean;
 import com.mvp.base.model.net.BmobHttpResponse;
 import com.mvp.base.model.net.RetrofitHelper;
 import com.mvp.base.utils.GsonUtil;
+import com.mvp.base.utils.Httpurl;
 import com.mvp.base.utils.JumpUtil;
 
 import java.io.IOException;
@@ -59,6 +60,9 @@ public class LoginActivity extends BaseActivity {
     String mobile;
     int  role;
     String avatar;
+    String objectId;
+    int userid;
+    String objectid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +71,8 @@ public class LoginActivity extends BaseActivity {
         SharedPreferences sp = getSharedPreferences("loginUser", Context.MODE_PRIVATE);
         String name = sp.getString("name", "");
         String moible = sp.getString("mobile", "");
+        objectid=sp.getString("objectId","");
+        Httpurl.objectID=objectid;
        if (!"".equals(name)&&!"".equals(moible)&&name!=null&&moible!=null){
            JumpUtil.goMainActivity(LoginActivity.this);
        }
@@ -116,15 +122,24 @@ public class LoginActivity extends BaseActivity {
                                         mobile=results.get(0).getMobile();
                                         role=results.get(0).getRole();
                                         avatar=results.get(0).getAvatar();
+                                        objectId=results.get(0).getObjectId();
+                                        userid=results.get(0).getUserid();
                                         SharedPreferences mSharedPreferences = getSharedPreferences("loginUser", Context.MODE_PRIVATE);
                                         SharedPreferences.Editor editor = mSharedPreferences.edit();
                                         editor.putString("name",name);
                                         editor.putString("mobile",mobile);
                                         editor.putInt("role",role);
                                         editor.putString("avatar",avatar);
+                                        editor.putString("objectId",objectId);
+                                        editor.putInt("userid",userid);
                                         editor.commit();
                                         Intent i2 = new Intent(LoginActivity.this, MainActivity.class);
                                         startActivity(i2, oc2.toBundle());
+                                        SharedPreferences sp = getSharedPreferences("loginUser", Context.MODE_PRIVATE);
+                                        String name = sp.getString("name", "");
+                                        String moible = sp.getString("mobile", "");
+                                        objectid=sp.getString("objectId","");
+                                        Httpurl.objectID=objectid;
                                     } else {
                                         Toast.makeText(getApplicationContext(), "请输入正确的姓名与手机号", Toast.LENGTH_SHORT).show();
                                     }
@@ -166,13 +181,22 @@ public class LoginActivity extends BaseActivity {
                                         mobile=results.get(0).getMobile();
                                         role=results.get(0).getRole();
                                         avatar=results.get(0).getAvatar();
+                                        objectId=results.get(0).getObjectId();
+                                        userid=results.get(0).getUserid();
                                         SharedPreferences mSharedPreferences = getSharedPreferences("loginUser", Context.MODE_PRIVATE);
                                         SharedPreferences.Editor editor = mSharedPreferences.edit();
                                         editor.putString("name",name);
                                         editor.putString("mobile",mobile);
                                         editor.putInt("role",role);
                                         editor.putString("avatar",avatar);
+                                        editor.putString("objectId",objectId);
+                                        editor.putInt("userid",userid);
                                         editor.commit();
+                                        SharedPreferences sp = getSharedPreferences("loginUser", Context.MODE_PRIVATE);
+                                        String name = sp.getString("name", "");
+                                        String moible = sp.getString("mobile", "");
+                                        objectid=sp.getString("objectId","");
+                                        Httpurl.objectID=objectid;
                                         JumpUtil.goMainActivity(LoginActivity.this);
                                     } else {
                                         Toast.makeText(getApplicationContext(), "请输入正确的姓名与手机号", Toast.LENGTH_SHORT).show();
@@ -193,8 +217,5 @@ public class LoginActivity extends BaseActivity {
                 }
                 break;
         }
-    }
-    public  void in(){
-
     }
 }
