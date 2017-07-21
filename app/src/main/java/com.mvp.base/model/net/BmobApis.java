@@ -104,8 +104,13 @@ public interface BmobApis {
 
 
     @Headers({"CONTENTTYPE:application/json","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
-    @POST("classes/workmate/{objectid}")
-    Observable<BmobHttpResponse<Object>> updateMyInfo(@Path("objectid") String objectid, @Body String body);
+    @PUT("classes/workmate/{objectId}")
+    Observable<BmobHttpResponse<Object>> updateMyInfo(
+            @Path("objectId") String objectid,
+             @Body WorkmateBean body
+    );
+    //
+
 
 
 

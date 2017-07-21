@@ -8,10 +8,12 @@ import com.mvp.base.base.RxPresenter;
 import com.mvp.base.model.bean.DoodleBean;
 import com.mvp.base.model.bean.Record;
 import com.mvp.base.model.bean.VideoType;
+import com.mvp.base.model.bean.WorkmateBean;
 import com.mvp.base.model.db.RealmHelper;
 import com.mvp.base.model.net.BmobHttpResponse;
 import com.mvp.base.model.net.RetrofitHelper;
 import com.mvp.base.presenter.contract.MineContract;
+import com.mvp.base.utils.GsonUtil;
 import com.mvp.base.utils.PreUtils;
 import com.mvp.base.utils.Preconditions;
 import com.mvp.base.utils.RxUtil;
@@ -66,7 +68,9 @@ public class MinePresenter extends RxPresenter implements MineContract.Presenter
 
         Subscription rxSubscription =
                 RetrofitHelper.getBmobApis().updateMyInfo(
-                        objectId, myjsoninfo)
+                        objectId,
+                        (WorkmateBean)GsonUtil.getObject(myjsoninfo, WorkmateBean.class)
+                )
                         .compose(RxUtil.<BmobHttpResponse>rxSchedulerHelper())
                         .subscribe(new Action1<BmobHttpResponse>() {
                             @Override
