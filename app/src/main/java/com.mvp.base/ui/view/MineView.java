@@ -3,6 +3,8 @@ package com.mvp.base.ui.view;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -21,6 +23,7 @@ import android.widget.TextView;
 import com.jph.takephoto.app.TakePhoto;
 import com.jph.takephoto.app.TakePhotoImpl;
 import com.jph.takephoto.compress.CompressConfig;
+import com.jph.takephoto.model.CropOptions;
 import com.jph.takephoto.model.InvokeParam;
 import com.jph.takephoto.model.TResult;
 import com.jph.takephoto.permission.InvokeListener;
@@ -296,6 +299,23 @@ public class MineView extends RootView<MineContract.Presenter> implements
                 dialog.dismiss();
             }
         });
+        photo.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (mContext instanceof MainActivity) {
+                    File file=new File(Environment.getExternalStorageDirectory(), "/temp/"+System.currentTimeMillis() + ".");
+                    if (!file.getParentFile().exists())file.getParentFile().mkdirs();
+                    Uri imageUri = Uri.fromFile(file);
+//                    CropOptions compressConfig = new CropOptions
+//                            .Builder().setMaxPixel(320).create();
+//                    ((MainActivity) mContext).getTakePhoto().onEnableCompress
+//                            (compressConfig, true);
+                    ((MainActivity) mContext).getTakePhoto().onPickFromCapture(imageUri);
+                }
+                dialog.dismiss();
+            }
+        });
 
         dialog.show();
     }
@@ -308,13 +328,15 @@ public class MineView extends RootView<MineContract.Presenter> implements
 
         compressPath = result.getImage().getCompressPath() ;
         originalPath = result.getImage().getOriginalPath() ;
-        ImageLoader.load(mContext, result.getImage().getCompressPath(), iv_avatar);
+        ImageLoader.load(mContext, originalPath, iv_avatar);
 
         WorkmateBean bean = new WorkmateBean();
         if(!TextUtils.isEmpty(compressPath)) {
             bean.setAvatar("http://cdn.sinacloud.net/diancai/dish/" + compressPath.substring(compressPath.lastIndexOf("/") + 1));
+            putObjectWithCustomRequestHeader(compressPath, bean);
         }
-        putObjectWithCustomRequestHeader(compressPath, bean);
+
+
     }
 
 
