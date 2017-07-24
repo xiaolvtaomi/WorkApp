@@ -166,12 +166,13 @@
                 android:textSize="12sp"/>
 
             <TextView
+                android:id="@+id/back_ticket"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawablePadding="10dp"
                 android:gravity="center_horizontal"
-                android:text="字体"
+                android:text="切换账号"
                 android:textColor="@color/black"
                 android:textSize="12sp"/>
 

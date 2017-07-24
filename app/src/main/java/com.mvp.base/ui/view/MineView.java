@@ -118,6 +118,7 @@ public class MineView extends RootView<MineContract.Presenter> implements
     TextView func_payment;
     TextView func_invite;
     TextView func_stages;
+    TextView back_ticket;
     public MineView(Context context) {
         super(context);
     }
@@ -139,6 +140,7 @@ public class MineView extends RootView<MineContract.Presenter> implements
         func_payment= (TextView) findViewById(R.id.func_payment);
         func_invite= (TextView) findViewById(R.id.func_invite);
         func_stages= (TextView) findViewById(R.id.func_stages);
+        back_ticket= (TextView) findViewById(R.id.back_ticket);
         ((AppCompatActivity) getContext()).setSupportActionBar(toolbar);
         toolbar.setTitle("");
         titleName.setText(getResources().getString(R.string.mine_title));
@@ -180,6 +182,7 @@ public class MineView extends RootView<MineContract.Presenter> implements
         func_integral.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 getContext().startActivity(new Intent(mContext,
                         HistoryActivity.class));
             }
@@ -191,6 +194,18 @@ public class MineView extends RootView<MineContract.Presenter> implements
             }
         });
         func_invite.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((AppCompatActivity) getContext()).finish();
+            }
+        });
+        func_stages.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EventUtil.showToast(getContext(), "敬请期待");
+            }
+        });
+        back_ticket.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 PreUtils.putString(getContext(),
@@ -207,12 +222,6 @@ public class MineView extends RootView<MineContract.Presenter> implements
                         "userid", 0);
                 getContext().startActivity(new Intent(mContext,
                         LoginActivity.class));
-            }
-        });
-        func_stages.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                EventUtil.showToast(getContext(), "敬请期待");
             }
         });
   }
