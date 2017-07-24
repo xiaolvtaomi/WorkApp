@@ -307,10 +307,10 @@ public class MineView extends RootView<MineContract.Presenter> implements
                     File file=new File(Environment.getExternalStorageDirectory(), "/temp/"+System.currentTimeMillis() + ".");
                     if (!file.getParentFile().exists())file.getParentFile().mkdirs();
                     Uri imageUri = Uri.fromFile(file);
-//                    CropOptions compressConfig = new CropOptions
-//                            .Builder().setMaxPixel(320).create();
-//                    ((MainActivity) mContext).getTakePhoto().onEnableCompress
-//                            (compressConfig, true);
+                    CompressConfig compressConfig = new CompressConfig
+                            .Builder().setMaxPixel(320).create();
+                    ((MainActivity) mContext).getTakePhoto().onEnableCompress
+                            (compressConfig, true);
                     ((MainActivity) mContext).getTakePhoto().onPickFromCapture(imageUri);
                 }
                 dialog.dismiss();
@@ -328,15 +328,13 @@ public class MineView extends RootView<MineContract.Presenter> implements
 
         compressPath = result.getImage().getCompressPath() ;
         originalPath = result.getImage().getOriginalPath() ;
-        ImageLoader.load(mContext, originalPath, iv_avatar);
+        ImageLoader.load(mContext, compressPath, iv_avatar);
 
         WorkmateBean bean = new WorkmateBean();
         if(!TextUtils.isEmpty(compressPath)) {
             bean.setAvatar("http://cdn.sinacloud.net/diancai/dish/" + compressPath.substring(compressPath.lastIndexOf("/") + 1));
-            putObjectWithCustomRequestHeader(compressPath, bean);
         }
-
-
+        putObjectWithCustomRequestHeader(compressPath, bean);
     }
 
 
