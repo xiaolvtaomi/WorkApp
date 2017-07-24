@@ -10,6 +10,7 @@ import com.mvp.base.model.bean.BatchBean;
 import com.mvp.base.model.bean.BatchRequestBean;
 import com.mvp.base.model.bean.DillItemBean;
 import com.mvp.base.model.bean.DishBean;
+import com.mvp.base.model.bean.WorkmateBean;
 import com.mvp.base.model.net.BmobHttpResponse;
 import com.mvp.base.model.net.RetrofitHelper;
 import com.mvp.base.presenter.contract.cook.DishContract;
@@ -125,70 +126,54 @@ public class DishPresenter extends RxPresenter implements DishContract.Presenter
     }
 
     @Override
-    public void postDishes(Collection<DishBean> dishes) {
+    public void postDishes(WorkmateBean[] workmateBeens, Collection<DishBean> dishes) {
 
-        BatchRequestBean batchrequest = new BatchRequestBean();
-        for (DishBean dish : dishes){
-            DillItemBean temp = new DillItemBean();
-            temp.setTitle(dish.getTitle());
-            temp.setDishname(dish.getDishname());
-            temp.setAvatar("https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=3001304778,4021565056&fm=96");
-            temp.setDay(Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-            temp.setDishpic(dish.getPicurl());
-            temp.setMonth(Calendar.getInstance().get(Calendar.MONTH)+1);
-            temp.setWorkmate_creator("李梦龙");
-            temp.setWorkmate_name("李梦龙");
-            temp.setYear(Calendar.getInstance().get(Calendar.YEAR));
+        if(workmateBeens != null ) {
 
-            BatchBean batchbean = new BatchBean();
-            batchbean.setMethod("POST");
-            batchbean.setPath("/1/classes/dillitem");
-            batchbean.setBody(temp);
-            batchrequest.getRequests().add(batchbean);
-        }
+            BatchRequestBean batchrequest = new BatchRequestBean();
+            for (WorkmateBean workmate : workmateBeens) {
+                for (DishBean dish : dishes) {
+                    DillItemBean temp = new DillItemBean();
+                    temp.setTitle(dish.getTitle());
+                    temp.setDishname(dish.getDishname());
+                    temp.setAvatar(workmate.getAvatar());
+                    temp.setDay(Calendar.getInstance().get(Calendar
+                            .DAY_OF_MONTH));
+                    temp.setDishpic(dish.getPicurl());
+                    temp.setMonth(Calendar.getInstance().get(Calendar.MONTH) + 1);
+                    temp.setWorkmate_creator(PreUtils.getString(mView.getContext(), "name","未知"));
+                    temp.setWorkmate_name(workmate.getName());
+                    temp.setYear(Calendar.getInstance().get(Calendar.YEAR));
 
-//        Subscription rxSubscription = RetrofitHelper.getBmobApis().postDillBatch(batchrequest)
-//                .compose(RxUtil.<List<Map<String,BmobHttpResponse>>>rxSchedulerHelper())
-//                .compose(RxUtil.<List<DillItemBean>>handleBmobResult())
-//                .subscribe(new Action1<List<Map<String,BmobHttpResponse>>>() {
-//                    @Override
-//                    public void call(List<Map<String,BmobHttpResponse>> response) {
-//                        if (response != null && !TextUtils.isEmpty(response.getObjectId())) {
-//                            if (mView.isActive()) {
-//                                mView.postSuc(mDillitembean);
-//                            }else{
-//                                mView.postFailed("提交失败");
-//                            }
-//                        }
-//                    }
-//                }, new Action1<Throwable>() {
-//                    @Override
-//                    public void call(Throwable throwable) {
-//                        mView.postFailed("提交异常");
-//                    }
-//                });
-//        addSubscribe(rxSubscription);
-
-        Log.e("DishPresenter", GsonUtil.getJson(batchrequest));
-
-        Call<ResponseBody> call = RetrofitHelper.getBmobApis().postDillBatch(batchrequest);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    System.out.println(response.body().string());
-                    mView.postSuc();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    mView.postFailed("提交失败");
+                    BatchBean batchbean = new BatchBean();
+                    batchbean.setMethod("POST");
+                    batchbean.setPath("/1/classes/dillitem");
+                    batchbean.setBody(temp);
+                    batchrequest.getRequests().add(batchbean);
                 }
             }
 
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
+            Log.e("DishPresenter", GsonUtil.getJson(batchrequest));
+
+            Call<ResponseBody> call = RetrofitHelper.getBmobApis().postDillBatch(batchrequest);
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    try {
+                        System.out.println(response.body().string());
+                        mView.postSuc();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        mView.postFailed("提交失败");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    t.printStackTrace();
+                }
+            });
+        }
     }
 
     @Override

@@ -19,7 +19,7 @@ import com.mvp.base.model.bean.WorkmateBean;
 public class WorkmateViewHolder extends BaseViewHolder<WorkmateBean> {
 
 
-    ImageView imgPicture;
+    ImageView imgPicture, iv_status;
     TextView tv_title;
     LinearLayout ll_container;
 
@@ -33,6 +33,7 @@ public class WorkmateViewHolder extends BaseViewHolder<WorkmateBean> {
         super(parent, R.layout.item_related);
         ll_container = $(R.id.ll_container);
         imgPicture = $(R.id.img_video);
+        iv_status = $(R.id.iv_status);
         tv_title = $(R.id.tv_title);
         imgPicture.setScaleType(ImageView.ScaleType.FIT_XY);
         if(mOnWorkmateClickListener != null){
@@ -41,7 +42,10 @@ public class WorkmateViewHolder extends BaseViewHolder<WorkmateBean> {
     }
 
     @Override
-    public void setData(final WorkmateBean data) {
+    public void setData(WorkmateBean data){
+
+    }
+    public void setData(final WorkmateBean data, boolean selected) {
         tv_title.setText(""+data.getName());
         ViewGroup.LayoutParams params = imgPicture.getLayoutParams();
 
@@ -49,7 +53,7 @@ public class WorkmateViewHolder extends BaseViewHolder<WorkmateBean> {
         int width = dm.widthPixels / 3;//宽度为屏幕宽度一半
 //        int height = data.getHeight()*width/data.getWidth();//计算View的高度
 
-        params.height = (int) (width * 1.1);
+        params.height = (int) (width * 1.0);
         imgPicture.setLayoutParams(params);
         ImageLoader.load(getContext(),data.getPicurl(),imgPicture);
         ll_container.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +64,13 @@ public class WorkmateViewHolder extends BaseViewHolder<WorkmateBean> {
                 }
             }
         });
+
+
+        if(selected){
+            iv_status.setVisibility(View.VISIBLE);
+        }else{
+            iv_status.setVisibility(View.GONE);
+        }
 
     }
 

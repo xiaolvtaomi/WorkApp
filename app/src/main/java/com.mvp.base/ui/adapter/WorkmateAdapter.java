@@ -23,7 +23,7 @@ import java.util.Map;
 public class WorkmateAdapter extends RecyclerArrayAdapter<Pair<Integer, Object>> implements WorkmateViewHolder.OnWorkmateClickListener {
 
     /**
-     * 类型集合，adapter对应的数据集合
+     * 类型集合，adapter对应的数据集合,first objectid
      */
     List<Pair<Integer, Object>> superData = new ArrayList<>();
     final int TYPE_TOPCELL = 1;
@@ -85,7 +85,7 @@ public class WorkmateAdapter extends RecyclerArrayAdapter<Pair<Integer, Object>>
                 ((WorkmateUnknowViewHolder) holder).setData((android.util.Pair<HomeTopCellBean, HomeTopCellBean>) superData.get(position).second);
                 break;
             case TYPE_WorkmateGROUP:
-                ((WorkmateViewHolder) holder).setData((WorkmateBean) superData.get(position).second);
+                ((WorkmateViewHolder) holder).setData((WorkmateBean) superData.get(position).second, selectedWorkmates.containsKey(((WorkmateBean) superData.get(position).second).getObjectId()));
                 break;
         }
     }
@@ -93,10 +93,10 @@ public class WorkmateAdapter extends RecyclerArrayAdapter<Pair<Integer, Object>>
     
     @Override
     public boolean clickWorkmate(WorkmateBean workmateBean) {
-        if(selectedWorkmates.containsKey(workmateBean.getName())){
-            selectedWorkmates.remove(workmateBean.getName());
+        if(selectedWorkmates.containsKey(workmateBean.getObjectId())){
+            selectedWorkmates.remove(workmateBean.getObjectId());
         }else{
-            selectedWorkmates.put(workmateBean.getName(), workmateBean);
+            selectedWorkmates.put(workmateBean.getObjectId(), workmateBean);
         }
         notifyDataSetChanged();
         return true ;

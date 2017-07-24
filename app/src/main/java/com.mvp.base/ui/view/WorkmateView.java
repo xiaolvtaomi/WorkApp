@@ -22,6 +22,7 @@ import com.mvp.base.presenter.contract.cook.WorkmateContract;
 import com.mvp.base.ui.adapter.DishAdapter;
 import com.mvp.base.ui.adapter.VideoListAdapter;
 import com.mvp.base.ui.adapter.WorkmateAdapter;
+import com.mvp.base.utils.JumpUtil;
 import com.mvp.base.utils.Preconditions;
 import com.mvp.base.widget.circleprogress.CircleProgress;
 import com.mvp.base.widget.theme.ColorTextView;
@@ -103,6 +104,13 @@ public class WorkmateView extends RootView<WorkmateContract.Presenter> implement
 //                }
 //                loading.setVisibility(View.VISIBLE);
 //                mPresenter.postWorkmates(data);
+            try {
+                WorkmateBean[] temp = new WorkmateBean[adapter.getselectedWorkmates().size()] ;
+                JumpUtil.go2DishSelectActivity(mContext, adapter.getselectedWorkmates().toArray(temp));
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
 
             }
         });

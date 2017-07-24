@@ -50,14 +50,18 @@ public class DishAdapter extends RecyclerArrayAdapter<Pair<Integer, Object>> imp
         return selectedDishes.values();
     }
 
-    public DishAdapter(Context context) {
+    boolean hastop = true ;
+    public DishAdapter(Context context, boolean hastop) {
         super(context);
+        this.hastop = hastop ;
     }
 
     public void setData(List<DishBean> dishes){
         superData.clear();
 
-        superData.add(new Pair<Integer, Object>(TYPE_TOPCELL, null));
+        if(hastop) {
+            superData.add(new Pair<Integer, Object>(TYPE_TOPCELL, null));
+        }
 
         for (int i = 0 ; i< dishes.size() ;i++){
             dishes.get(i).setHasTitle(
