@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.READ_LOGS"/>
     <uses-permission android:name="android.permission.GET_TASKS"/>
 
+    <uses-permission android:name="com.company.app.fileprovider.READ" />
 
     <application
         android:name=".app.App"
@@ -43,7 +44,6 @@
         <activity android:name=".ui.activitys.DishSelectActivity"/>
 
 
-        <uses-permission android:name="com.company.app.fileprovider.READ" />
         <meta-data
             android:name="PGYER_APPID"
             android:value="071bdb1d9b450cbef7c21924c79085c0" >
