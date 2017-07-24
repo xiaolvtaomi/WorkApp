@@ -53,15 +53,15 @@ public class LoginActivity extends BaseActivity {
     CardView cv;
     @BindView(R.id.fab)
     FloatingActionButton fab;
-    String str1;
-    String str2;
+    String login_name;
+    String login_moible;
     String name;
     String mobile;
     int role;
     String avatar;
     String objectId;
     int userid;
-
+    private boolean isoncl=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +72,7 @@ public class LoginActivity extends BaseActivity {
         if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(moible)) {
             JumpUtil.goMainActivity(LoginActivity.this, null);
         }
+
     }
 
     @OnClick({R.id.bt_go, R.id.fab})
@@ -81,96 +82,96 @@ public class LoginActivity extends BaseActivity {
 
                 break;
             case R.id.bt_go:
+              if (isoncl==true) {
+                  isoncl=false;
+                  EditText editText1 = (EditText) findViewById(R.id.et_username);
+                  login_name = editText1.getText().toString();
+                  EditText editText2 = (EditText) findViewById(R.id.et_password);
+                  login_moible = editText2.getText().toString();
 
-                EditText editText1 = (EditText) findViewById(R.id.et_username);
-                str1 = editText1.getText().toString();
-                EditText editText2 = (EditText) findViewById(R.id.et_password);
-                str2 = editText2.getText().toString();
+                  if (!TextUtils.isEmpty(login_name) && !TextUtils.isEmpty(login_moible)) {
+                      Map<String, Object> params = new HashMap<>();
+                      params.put("name", login_name);
+                      params.put("mobile", login_moible);
+                      String json = new Gson().toJson(params);
+                      Call<ResponseBody> call = RetrofitHelper.getBmobApis()
+                              .login(json);
+                      call.enqueue(new Callback<ResponseBody>() {
+                          @Override
+                          public void onResponse(Call<ResponseBody> call,
+                                                 Response<ResponseBody>
+                                                         response) {
+                              try {
+                                  String respon_str = response.body().string();
+                                  System.out.println(respon_str);
+                                  LoginResponse responsebean = (LoginResponse)
+                                          GsonUtil.getObject(respon_str,
+                                                  LoginResponse.class);
+                                  List<WorkmateBean> results = responsebean ==
+                                          null ? null : responsebean.getResults();
+                                  if (results != null && results.size() > 0) {
+                                      name = results.get(0).getName();
+                                      mobile = results.get(0).getMobile();
+                                      role = results.get(0).getRole();
+                                      avatar = results.get(0).getAvatar();
+                                      objectId = results.get(0).getObjectId();
+                                      userid = results.get(0).getUserid();
+                                      PreUtils.putString(LoginActivity.this,
+                                              "name", name);
+                                      PreUtils.putString(LoginActivity.this,
+                                              "mobile", mobile);
+                                      PreUtils.putInt(LoginActivity.this,
+                                              "role", role);
+                                      PreUtils.putString(LoginActivity.this,
+                                              "avatar", avatar);
+                                      PreUtils.putString(LoginActivity.this,
+                                              "objectId", objectId);
+                                      PreUtils.putInt(LoginActivity.this,
+                                              "userid", userid);
 
+                                      if (Build.VERSION.SDK_INT >= Build
+                                              .VERSION_CODES.LOLLIPOP) {
+                                          Explode explode = new Explode();
+                                          explode.setDuration(500);
+                                          getWindow().setExitTransition(explode);
+                                          getWindow().setEnterTransition(explode);
+                                          ActivityOptionsCompat oc2 =
+                                                  ActivityOptionsCompat
+                                                          .makeSceneTransitionAnimation(LoginActivity.this);
+                                          JumpUtil.goMainActivity(LoginActivity
+                                                  .this, oc2);
 
+                                      } else {
+                                          JumpUtil.goMainActivity(LoginActivity
+                                                  .this, null);
 
-                if (!TextUtils.isEmpty(str1) && !TextUtils.isEmpty(str2)) {
-                    Map<String, Object> params = new HashMap<>();
-                    params.put("name", str1);
-                    params.put("mobile", str2);
-                    String json = new Gson().toJson(params);
-                    Call<ResponseBody> call = RetrofitHelper.getBmobApis()
-                            .login(json);
-                    call.enqueue(new Callback<ResponseBody>() {
-                        @Override
-                        public void onResponse(Call<ResponseBody> call,
-                                               Response<ResponseBody>
-                                                       response) {
-                            try {
-                                String respon_str = response.body().string();
-                                System.out.println(respon_str);
-                                LoginResponse responsebean = (LoginResponse)
-                                        GsonUtil.getObject(respon_str,
-                                                LoginResponse.class);
-                                List<WorkmateBean> results = responsebean ==
-                                        null ? null : responsebean.getResults();
-                                if (results != null && results.size() > 0) {
-                                    name = results.get(0).getName();
-                                    mobile = results.get(0).getMobile();
-                                    role = results.get(0).getRole();
-                                    avatar = results.get(0).getAvatar();
-                                    objectId = results.get(0).getObjectId();
-                                    userid = results.get(0).getUserid();
-                                    PreUtils.putString(LoginActivity.this,
-                                            "name", name);
-                                    PreUtils.putString(LoginActivity.this,
-                                            "mobile", mobile);
-                                    PreUtils.putInt(LoginActivity.this,
-                                            "role", role);
-                                    PreUtils.putString(LoginActivity.this,
-                                            "avatar", avatar);
-                                    PreUtils.putString(LoginActivity.this,
-                                            "objectId", objectId);
-                                    PreUtils.putInt(LoginActivity.this,
-                                            "userid", userid);
-
-                                    if (Build.VERSION.SDK_INT >= Build
-                                            .VERSION_CODES.LOLLIPOP) {
-                                        Explode explode = new Explode();
-                                        explode.setDuration(500);
-                                        getWindow().setExitTransition(explode);
-                                        getWindow().setEnterTransition(explode);
-                                        ActivityOptionsCompat oc2 =
-                                                ActivityOptionsCompat
-                                                        .makeSceneTransitionAnimation(LoginActivity.this);
-                                        JumpUtil.goMainActivity(LoginActivity
-                                                .this, oc2);
-
-                                    } else {
-                                        JumpUtil.goMainActivity(LoginActivity
-                                                .this, null);
-
-                                    }
-
-
-                                } else {
-                                    Toast.makeText(getApplicationContext(),
-                                            "请输入正确的姓名与手机号", Toast
-                                                    .LENGTH_SHORT).show();
-                                }
+                                      }
 
 
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-                            t.printStackTrace();
-                        }
-                    });
-                } else {
-                    Toast.makeText(getApplicationContext(), "请输入姓名与手机号", Toast.LENGTH_SHORT).show();
-                }
+                                  } else {
+                                      Toast.makeText(getApplicationContext(),
+                                              "请输入正确的姓名与手机号", Toast
+                                                      .LENGTH_SHORT).show();
+                                  }
 
 
-                break;
+                              } catch (IOException e) {
+                                  e.printStackTrace();
+                              }
+                          }
+
+                          @Override
+                          public void onFailure(Call<ResponseBody> call, Throwable t) {
+                              t.printStackTrace();
+                          }
+                      });
+                  } else {
+                      Toast.makeText(getApplicationContext(), "请输入姓名与手机号", Toast.LENGTH_SHORT).show();
+                  }
+
+                  isoncl=true;
+                  break;
+              }
         }
     }
 }

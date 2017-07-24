@@ -47,6 +47,7 @@ import com.mvp.base.presenter.VideoInfoPresenter;
 import com.mvp.base.presenter.contract.MineContract;
 import com.mvp.base.ui.activitys.CollectionActivity;
 import com.mvp.base.ui.activitys.HistoryActivity;
+import com.mvp.base.ui.activitys.LoginActivity;
 import com.mvp.base.ui.activitys.MainActivity;
 import com.mvp.base.ui.activitys.SettingActivity;
 import com.mvp.base.ui.adapter.MineHistoryVideoListAdapter;
@@ -112,7 +113,11 @@ public class MineView extends RootView<MineContract.Presenter> implements
     Button photo;
     Button back;
     Dialog dialog;
-
+    TextView func_order;
+    TextView func_integral;
+    TextView func_payment;
+    TextView func_invite;
+    TextView func_stages;
     public MineView(Context context) {
         super(context);
     }
@@ -129,6 +134,11 @@ public class MineView extends RootView<MineContract.Presenter> implements
     @Override
     protected void initView() {
        iv_avatar= (ImageView) findViewById(R.id.uc_avater);
+        func_order= (TextView) findViewById(R.id.func_order);
+        func_integral= (TextView) findViewById(R.id.func_integral);
+        func_payment= (TextView) findViewById(R.id.func_payment);
+        func_invite= (TextView) findViewById(R.id.func_invite);
+        func_stages= (TextView) findViewById(R.id.func_stages);
         ((AppCompatActivity) getContext()).setSupportActionBar(toolbar);
         toolbar.setTitle("");
         titleName.setText(getResources().getString(R.string.mine_title));
@@ -158,6 +168,51 @@ public class MineView extends RootView<MineContract.Presenter> implements
             @Override
             public void onClick(View view) {
                 showDialog();
+            }
+        });
+        func_order.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getContext().startActivity(new Intent(mContext,
+                        SettingActivity.class));
+            }
+        });
+        func_integral.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getContext().startActivity(new Intent(mContext,
+                        HistoryActivity.class));
+            }
+        });
+        func_payment.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EventBus.getDefault().post("", MineFragment.SET_THEME);
+            }
+        });
+        func_invite.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PreUtils.putString(getContext(),
+                        "name", "");
+                PreUtils.putString(getContext(),
+                        "mobile","");
+                PreUtils.putInt(getContext(),
+                        "role",0);
+                PreUtils.putString(getContext(),
+                        "avatar","");
+                PreUtils.putString(getContext(),
+                        "objectId", "");
+                PreUtils.putInt(getContext(),
+                        "userid", 0);
+                getContext().startActivity(new Intent(mContext,
+                        LoginActivity.class));
+            }
+        });
+        func_stages.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EventUtil.showToast(getContext(), "敬请期待");
             }
         });
   }
@@ -304,7 +359,7 @@ public class MineView extends RootView<MineContract.Presenter> implements
             @Override
             public void onClick(View v) {
                 if (mContext instanceof MainActivity) {
-                    File file=new File(Environment.getExternalStorageDirectory(), "/temp/"+System.currentTimeMillis() + ".");
+                    File file=new File(Environment.getExternalStorageDirectory(), "/temp/"+System.currentTimeMillis() + ".jpg");
                     if (!file.getParentFile().exists())file.getParentFile().mkdirs();
                     Uri imageUri = Uri.fromFile(file);
                     CompressConfig compressConfig = new CompressConfig
