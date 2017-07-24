@@ -6,6 +6,7 @@ import com.mvp.base.base.BasePresenter;
 import com.mvp.base.base.BaseView;
 import com.mvp.base.model.bean.DillItemBean;
 import com.mvp.base.model.bean.DishBean;
+import com.mvp.base.model.bean.WorkmateBean;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -79,7 +80,7 @@ public interface DishContract {
         /**
          * 提交我的菜
          */
-        void postDishes( Collection<DishBean> dishes);
+        void postDishes(WorkmateBean[] workmateBeens,  Collection<DishBean> dishes);
 
         /**
          * 点选菜

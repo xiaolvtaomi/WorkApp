@@ -1,5 +1,6 @@
 package com.mvp.base.ui.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,8 +15,12 @@ import com.mvp.base.R;
 import com.mvp.base.base.RootView;
 import com.mvp.base.model.bean.DillItemBean;
 import com.mvp.base.model.bean.DishBean;
+import com.mvp.base.model.bean.WorkmateBean;
 import com.mvp.base.presenter.contract.cook.DishContract;
+import com.mvp.base.ui.activitys.DishSelectActivity;
+import com.mvp.base.ui.activitys.MainActivity;
 import com.mvp.base.ui.adapter.DishAdapter;
+import com.mvp.base.utils.PreUtils;
 import com.mvp.base.utils.Preconditions;
 import com.mvp.base.widget.theme.ColorTextView;
 
@@ -38,12 +43,17 @@ public class DishView extends RootView<DishContract.Presenter> implements DishCo
     FloatingActionButton fab;
     DishAdapter adapter ;
 
+    WorkmateBean[] workmates = null;
     public DishView(Context context) {
         super(context);
     }
 
     public DishView(Context context, AttributeSet attrs) {
         super(context, attrs);
+    }
+
+    public void setWorkmates(WorkmateBean[] workmates){
+        this.workmates = workmates ;
     }
 
 
@@ -55,7 +65,7 @@ public class DishView extends RootView<DishContract.Presenter> implements DishCo
     @Override
     protected void initView() {
         titleName.setText("点菜");
-        adapter = new DishAdapter(getContext());
+        adapter = new DishAdapter(getContext(), !(mContext instanceof DishSelectActivity));
         recyclerView.setAdapterWithProgress(adapter);
 //        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -109,7 +119,24 @@ public class DishView extends RootView<DishContract.Presenter> implements DishCo
             @Override
             public void onClick(View view) {
                 if(adapter.getSelectedDishes() != null && adapter.getSelectedDishes().size() > 0 ){
-                    mPresenter.postDishes(adapter.getSelectedDishes());
+                    if(mContext instanceof DishSelectActivity){
+                        if(workmates != null && workmates.length > 0){
+                            mPresenter.postDishes(workmates, adapter.getSelectedDishes());
+                        }else{
+                            Snackbar.make(view, "没有选人,请退回上个界面选择同事", Snackbar.LENGTH_SHORT)
+                                    .setAction("Action", null).show();
+                        }
+                    }else{
+                        if(workmates == null || workmates.length == 0){
+                            workmates = new WorkmateBean[1];
+                            WorkmateBean temp = new WorkmateBean();
+                            temp.setAvatar(PreUtils.getString(mContext, "avatar", ""));
+                            temp.setName(PreUtils.getString(mContext, "name", "未知"));
+                            temp.setObjectId(PreUtils.getString(mContext, "objectId", ""));
+                            workmates[0] = temp ;
+                            mPresenter.postDishes(workmates, adapter.getSelectedDishes());
+                        }
+                    }
                 }else{
                     Snackbar.make(view, "想吃至少选个菜吧", Snackbar.LENGTH_SHORT)
                             .setAction("Action", null).show();
@@ -120,15 +147,20 @@ public class DishView extends RootView<DishContract.Presenter> implements DishCo
 
     @Override
     public void statusToDished(List<DishBean> dishes) {
-        // 更新 adapter
-        fab.setImageResource(R.drawable.ic_done_white);
-        fab.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Snackbar.make(v, "你已经定过了", Snackbar.LENGTH_SHORT)
-                        .setAction("Action", null).show();
-            }
-        });
+        if(mContext instanceof DishSelectActivity){
+            ((DishSelectActivity)mContext).setResult(Activity.RESULT_OK);
+            ((DishSelectActivity)mContext).finish();
+        }else {
+            // 更新 adapter
+            fab.setImageResource(R.drawable.ic_done_white);
+            fab.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Snackbar.make(v, "你已经定过了", Snackbar.LENGTH_SHORT)
+                            .setAction("Action", null).show();
+                }
+            });
+        }
     }
 
     @Override

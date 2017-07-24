@@ -4,10 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.ActivityOptionsCompat;
 
+import com.mvp.base.model.bean.Collection;
 import com.mvp.base.model.bean.DoodleBean;
 import com.mvp.base.model.bean.VideoInfo;
+import com.mvp.base.model.bean.WorkmateBean;
 import com.mvp.base.ui.activitys.DishAddActivity;
 import com.mvp.base.ui.activitys.DishManageActivity;
+import com.mvp.base.ui.activitys.DishSelectActivity;
 import com.mvp.base.ui.activitys.MainActivity;
 import com.mvp.base.ui.activitys.WorkmateListActivity;
 import com.mvp.base.ui.activitys.WelcomeActivity;
@@ -51,6 +54,12 @@ public class JumpUtil {
 
     public static void go2DishAddActivity(Context context) {
         Intent intent = new Intent(context, DishAddActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void go2DishSelectActivity(Context context, WorkmateBean[] selectedPersons) {
+        Intent intent = new Intent(context, DishSelectActivity.class);
+        intent.putExtra("selectedPersons", selectedPersons);
         context.startActivity(intent);
     }
 
