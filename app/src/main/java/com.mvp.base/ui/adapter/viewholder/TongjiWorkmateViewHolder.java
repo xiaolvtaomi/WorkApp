@@ -80,26 +80,41 @@ public class TongjiWorkmateViewHolder extends BaseViewHolder<TongjiWorkmateBean>
                     rl_item0.setVisibility(View.VISIBLE);
                     ImageLoader.load(getContext(),mWorkmateBean.dishes.get(i).getDishpic(),iv_dish0);
                     tv_dishname0 .setText(mWorkmateBean.dishes.get(i).getDishname());
+                    rl_item1.setVisibility(View.INVISIBLE);
+                    rl_item2.setVisibility(View.INVISIBLE);
+                    rl_item3.setVisibility(View.INVISIBLE);
+                    rl_item4.setVisibility(View.INVISIBLE);
+                    rl_item5.setVisibility(View.INVISIBLE);
                 }
                else if (i==1){
                     rl_item1.setVisibility(View.VISIBLE);
                     ImageLoader.load(getContext(),mWorkmateBean.dishes.get(i).getDishpic(),iv_dish1);
                     tv_dishname1 .setText(mWorkmateBean.dishes.get(i).getDishname());
+                    rl_item2.setVisibility(View.INVISIBLE);
+                    rl_item3.setVisibility(View.INVISIBLE);
+                    rl_item4.setVisibility(View.INVISIBLE);
+                    rl_item5.setVisibility(View.INVISIBLE);
                 }
                 else if (i==2){
                     rl_item2.setVisibility(View.VISIBLE);
                     ImageLoader.load(getContext(),mWorkmateBean.dishes.get(i).getDishpic(),iv_dish2);
                     tv_dishname2 .setText(mWorkmateBean.dishes.get(i).getDishname());
+                    rl_item3.setVisibility(View.INVISIBLE);
+                    rl_item4.setVisibility(View.INVISIBLE);
+                    rl_item5.setVisibility(View.INVISIBLE);
                 }
                 else if (i==3){
                     rl_item3.setVisibility(View.VISIBLE);
                     ImageLoader.load(getContext(),mWorkmateBean.dishes.get(i).getDishpic(),iv_dish3);
                     tv_dishname3 .setText(mWorkmateBean.dishes.get(i).getDishname());
+                    rl_item4.setVisibility(View.INVISIBLE);
+                    rl_item5.setVisibility(View.INVISIBLE);
                 }
                 else if (i==4){
                     rl_item4.setVisibility(View.VISIBLE);
                     ImageLoader.load(getContext(),mWorkmateBean.dishes.get(i).getDishpic(),iv_dish4);
                     tv_dishname4 .setText(mWorkmateBean.dishes.get(i).getDishname());
+                    rl_item5.setVisibility(View.INVISIBLE);
                 }
                 else if (i==5){
                     rl_item5.setVisibility(View.VISIBLE);
