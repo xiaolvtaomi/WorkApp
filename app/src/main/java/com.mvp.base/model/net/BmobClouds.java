@@ -49,4 +49,18 @@ public interface BmobClouds {
     @POST("getTongjiWorkmatesByYMD")
     Observable<BmobHttpResponse<List<TongjiWorkmateBean>>> getTongjiWorkmatesByYMD();
 
+    @Headers({"CONTENTTYPE:application/x-www-form-urlencoded; charset=utf-8","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
+    @POST("postWorkmatesDishes")
+    Observable<BmobHttpResponse<String>> postDillBatchV2(@Body List<DillItemBean> items);
+
+
+    @Headers({"CONTENTTYPE:application/x-www-form-urlencoded; charset=utf-8","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
+    @FormUrlEncoded
+    @POST("postWorkmatesDishes")
+    Observable<BmobHttpResponse<String>> postDillBatchV3(@Field("mm") String itemsjson);
+
+    @Headers({"CONTENTTYPE:application/x-www-form-urlencoded; charset=utf-8","X-Bmob-Application-Id:9511f045589e984315543d0a6e44e857","X-Bmob-REST-API-Key:34b46edfd764465a1d3925321403a7ed"})
+    @POST("getTongjiWorkmatesByYMD")
+    Observable<BmobHttpResponse<Object>> postDillBatchV2test();
+
 }

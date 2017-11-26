@@ -1,6 +1,8 @@
 package com.mvp.base.ui.activitys;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +26,7 @@ import com.mvp.base.model.net.RetrofitHelper;
 import com.mvp.base.utils.GsonUtil;
 import com.mvp.base.utils.RxUtil;
 import com.mvp.base.utils.StringUtils;
+import com.mvp.base.widget.circleprogress.CircleProgress;
 import com.mvp.base.widget.theme.ColorTextView;
 import com.sina.cloudstorage.auth.AWSCredentials;
 import com.sina.cloudstorage.auth.BasicAWSCredentials;
@@ -66,6 +69,8 @@ public class DishAddActivity extends SwipeBackWithPicActivity implements View.On
     Button btn_post ;
     @BindView(R.id.iv_logo)
     ImageView iv_logo ;
+    @BindView(R.id.loading)
+    CircleProgress loading;
 
     @BindView(R.id.title_name)
     ColorTextView titleName;
@@ -100,6 +105,7 @@ public class DishAddActivity extends SwipeBackWithPicActivity implements View.On
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_post:
+
                 if(TextUtils.isEmpty(compressPath)){
                     Toast.makeText(this,"选图", Toast.LENGTH_SHORT).show();
 
@@ -115,6 +121,9 @@ public class DishAddActivity extends SwipeBackWithPicActivity implements View.On
                         break;
                     }
 
+
+                    btn_post.setClickable(false);
+                    loading.setVisibility(View.VISIBLE);
                     // 测试
                     if(bean == null) {
                         bean = new DishBean();
@@ -140,6 +149,18 @@ public class DishAddActivity extends SwipeBackWithPicActivity implements View.On
         }
     }
 
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case 123: // 隐藏loading
+                    btn_post.setClickable(true);
+                    loading.setVisibility(View.INVISIBLE);
+                    break;
+            }
+        }
+    };
+
 
     /**
      * 上传文件 自定义请求头
@@ -162,6 +183,8 @@ public class DishAddActivity extends SwipeBackWithPicActivity implements View.On
 
                 if(putObjectResult != null && !TextUtils.isEmpty(putObjectResult.getContentMd5())){
                     postDish(bean);
+                }else{
+                    handler.sendEmptyMessage(123);
                 }
 
 
@@ -200,11 +223,14 @@ public class DishAddActivity extends SwipeBackWithPicActivity implements View.On
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                handler.sendEmptyMessage(123);
+
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 t.printStackTrace();
+                handler.sendEmptyMessage(123);
             }
         });
     }

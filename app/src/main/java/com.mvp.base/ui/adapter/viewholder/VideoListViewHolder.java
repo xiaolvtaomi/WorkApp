@@ -37,5 +37,6 @@ public class VideoListViewHolder extends BaseViewHolder<com.mvp.base.model.bean.
         params.height = (int) (width * 1.1);
         imgPicture.setLayoutParams(params);
         com.mvp.base.component.ImageLoader.load(getContext(),data.pic,imgPicture);
+
     }
 }

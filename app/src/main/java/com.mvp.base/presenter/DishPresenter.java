@@ -130,7 +130,33 @@ public class DishPresenter extends RxPresenter implements DishContract.Presenter
 
         if(workmateBeens != null ) {
 
-            BatchRequestBean batchrequest = new BatchRequestBean();
+//            BatchRequestBean batchrequest = new BatchRequestBean();
+//            for (WorkmateBean workmate : workmateBeens) {
+//                for (DishBean dish : dishes) {
+//                    DillItemBean temp = new DillItemBean();
+//                    temp.setTitle(dish.getTitle());
+//                    temp.setDishname(dish.getDishname());
+//                    temp.setAvatar(workmate.getAvatar());
+//                    temp.setDay(Calendar.getInstance().get(Calendar
+//                            .DAY_OF_MONTH));
+//                    temp.setDishpic(dish.getPicurl());
+//                    temp.setMonth(Calendar.getInstance().get(Calendar.MONTH) + 1);
+//                    temp.setWorkmate_creator(PreUtils.getString(mView.getContext(), "name","未知"));
+//                    temp.setWorkmate_name(workmate.getName());
+//                    temp.setYear(Calendar.getInstance().get(Calendar.YEAR));
+//
+//                    BatchBean batchbean = new BatchBean();
+//                    batchbean.setMethod("POST");
+//                    batchbean.setPath("/1/classes/dillitem");
+//                    batchbean.setBody(temp);
+//                    batchrequest.getRequests().add(batchbean);
+//                }
+//            }
+//
+//            Log.e("DishPresenter", GsonUtil.getJson(batchrequest));
+
+
+            List<DillItemBean> items = new ArrayList<>();
             for (WorkmateBean workmate : workmateBeens) {
                 for (DishBean dish : dishes) {
                     DillItemBean temp = new DillItemBean();
@@ -145,34 +171,46 @@ public class DishPresenter extends RxPresenter implements DishContract.Presenter
                     temp.setWorkmate_name(workmate.getName());
                     temp.setYear(Calendar.getInstance().get(Calendar.YEAR));
 
-                    BatchBean batchbean = new BatchBean();
-                    batchbean.setMethod("POST");
-                    batchbean.setPath("/1/classes/dillitem");
-                    batchbean.setBody(temp);
-                    batchrequest.getRequests().add(batchbean);
+                    items.add(temp);
                 }
             }
 
-            Log.e("DishPresenter", GsonUtil.getJson(batchrequest));
+            Subscription rxSubscription = RetrofitHelper.getBmobClouds().postDillBatchV3(GsonUtil.getJson(items))
+                    .compose(RxUtil.<BmobHttpResponse<String>>rxSchedulerHelper())
+                    .compose(RxUtil.<String>handleBmobResult())
+                    .subscribe(new Action1<String>() {
+                        @Override
+                        public void call(String result) {
+                            if (mView.isActive()) {
+                                mView.postSuc(result);
+                            }
+                        }
+                    }, new Action1<Throwable>() {
+                        @Override
+                        public void call(Throwable throwable) {
+                            mView.postFailed("提交失败");
+                        }
+                    });
+            addSubscribe(rxSubscription);
 
-            Call<ResponseBody> call = RetrofitHelper.getBmobApis().postDillBatch(batchrequest);
-            call.enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    try {
-                        System.out.println(response.body().string());
-                        mView.postSuc();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        mView.postFailed("提交失败");
-                    }
-                }
+//            Subscription rxSubscription = RetrofitHelper.getBmobClouds().postDillBatchV2test()
+//                    .compose(RxUtil.<BmobHttpResponse<Object>>rxSchedulerHelper())
+//                    .compose(RxUtil.<Object>handleBmobResult())
+//                    .subscribe(new Action1<Object>() {
+//                        @Override
+//                        public void call(Object result) {
+//                            if (mView.isActive()) {
+//                                mView.postSuc("ok");
+//                            }
+//                        }
+//                    }, new Action1<Throwable>() {
+//                        @Override
+//                        public void call(Throwable throwable) {
+//                            mView.postFailed("提交失败");
+//                        }
+//                    });
+//            addSubscribe(rxSubscription);
 
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    t.printStackTrace();
-                }
-            });
         }
     }
 

@@ -57,7 +57,7 @@ public interface DishContract {
 
         void postFailed(String reason);
 
-        void postSuc();
+        void postSuc(String result);
 
         void refreshFailed(String reason);
 

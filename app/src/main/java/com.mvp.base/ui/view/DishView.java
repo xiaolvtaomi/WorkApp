@@ -182,8 +182,8 @@ public class DishView extends RootView<DishContract.Presenter> implements DishCo
     }
 
     @Override
-    public void postSuc() {
-        Snackbar.make(recyclerView, "提交成功", Snackbar.LENGTH_SHORT)
+    public void postSuc(String result) {
+        Snackbar.make(recyclerView, result, Snackbar.LENGTH_SHORT)
                 .setAction("Action", null).show();
         statusToDished(null);
     }

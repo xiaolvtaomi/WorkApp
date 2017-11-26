@@ -47,7 +47,6 @@ import com.mvp.base.presenter.VideoInfoPresenter;
 import com.mvp.base.presenter.contract.MineContract;
 import com.mvp.base.ui.activitys.CollectionActivity;
 import com.mvp.base.ui.activitys.HistoryActivity;
-import com.mvp.base.ui.activitys.LoginActivity;
 import com.mvp.base.ui.activitys.MainActivity;
 import com.mvp.base.ui.activitys.SettingActivity;
 import com.mvp.base.ui.adapter.MineHistoryVideoListAdapter;
@@ -90,22 +89,16 @@ import static com.mvp.base.R.id.swipe_deck;
 public class MineView extends RootView<MineContract.Presenter> implements
         MineContract.View {
 
-    MineHistoryVideoListAdapter mAdapter;
+//    MineHistoryVideoListAdapter mAdapter;
     VideoInfo videoInfo;
     @BindView(R.id.title_name)
     ColorTextView titleName;
     @BindView(R.id.rl_them)
     RelativeLayout rlThem;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(recyclerView)
-    EasyRecyclerView mRecyclerView;
-    @BindView(R.id.tv_history)
-    TextView mTvHistory;
     @BindView(R.id.tv_down)
     TextView tvDown;
-    @BindView(R.id.tv_collection)
-    TextView tvCollection;
+    @BindView(R.id.tv_name)
+    TextView tv_name;
     @BindView(R.id.tv_them)
     TextView tvThem;
     ImageView iv_avatar;
@@ -113,12 +106,7 @@ public class MineView extends RootView<MineContract.Presenter> implements
     Button photo;
     Button back;
     Dialog dialog;
-    TextView func_order;
-    TextView func_integral;
-    TextView func_payment;
-    TextView func_invite;
-    TextView func_stages;
-    TextView back_ticket;
+
     public MineView(Context context) {
         super(context);
     }
@@ -134,108 +122,50 @@ public class MineView extends RootView<MineContract.Presenter> implements
 
     @Override
     protected void initView() {
-       iv_avatar= (ImageView) findViewById(R.id.uc_avater);
-        func_order= (TextView) findViewById(R.id.func_order);
-        func_integral= (TextView) findViewById(R.id.func_integral);
-        func_payment= (TextView) findViewById(R.id.func_payment);
-        func_invite= (TextView) findViewById(R.id.func_invite);
-        func_stages= (TextView) findViewById(R.id.func_stages);
-        back_ticket= (TextView) findViewById(R.id.back_ticket);
-        ((AppCompatActivity) getContext()).setSupportActionBar(toolbar);
-        toolbar.setTitle("");
+        iv_avatar = (ImageView) findViewById(R.id.uc_avater);
         titleName.setText(getResources().getString(R.string.mine_title));
-        StringUtils.setIconDrawable(mContext, mTvHistory,
-                MaterialDesignIconic.Icon.gmi_account_calendar, 16, 15);
+
         StringUtils.setIconDrawable(mContext, tvDown, MaterialDesignIconic
                 .Icon.gmi_time_countdown, 16, 15);
-        StringUtils.setIconDrawable(mContext, tvCollection,
-                MaterialDesignIconic.Icon.gmi_collection_bookmark, 16, 15);
+
         StringUtils.setIconDrawable(mContext, tvThem, MaterialDesignIconic
                 .Icon.gmi_palette, 16, 15);
-        mRecyclerView.setAdapter(mAdapter = new MineHistoryVideoListAdapter
-                (mContext));
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext,
-                3);
-        gridLayoutManager.setSpanSizeLookup(mAdapter.obtainGridSpanSizeLookUp
-                (3));
-        mRecyclerView.setLayoutManager(gridLayoutManager);
-        SpaceDecoration itemDecoration = new SpaceDecoration(ScreenUtil
-                .dip2px(mContext, 8));
-        itemDecoration.setPaddingEdgeSide(true);
-        itemDecoration.setPaddingStart(true);
-        itemDecoration.setPaddingHeaderFooter(false);
-        mRecyclerView.addItemDecoration(itemDecoration);
-        ImageLoader.load(mContext, PreUtils.getString(getContext(),"avatar", ""), iv_avatar);
+//        mRecyclerView.setAdapter(mAdapter = new MineHistoryVideoListAdapter
+//                (mContext));
+//        GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext,
+//                3);
+//        gridLayoutManager.setSpanSizeLookup(mAdapter.obtainGridSpanSizeLookUp
+//                (3));
+//        mRecyclerView.setLayoutManager(gridLayoutManager);
+//        SpaceDecoration itemDecoration = new SpaceDecoration(ScreenUtil
+//                .dip2px(mContext, 8));
+//        itemDecoration.setPaddingEdgeSide(true);
+//        itemDecoration.setPaddingStart(true);
+//        itemDecoration.setPaddingHeaderFooter(false);
+//        mRecyclerView.addItemDecoration(itemDecoration);
+
+        tv_name.setText(""+PreUtils.getString(mContext, "name", "未知"));
+        ImageLoader.load(mContext, PreUtils.getString(getContext(), "avatar",
+                ""), iv_avatar);
         iv_avatar.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 showDialog();
             }
         });
-        func_order.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getContext().startActivity(new Intent(mContext,
-                        SettingActivity.class));
-            }
-        });
-        func_integral.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    }
 
-                getContext().startActivity(new Intent(mContext,
-                        HistoryActivity.class));
-            }
-        });
-        func_payment.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                EventBus.getDefault().post("", MineFragment.SET_THEME);
-            }
-        });
-        func_invite.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((AppCompatActivity) getContext()).finish();
-            }
-        });
-        func_stages.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                EventUtil.showToast(getContext(), "敬请期待");
-            }
-        });
-        back_ticket.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PreUtils.putString(getContext(),
-                        "name", "");
-                PreUtils.putString(getContext(),
-                        "mobile","");
-                PreUtils.putInt(getContext(),
-                        "role",0);
-                PreUtils.putString(getContext(),
-                        "avatar","");
-                PreUtils.putString(getContext(),
-                        "objectId", "");
-                PreUtils.putInt(getContext(),
-                        "userid", 0);
-                getContext().startActivity(new Intent(mContext,
-                        LoginActivity.class));
-            }
-        });
-  }
 
     @Override
     protected void initEvent() {
-        mAdapter.setOnItemClickListener(new RecyclerArrayAdapter
-                .OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                videoInfo = BeanUtil.VideoType2VideoInfo(mAdapter.getItem
-                        (position), videoInfo);
-            }
-        });
+//        mAdapter.setOnItemClickListener(new RecyclerArrayAdapter
+//                .OnItemClickListener() {
+//            @Override
+//            public void onItemClick(int position) {
+//                videoInfo = BeanUtil.VideoType2VideoInfo(mAdapter.getItem
+//                        (position), videoInfo);
+//            }
+//        });
     }
 
     @Override
@@ -255,13 +185,8 @@ public class MineView extends RootView<MineContract.Presenter> implements
 
     @Override
     public void showContent(List<VideoType> list) {
-        mAdapter.clear();
-        mAdapter.addAll(list);
-        if (list.size() > 0) {
-            mRecyclerView.setVisibility(View.VISIBLE);
-        } else {
-            mRecyclerView.setVisibility(View.GONE);
-        }
+//        mAdapter.clear();
+//        mAdapter.addAll(list);
     }
 
     @Override
@@ -275,21 +200,15 @@ public class MineView extends RootView<MineContract.Presenter> implements
     }
 
 
-    @OnClick({R.id.rl_record, R.id.rl_down, R.id.rl_collection, R.id.rl_them,
+    @OnClick({ R.id.rl_down, R.id.rl_them,
             R.id.img_setting})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.rl_record:
-                getContext().startActivity(new Intent(mContext,
-                        HistoryActivity.class));
-                break;
+
             case R.id.rl_down:
                 EventUtil.showToast(getContext(), "敬请期待");
                 break;
-            case R.id.rl_collection:
-                getContext().startActivity(new Intent(mContext,
-                        CollectionActivity.class));
-                break;
+
             case R.id.rl_them:
                 EventBus.getDefault().post("", MineFragment.SET_THEME);
                 break;
@@ -368,14 +287,18 @@ public class MineView extends RootView<MineContract.Presenter> implements
             @Override
             public void onClick(View v) {
                 if (mContext instanceof MainActivity) {
-                    File file=new File(Environment.getExternalStorageDirectory(), "/temp/"+System.currentTimeMillis() + ".jpg");
-                    if (!file.getParentFile().exists())file.getParentFile().mkdirs();
+                    File file = new File(Environment
+                            .getExternalStorageDirectory(), "/temp/" + System
+                            .currentTimeMillis() + ".");
+                    if (!file.getParentFile().exists())
+                        file.getParentFile().mkdirs();
                     Uri imageUri = Uri.fromFile(file);
                     CompressConfig compressConfig = new CompressConfig
                             .Builder().setMaxPixel(320).create();
                     ((MainActivity) mContext).getTakePhoto().onEnableCompress
                             (compressConfig, true);
-                    ((MainActivity) mContext).getTakePhoto().onPickFromCapture(imageUri);
+                    ((MainActivity) mContext).getTakePhoto()
+                            .onPickFromCapture(imageUri);
                 }
                 dialog.dismiss();
             }
@@ -390,13 +313,14 @@ public class MineView extends RootView<MineContract.Presenter> implements
     @Subscriber(tag = MainActivity.UPDATE_AVATAR)
     public void updateAvatar(TResult result) {
 
-        compressPath = result.getImage().getCompressPath() ;
-        originalPath = result.getImage().getOriginalPath() ;
+        compressPath = result.getImage().getCompressPath();
+        originalPath = result.getImage().getOriginalPath();
         ImageLoader.load(mContext, compressPath, iv_avatar);
 
         WorkmateBean bean = new WorkmateBean();
-        if(!TextUtils.isEmpty(compressPath)) {
-            bean.setAvatar("http://cdn.sinacloud.net/diancai/dish/" + compressPath.substring(compressPath.lastIndexOf("/") + 1));
+        if (!TextUtils.isEmpty(compressPath)) {
+            bean.setAvatar("http://cdn.sinacloud.net/diancai/dish/" +
+                    compressPath.substring(compressPath.lastIndexOf("/") + 1));
         }
         putObjectWithCustomRequestHeader(compressPath, bean);
     }
@@ -406,21 +330,25 @@ public class MineView extends RootView<MineContract.Presenter> implements
     String secretKey = "d6e28b0c3631d16901a2a6cbeb29ecf6bff40193";
     AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
     SCS conn = new SCSClient(credentials);
+
     /**
      * 上传文件 自定义请求头
      */
-    public void putObjectWithCustomRequestHeader(final String filepath, final WorkmateBean bean){
-        new Thread(){
-            public void run(){
+    public void putObjectWithCustomRequestHeader(final String filepath, final
+    WorkmateBean bean) {
+        new Thread() {
+            public void run() {
 
                 Map<String, String> headers = new HashMap<String, String>();
                 headers.put("x-amz-acl", "public-read");
                 PutObjectResult putObjectResult = conn.putObject("diancai",
-                        "dish/"+filepath.substring(filepath.lastIndexOf("/")+1),
+                        "dish/" + filepath.substring(filepath.lastIndexOf
+                                ("/") + 1),
                         new File(filepath), headers);
                 System.out.println(putObjectResult);//服务器响应结果
 
-                if(putObjectResult != null && !TextUtils.isEmpty(putObjectResult.getContentMd5())){
+                if (putObjectResult != null && !TextUtils.isEmpty
+                        (putObjectResult.getContentMd5())) {
                     updateWorkmateBean(bean);
                 }
 
@@ -430,7 +358,7 @@ public class MineView extends RootView<MineContract.Presenter> implements
 
     }
 
-    public void updateWorkmateBean(WorkmateBean bean){
+    public void updateWorkmateBean(WorkmateBean bean) {
         mPresenter.updateMyInfo(mContext, GsonUtil.getJson(bean));
     }
 }
